@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import logo from '../../assets/MockTale.jpg'; // Adjust the path as necessary
+import logo from '../../assets/planprep4u-logo.jpg';
 import { useAuth } from '../../hooks/useAuth';
 import { reportsService } from '../../services/reports';
 
@@ -62,9 +62,9 @@ export const Sidebar: React.FC = () => {
       {/* Logo and Title */}
       <div className="flex items-center px-6 py-4 border-b border-gray-200">
         <div className="flex items-center w-10 h-10">
-            <img src={logo} alt="MockTale Logo" style={{borderRadius:"50%"}} />
+            <img src={logo} alt="PlanPrep4u Logo" style={{borderRadius:"50%"}} />
           <div className="ml-3">
-            <h1 className="text-lg font-semibold text-gray-900">MockTale</h1>
+            <h1 className="text-lg font-semibold text-gray-900">PlanPrep4u</h1>
             <p className="text-xs text-gray-500">Admin Panel</p>
           </div>
         </div>

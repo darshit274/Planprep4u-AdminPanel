@@ -139,7 +139,7 @@ export const NewSidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
       <div className="flex items-center justify-center h-16 px-4 bg-primary-600 text-white">
         <div className="flex items-center space-x-2">
           <GraduationCap className="h-8 w-8" />
-          <span className="text-xl font-bold">Mocktail Admin</span>
+          <span className="text-xl font-bold">PlanPrep4u Admin</span>
         </div>
       </div>
 

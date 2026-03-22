@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { z } from 'zod';
-import logo from '../../assets/MockTale.jpg';
+import logo from '../../assets/planprep4u-logo.jpg';
 import { authService } from '../../services/auth';
 
 const otpSchema = z.object({
@@ -127,7 +127,7 @@ export const OTPVerificationForm: React.FC<OTPVerificationFormProps> = ({ email,
       <div className="max-w-md w-full space-y-8">
         <div>
           <div className="mx-auto h-20 w-20 flex items-center justify-center rounded-full bg-primary-100">
-            <img src={logo} alt="MockTale Logo" style={{ borderRadius: "50%" }} />
+            <img src={logo} alt="PlanPrep4u Logo" style={{ borderRadius: "50%" }} />
           </div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             Enter Verification Code

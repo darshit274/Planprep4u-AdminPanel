@@ -103,7 +103,7 @@ export const NewDashboard: React.FC = () => {
       <div className="text-center">
         <div className="flex items-center justify-center mb-4">
           <GraduationCap className="h-12 w-12 text-primary-600 mr-3" />
-          <h1 className="text-3xl font-bold text-gray-900">Mocktail Educational Platform</h1>
+          <h1 className="text-3xl font-bold text-gray-900">PlanPrep4u Educational Platform</h1>
         </div>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto">
           Complete admin dashboard for managing your comprehensive educational platform with 

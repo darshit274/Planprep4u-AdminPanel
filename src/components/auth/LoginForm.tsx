@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { z } from 'zod';
-import logo from '../../assets/MockTale.jpg'; // Adjust the path as necessary
+import logo from '../../assets/planprep4u-logo.jpg';
 import { authService } from '../../services/auth';
 import { OTPVerificationForm } from './OTPVerificationForm';
 
@@ -78,10 +78,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
         <div>
           <div className="mx-auto h-20 w-20 flex items-center justify-center rounded-full bg-primary-100">
             {/* <Shield className="h-8 w-8 text-primary-600" /> */}
-            <img src={logo} alt="MockTale Logo" style={{borderRadius:"50%"}} />
+            <img src={logo} alt="PlanPrep4u Logo" style={{borderRadius:"50%"}} />
           </div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            MockTale Admin
+            PlanPrep4u Admin
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Sign in to your admin dashboard
@@ -102,7 +102,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
                   {...register('email')}
                   type="email"
                   className={`block w-full pl-10 pr-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors ${errors.email ? 'border-red-300 focus:border-red-500 focus:ring-red-500' : 'border-gray-300'}`}
-                  placeholder="admin@mocktale.com"
+                  placeholder="admin@planprep4u.com"
                 />
               </div>
               {errors.email && (

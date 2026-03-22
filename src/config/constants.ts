@@ -8,10 +8,10 @@ export const ENV = {
 
 // Application constants
 export const APP_CONFIG = {
-  NAME: 'MockTale Admin',
+  NAME: 'PlanPrep4u Admin',
   VERSION: '1.0.0',
-  DESCRIPTION: 'Admin Panel for MockTale Education Platform',
-  COMPANY: 'MockTale Academy',
+  DESCRIPTION: 'Admin Panel for PlanPrep4u Education Platform',
+  COMPANY: 'PlanPrep4u',
 } as const;
 
 // API endpoints
@@ -45,7 +45,7 @@ export const UI_CONFIG = {
   },
   CHART: {
     COLORS: {
-      PRIMARY: '#3B82F6',
+      PRIMARY: '#1e586f',
       SUCCESS: '#10B981',
       WARNING: '#F59E0B',
       DANGER: '#EF4444',
