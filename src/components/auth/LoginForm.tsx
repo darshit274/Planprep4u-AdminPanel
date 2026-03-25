@@ -102,7 +102,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
                   {...register('email')}
                   type="email"
                   className={`block w-full pl-10 pr-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors ${errors.email ? 'border-red-300 focus:border-red-500 focus:ring-red-500' : 'border-gray-300'}`}
-                  placeholder="admin@planprep4u.com"
+                  placeholder="planprep4uofficial@gmail.com"
                 />
               </div>
               {errors.email && (
