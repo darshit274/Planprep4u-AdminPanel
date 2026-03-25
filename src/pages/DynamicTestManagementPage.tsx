@@ -111,7 +111,7 @@ const DynamicTestManagementPage: React.FC<DynamicTestManagementPageProps> = () =
   const renderCategoryIcon = (category: DynamicCategory) => {
     switch (category.node_type) {
       case 'container':
-        return <FolderIcon className="w-5 h-5 text-blue-500" />;
+        return <FolderIcon className="w-5 h-5 text-primary-500" />;
       case 'question_holder':
         return <DocumentTextIcon className="w-5 h-5 text-green-500" />;
       default:
@@ -131,7 +131,7 @@ const DynamicTestManagementPage: React.FC<DynamicTestManagementPageProps> = () =
           className={`
             flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200
             ${isSelected 
-              ? 'bg-blue-50 border-2 border-blue-200' 
+              ? 'bg-primary-50 border-2 border-primary-200' 
               : 'hover:bg-gray-50 border-2 border-transparent'
             }
           `}
@@ -190,7 +190,7 @@ const DynamicTestManagementPage: React.FC<DynamicTestManagementPageProps> = () =
                   </span>
                 )}
                 {category.node_type === 'container' && (
-                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary-100 text-primary-800">
                     {category.subcategories_count} Sub
                   </span>
                 )}
@@ -231,7 +231,7 @@ const DynamicTestManagementPage: React.FC<DynamicTestManagementPageProps> = () =
         {actions.canAddSubcategory && (
           <button
             onClick={() => handleAddSubcategory(category.id)}
-            className="w-full flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
+            className="w-full flex items-center px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700 transition-colors"
           >
             <PlusIcon className="w-4 h-4 mr-2" />
             Add Subcategory
@@ -292,7 +292,7 @@ const DynamicTestManagementPage: React.FC<DynamicTestManagementPageProps> = () =
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
       </div>
     );
   }
@@ -332,7 +332,7 @@ const DynamicTestManagementPage: React.FC<DynamicTestManagementPageProps> = () =
             
             <button
               onClick={() => handleAddSubcategory(null)}
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700"
             >
               <PlusIcon className="w-4 h-4 mr-2" />
               Add Root Category
@@ -354,7 +354,7 @@ const DynamicTestManagementPage: React.FC<DynamicTestManagementPageProps> = () =
                   {/* Statistics */}
                   {statistics && (
                     <div className="flex space-x-4 text-sm">
-                      <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full">
+                      <span className="px-3 py-1 bg-primary-100 text-primary-800 rounded-full">
                         {statistics.totalCategories} Categories
                       </span>
                       <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full">
@@ -376,7 +376,7 @@ const DynamicTestManagementPage: React.FC<DynamicTestManagementPageProps> = () =
                       <div className="mt-6">
                         <button
                           onClick={() => handleAddSubcategory(null)}
-                          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700"
                         >
                           <PlusIcon className="w-4 h-4 mr-2" />
                           Create Category

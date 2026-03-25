@@ -246,7 +246,7 @@ const PYQManagement: React.FC = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
         <span className="ml-3 text-gray-600">Loading PYQs...</span>
       </div>
     );
@@ -270,21 +270,21 @@ const PYQManagement: React.FC = () => {
               onClick={() => setShowFilters(!showFilters)}
               className={`inline-flex items-center px-4 py-2 border rounded-lg text-sm font-medium transition-colors ${
                 showFilters || getActiveFiltersCount() > 0
-                  ? 'border-indigo-200 bg-indigo-50 text-indigo-700'
+                  ? 'border-primary-200 bg-primary-50 text-primary-700'
                   : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
               }`}
             >
               <Filter className="h-4 w-4 mr-2" />
               Filters
               {getActiveFiltersCount() > 0 && (
-                <span className="ml-2 bg-indigo-100 text-indigo-700 rounded-full px-2 py-0.5 text-xs">
+                <span className="ml-2 bg-primary-100 text-primary-700 rounded-full px-2 py-0.5 text-xs">
                   {getActiveFiltersCount()}
                 </span>
               )}
             </button>
             <button
               onClick={handleCreatePyq}
-              className="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+              className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
             >
               <Plus className="h-4 w-4 mr-2" />
               Add PYQ
@@ -297,8 +297,8 @@ const PYQManagement: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
             <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
               <div className="flex items-center">
-                <div className="p-2 bg-indigo-100 rounded-lg">
-                  <FileText className="h-6 w-6 text-indigo-600" />
+                <div className="p-2 bg-primary-100 rounded-lg">
+                  <FileText className="h-6 w-6 text-primary-600" />
                 </div>
                 <div className="ml-4">
                   <p className="text-sm font-medium text-gray-600">Total PYQs</p>
@@ -334,8 +334,8 @@ const PYQManagement: React.FC = () => {
 
             <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
               <div className="flex items-center">
-                <div className="p-2 bg-blue-100 rounded-lg">
-                  <Users className="h-6 w-6 text-blue-600" />
+                <div className="p-2 bg-primary-100 rounded-lg">
+                  <Users className="h-6 w-6 text-primary-600" />
                 </div>
                 <div className="ml-4">
                   <p className="text-sm font-medium text-gray-600">Total Attempts</p>
@@ -350,8 +350,8 @@ const PYQManagement: React.FC = () => {
 
             <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
               <div className="flex items-center">
-                <div className="p-2 bg-purple-100 rounded-lg">
-                  <Calendar className="h-6 w-6 text-purple-600" />
+                <div className="p-2 bg-primary-100 rounded-lg">
+                  <Calendar className="h-6 w-6 text-primary-600" />
                 </div>
                 <div className="ml-4">
                   <p className="text-sm font-medium text-gray-600">Year Range</p>
@@ -404,7 +404,7 @@ const PYQManagement: React.FC = () => {
                   placeholder="Search PYQs..."
                   value={filters.search || ''}
                   onChange={(e) => handleFilterChange({ search: e.target.value })}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 />
               </div>
             </div>
@@ -415,7 +415,7 @@ const PYQManagement: React.FC = () => {
               <select
                 value={filters.exam_type_id || ''}
                 onChange={(e) => handleFilterChange({ exam_type_id: e.target.value ? parseInt(e.target.value) : undefined })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               >
                 <option value="">All Exam Types</option>
                 {examTypes.map((examType) => (
@@ -432,7 +432,7 @@ const PYQManagement: React.FC = () => {
               <select
                 value={filters.exam_year || ''}
                 onChange={(e) => handleFilterChange({ exam_year: e.target.value ? parseInt(e.target.value) : undefined })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               >
                 <option value="">All Years</option>
                 {Array.from({ length: 11 }, (_, i) => new Date().getFullYear() - i).map((year) => (
@@ -449,7 +449,7 @@ const PYQManagement: React.FC = () => {
               <select
                 value={filters.paper_type || ''}
                 onChange={(e) => handleFilterChange({ paper_type: e.target.value as any })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               >
                 <option value="">All Types</option>
                 <option value="prelims">Prelims</option>
@@ -467,7 +467,7 @@ const PYQManagement: React.FC = () => {
                 onChange={(e) => handleFilterChange({ 
                   is_active: e.target.value === '' ? undefined : e.target.value === 'true'
                 })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               >
                 <option value="">All Status</option>
                 <option value="true">Active</option>
@@ -483,7 +483,7 @@ const PYQManagement: React.FC = () => {
                 onChange={(e) => handleFilterChange({ 
                   is_featured: e.target.value === '' ? undefined : e.target.value === 'true'
                 })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               >
                 <option value="">All</option>
                 <option value="true">Featured</option>
@@ -500,7 +500,7 @@ const PYQManagement: React.FC = () => {
                   const [sortBy, sortOrder] = e.target.value.split('-');
                   handleFilterChange({ sortBy, sortOrder: sortOrder as 'ASC' | 'DESC' });
                 }}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               >
                 <option value="created_at-DESC">Newest First</option>
                 <option value="created_at-ASC">Oldest First</option>
@@ -523,7 +523,7 @@ const PYQManagement: React.FC = () => {
             Showing {((currentPage - 1) * pageSize) + 1} to {Math.min(currentPage * pageSize, totalCount)} of {totalCount} PYQs
           </p>
           {refreshing && (
-            <RefreshCw className="h-4 w-4 animate-spin text-indigo-600" />
+            <RefreshCw className="h-4 w-4 animate-spin text-primary-600" />
           )}
         </div>
         
@@ -531,7 +531,7 @@ const PYQManagement: React.FC = () => {
           <button
             onClick={() => setViewMode('grid')}
             className={`p-2 rounded-lg transition-colors ${
-              viewMode === 'grid' ? 'bg-indigo-100 text-indigo-700' : 'bg-gray-100 text-gray-600'
+              viewMode === 'grid' ? 'bg-primary-100 text-primary-700' : 'bg-gray-100 text-gray-600'
             }`}
           >
             <div className="w-4 h-4 grid grid-cols-2 gap-0.5">
@@ -544,7 +544,7 @@ const PYQManagement: React.FC = () => {
           <button
             onClick={() => setViewMode('list')}
             className={`p-2 rounded-lg transition-colors ${
-              viewMode === 'list' ? 'bg-indigo-100 text-indigo-700' : 'bg-gray-100 text-gray-600'
+              viewMode === 'list' ? 'bg-primary-100 text-primary-700' : 'bg-gray-100 text-gray-600'
             }`}
           >
             <div className="w-4 h-4 flex flex-col gap-0.5">
@@ -592,7 +592,7 @@ const PYQManagement: React.FC = () => {
             <div className="mt-6">
               <button
                 onClick={handleCreatePyq}
-                className="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+                className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
               >
                 <Plus className="h-4 w-4 mr-2" />
                 Create First PYQ
@@ -658,7 +658,7 @@ const PYQManagement: React.FC = () => {
                       onClick={() => handlePageChange(pageNum)}
                       className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${
                         pageNum === currentPage
-                          ? 'z-10 bg-indigo-600 text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+                          ? 'z-10 bg-primary-600 text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600'
                           : 'text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0'
                       }`}
                     >

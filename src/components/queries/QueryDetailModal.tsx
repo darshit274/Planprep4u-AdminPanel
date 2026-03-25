@@ -52,7 +52,7 @@ const QueryDetailModal: React.FC<QueryDetailModalProps> = ({
   const getStatusBadge = (status: string) => {
     const badges = {
       pending: { bg: 'bg-yellow-100', text: 'text-yellow-800', border: 'border-yellow-200' },
-      viewed: { bg: 'bg-blue-100', text: 'text-blue-800', border: 'border-blue-200' },
+      viewed: { bg: 'bg-primary-100', text: 'text-primary-800', border: 'border-primary-200' },
       solved: { bg: 'bg-green-100', text: 'text-green-800', border: 'border-green-200' }
     };
     return badges[status as keyof typeof badges] || badges.pending;
@@ -98,8 +98,8 @@ const QueryDetailModal: React.FC<QueryDetailModalProps> = ({
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Contact Information</h3>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                  <UserIcon className="w-5 h-5 text-blue-600" />
+                <div className="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center">
+                  <UserIcon className="w-5 h-5 text-primary-600" />
                 </div>
                 <div>
                   <p className="text-xs text-gray-500">Full Name</p>
@@ -126,8 +126,8 @@ const QueryDetailModal: React.FC<QueryDetailModalProps> = ({
               </div>
 
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
-                  <PhoneIcon className="w-5 h-5 text-purple-600" />
+                <div className="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center">
+                  <PhoneIcon className="w-5 h-5 text-primary-600" />
                 </div>
                 <div className="flex-1">
                   <p className="text-xs text-gray-500">Mobile Number</p>
@@ -173,7 +173,7 @@ const QueryDetailModal: React.FC<QueryDetailModalProps> = ({
               onChange={(e) => setAdminNotes(e.target.value)}
               placeholder="Add internal notes about this query..."
               rows={4}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 resize-none"
             />
             <p className="mt-1 text-xs text-gray-500">
               These notes are internal and will not be visible to the user.
@@ -186,7 +186,7 @@ const QueryDetailModal: React.FC<QueryDetailModalProps> = ({
               <button
                 onClick={() => handleStatusUpdate('viewed')}
                 disabled={isUpdating}
-                className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex items-center gap-2 px-5 py-2.5 bg-primary-600 text-white rounded-lg hover:bg-primary-700 font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <EyeIcon className="w-5 h-5" />
                 Mark as Viewed

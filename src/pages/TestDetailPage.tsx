@@ -416,7 +416,7 @@ const TestDetailPage: React.FC = () => {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
       </div>
     );
   }
@@ -427,7 +427,7 @@ const TestDetailPage: React.FC = () => {
         <div className="text-red-600 mb-4">Error loading questions</div>
         <button
           onClick={() => queryClient.invalidateQueries({ queryKey: ['testQuestions', testUuid] })}
-          className="text-blue-600 hover:text-blue-800"
+          className="text-primary-600 hover:text-primary-800"
         >
           Try again
         </button>
@@ -525,7 +525,7 @@ const TestDetailPage: React.FC = () => {
                   onClick={() => handlePageChange(page)}
                   className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${
                     page === currentPage
-                      ? 'z-10 bg-blue-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600'
+                      ? 'z-10 bg-primary-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600'
                       : 'text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0'
                   }`}
                 >
@@ -550,11 +550,11 @@ const TestDetailPage: React.FC = () => {
     <div className="space-y-6">
       {/* Breadcrumb */}
       <nav className="flex items-center space-x-2 text-sm">
-        <Link to="/test-management" className="text-blue-600 hover:text-blue-800">
+        <Link to="/test-management" className="text-primary-600 hover:text-primary-800">
           Test Management
         </Link>
         <span className="text-gray-400">/</span>
-        <button onClick={() => navigate(-1)} className="text-blue-600 hover:text-blue-800">
+        <button onClick={() => navigate(-1)} className="text-primary-600 hover:text-primary-800">
           Tests
         </button>
         <span className="text-gray-400">/</span>
@@ -592,7 +592,7 @@ const TestDetailPage: React.FC = () => {
             setFormData(resetFormData());
             setShowModal(true);
           }}
-          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 flex items-center gap-2"
+          className="bg-primary-600 text-white px-4 py-2 rounded-md hover:bg-primary-700 flex items-center gap-2"
         >
           <PlusIcon className="h-5 w-5" />
           Add Question
@@ -611,11 +611,11 @@ const TestDetailPage: React.FC = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search questions or explanations..."
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
               />
               <button
                 type="submit"
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-primary-600 text-white px-3 py-1 rounded text-sm hover:bg-primary-700"
               >
                 Search
               </button>
@@ -638,7 +638,7 @@ const TestDetailPage: React.FC = () => {
               setPageSize(parseInt(e.target.value));
               setCurrentPage(1);
             }}
-            className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
           >
             <option value={5}>5 per page</option>
             <option value={10}>10 per page</option>
@@ -654,7 +654,7 @@ const TestDetailPage: React.FC = () => {
             }}
             className={`px-4 py-2 rounded-md border ${
               showBulkActions 
-                ? 'bg-blue-50 border-blue-300 text-blue-700' 
+                ? 'bg-primary-50 border-primary-300 text-primary-700' 
                 : 'border-gray-300 hover:bg-gray-50'
             }`}
           >
@@ -664,7 +664,7 @@ const TestDetailPage: React.FC = () => {
 
         {/* Bulk Actions Bar */}
         {showBulkActions && (
-          <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-md">
+          <div className="mt-4 p-3 bg-primary-50 border border-primary-200 rounded-md">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <label className="flex items-center">
@@ -672,7 +672,7 @@ const TestDetailPage: React.FC = () => {
                     type="checkbox"
                     checked={selectedQuestions.length === questions.length && questions.length > 0}
                     onChange={handleSelectAll}
-                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                   />
                   <span className="ml-2 text-sm">
                     Select All ({selectedQuestions.length} selected)
@@ -721,7 +721,7 @@ const TestDetailPage: React.FC = () => {
                     setStatusFilter(e.target.value);
                     setCurrentPage(1);
                   }}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                 >
                   <option value="all">All Status</option>
                   <option value="active">Active</option>
@@ -737,7 +737,7 @@ const TestDetailPage: React.FC = () => {
                     setSortBy(e.target.value);
                     setCurrentPage(1);
                   }}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                 >
                   <option value="created_at">Created Date</option>
                   <option value="updated_at">Updated Date</option>
@@ -754,7 +754,7 @@ const TestDetailPage: React.FC = () => {
                     setSortOrder(e.target.value);
                     setCurrentPage(1);
                   }}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                 >
                   <option value="DESC">Descending</option>
                   <option value="ASC">Ascending</option>
@@ -789,7 +789,7 @@ const TestDetailPage: React.FC = () => {
               <div className="text-gray-500 mb-4">No questions found</div>
               <button
                 onClick={() => setShowModal(true)}
-                className="text-blue-600 hover:text-blue-800"
+                className="text-primary-600 hover:text-primary-800"
               >
                 Create your first question
               </button>
@@ -805,10 +805,10 @@ const TestDetailPage: React.FC = () => {
                           type="checkbox"
                           checked={selectedQuestions.includes(question.uuid)}
                           onChange={() => handleSelectQuestion(question.uuid)}
-                          className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                          className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                         />
                       )}
-                      <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
+                      <span className="bg-primary-100 text-primary-800 text-xs px-2 py-1 rounded-full">
                         Q{index + 1}
                       </span>
                       <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
@@ -880,8 +880,8 @@ const TestDetailPage: React.FC = () => {
                   </div>
                   
                   {question.explanation && (
-                    <div className="bg-blue-50 p-3 rounded-md">
-                      <p className="text-sm text-blue-800">
+                    <div className="bg-primary-50 p-3 rounded-md">
+                      <p className="text-sm text-primary-800">
                         <span className="font-medium">Explanation:</span> {question.explanation}
                       </p>
                     </div>
@@ -913,7 +913,7 @@ const TestDetailPage: React.FC = () => {
                   value={formData.question_text}
                   onChange={(e) => setFormData({ ...formData, question_text: e.target.value })}
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                   required
                 />
               </div>
@@ -927,7 +927,7 @@ const TestDetailPage: React.FC = () => {
                     type="text"
                     value={formData.option_a}
                     onChange={(e) => setFormData({ ...formData, option_a: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                     required
                   />
                 </div>
@@ -939,7 +939,7 @@ const TestDetailPage: React.FC = () => {
                     type="text"
                     value={formData.option_b}
                     onChange={(e) => setFormData({ ...formData, option_b: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                     required
                   />
                 </div>
@@ -951,7 +951,7 @@ const TestDetailPage: React.FC = () => {
                     type="text"
                     value={formData.option_c}
                     onChange={(e) => setFormData({ ...formData, option_c: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                     required
                   />
                 </div>
@@ -963,7 +963,7 @@ const TestDetailPage: React.FC = () => {
                     type="text"
                     value={formData.option_d}
                     onChange={(e) => setFormData({ ...formData, option_d: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                     required
                   />
                 </div>
@@ -977,7 +977,7 @@ const TestDetailPage: React.FC = () => {
                   <select
                     value={formData.correct_answer}
                     onChange={(e) => setFormData({ ...formData, correct_answer: e.target.value as 'A' | 'B' | 'C' | 'D' })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                     required
                   >
                     <option value="A">Option A</option>
@@ -994,7 +994,7 @@ const TestDetailPage: React.FC = () => {
                     type="number"
                     value={formData.marks}
                     onChange={(e) => setFormData({ ...formData, marks: parseInt(e.target.value) || 1 })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                     min="1"
                     required
                   />
@@ -1009,7 +1009,7 @@ const TestDetailPage: React.FC = () => {
                   value={formData.explanation}
                   onChange={(e) => setFormData({ ...formData, explanation: e.target.value })}
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                   placeholder="Optional explanation for the correct answer"
                 />
               </div>
@@ -1026,7 +1026,7 @@ const TestDetailPage: React.FC = () => {
                     value={formData.question_text_gujarati}
                     onChange={(e) => setFormData({ ...formData, question_text_gujarati: e.target.value })}
                     rows={3}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                     placeholder="ગુજરાતીમાં પ્રશ્ન"
                   />
                 </div>
@@ -1040,7 +1040,7 @@ const TestDetailPage: React.FC = () => {
                       type="text"
                       value={formData.option_a_gujarati}
                       onChange={(e) => setFormData({ ...formData, option_a_gujarati: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                       placeholder="વિકલ્પ A"
                     />
                   </div>
@@ -1052,7 +1052,7 @@ const TestDetailPage: React.FC = () => {
                       type="text"
                       value={formData.option_b_gujarati}
                       onChange={(e) => setFormData({ ...formData, option_b_gujarati: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                       placeholder="વિકલ્પ B"
                     />
                   </div>
@@ -1064,7 +1064,7 @@ const TestDetailPage: React.FC = () => {
                       type="text"
                       value={formData.option_c_gujarati}
                       onChange={(e) => setFormData({ ...formData, option_c_gujarati: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                       placeholder="વિકલ્પ C"
                     />
                   </div>
@@ -1076,7 +1076,7 @@ const TestDetailPage: React.FC = () => {
                       type="text"
                       value={formData.option_d_gujarati}
                       onChange={(e) => setFormData({ ...formData, option_d_gujarati: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                       placeholder="વિકલ્પ D"
                     />
                   </div>
@@ -1090,7 +1090,7 @@ const TestDetailPage: React.FC = () => {
                     value={formData.explanation_gujarati}
                     onChange={(e) => setFormData({ ...formData, explanation_gujarati: e.target.value })}
                     rows={3}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                     placeholder="ગુજરાતીમાં સમજૂતી"
                   />
                 </div>
@@ -1104,7 +1104,7 @@ const TestDetailPage: React.FC = () => {
                     id="is_active"
                     checked={formData.is_active}
                     onChange={(e) => setFormData({ ...formData, is_active: e.target.checked })}
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
                   />
                   <label htmlFor="is_active" className="ml-2 block text-sm text-gray-700">
                     Active (question is available for use)
@@ -1127,7 +1127,7 @@ const TestDetailPage: React.FC = () => {
                 <button
                   type="submit"
                   disabled={createMutation.isPending || updateMutation.isPending}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+                  className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 disabled:opacity-50"
                 >
                   {createMutation.isPending || updateMutation.isPending ? 'Saving...' : 'Save'}
                 </button>

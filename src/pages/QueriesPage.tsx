@@ -76,7 +76,7 @@ const QueriesPage: React.FC = () => {
   const getStatusBadge = (status: string) => {
     const badges = {
       pending: 'bg-yellow-100 text-yellow-800 border-yellow-200',
-      viewed: 'bg-blue-100 text-blue-800 border-blue-200',
+      viewed: 'bg-primary-100 text-primary-800 border-primary-200',
       solved: 'bg-green-100 text-green-800 border-green-200'
     };
     return badges[status as keyof typeof badges] || badges.pending;
@@ -132,14 +132,14 @@ const QueriesPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-400">
+        <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-400">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600">Viewed</p>
-              <p className="text-3xl font-bold text-blue-600 mt-2">{stats.viewed}</p>
+              <p className="text-3xl font-bold text-primary-600 mt-2">{stats.viewed}</p>
             </div>
-            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-              <EyeIcon className="w-6 h-6 text-blue-600" />
+            <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center">
+              <EyeIcon className="w-6 h-6 text-primary-600" />
             </div>
           </div>
         </div>
@@ -186,8 +186,8 @@ const QueriesPage: React.FC = () => {
               onClick={() => setStatus('viewed')}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 status === 'viewed'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
+                  ? 'bg-primary-600 text-white'
+                  : 'bg-primary-100 text-primary-700 hover:bg-primary-200'
               }`}
             >
               Viewed ({stats.viewed})
@@ -213,7 +213,7 @@ const QueriesPage: React.FC = () => {
                 placeholder="Search by name, email, or mobile..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
               />
             </div>
           </div>
@@ -225,7 +225,7 @@ const QueriesPage: React.FC = () => {
           <select
             value={limit}
             onChange={(e) => setLimit(Number(e.target.value))}
-            className="px-3 py-1 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="px-3 py-1 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
           >
             <option value={10}>10</option>
             <option value={20}>20</option>
@@ -239,7 +239,7 @@ const QueriesPage: React.FC = () => {
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         {loading ? (
           <div className="flex items-center justify-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
           </div>
         ) : queries.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 text-gray-500">
@@ -315,7 +315,7 @@ const QueriesPage: React.FC = () => {
                             e.stopPropagation();
                             setSelectedQuery(query);
                           }}
-                          className="text-blue-600 hover:text-blue-900 font-medium"
+                          className="text-primary-600 hover:text-primary-900 font-medium"
                         >
                           View Details
                         </button>
@@ -347,7 +347,7 @@ const QueriesPage: React.FC = () => {
                       onClick={() => setPage(pageNum)}
                       className={`px-4 py-2 text-sm font-medium rounded-lg ${
                         page === pageNum
-                          ? 'bg-blue-600 text-white'
+                          ? 'bg-primary-600 text-white'
                           : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
                       }`}
                     >

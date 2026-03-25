@@ -123,8 +123,8 @@ export const SubjectModal: React.FC<SubjectModalProps> = ({
       <div className="bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between p-6 border-b">
           <div className="flex items-center">
-            <div className="p-2 bg-indigo-100 rounded-lg mr-3">
-              <BookOpen className="h-5 w-5 text-indigo-600" />
+            <div className="p-2 bg-primary-100 rounded-lg mr-3">
+              <BookOpen className="h-5 w-5 text-primary-600" />
             </div>
             <h2 className="text-xl font-semibold text-gray-900">
               {isEditing ? 'Edit Subject' : 'Create New Subject'}
@@ -150,7 +150,7 @@ export const SubjectModal: React.FC<SubjectModalProps> = ({
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent ${
                   errors.name ? 'border-red-300' : 'border-gray-300'
                 }`}
                 placeholder="e.g., Mathematics, English, General Knowledge"
@@ -170,7 +170,7 @@ export const SubjectModal: React.FC<SubjectModalProps> = ({
                 name="code"
                 value={formData.code}
                 onChange={handleChange}
-                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${
+                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent ${
                   errors.code ? 'border-red-300' : 'border-gray-300'
                 }`}
                 placeholder="e.g., MATH, ENG, GK"
@@ -195,7 +195,7 @@ export const SubjectModal: React.FC<SubjectModalProps> = ({
               value={formData.description}
               onChange={handleChange}
               rows={4}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               placeholder="Brief description of the subject (optional)"
               disabled={loading}
             />
@@ -209,7 +209,7 @@ export const SubjectModal: React.FC<SubjectModalProps> = ({
                 name="has_hierarchy"
                 checked={formData.has_hierarchy}
                 onChange={handleChange}
-                className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
                 disabled={loading}
               />
               <label htmlFor="has_hierarchy" className="ml-2 flex items-center text-sm text-gray-700">
@@ -219,12 +219,12 @@ export const SubjectModal: React.FC<SubjectModalProps> = ({
             </div>
             
             {formData.has_hierarchy && (
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <div className="bg-primary-50 border border-primary-200 rounded-lg p-4">
                 <div className="flex items-start">
-                  <TreePine className="h-5 w-5 text-blue-600 mr-2 mt-0.5" />
+                  <TreePine className="h-5 w-5 text-primary-600 mr-2 mt-0.5" />
                   <div className="text-sm">
-                    <p className="font-medium text-blue-900 mb-1">Hierarchical Structure</p>
-                    <p className="text-blue-700">
+                    <p className="font-medium text-primary-900 mb-1">Hierarchical Structure</p>
+                    <p className="text-primary-700">
                       This subject will support multi-level organization (e.g., NCERT → Class 6 → Chapter 1 → Fractions).
                       You can manage the hierarchy structure after creating the subject.
                     </p>
@@ -240,7 +240,7 @@ export const SubjectModal: React.FC<SubjectModalProps> = ({
                 name="is_active"
                 checked={formData.is_active}
                 onChange={handleChange}
-                className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
                 disabled={loading}
               />
               <label htmlFor="is_active" className="ml-2 block text-sm text-gray-700">
@@ -277,7 +277,7 @@ export const SubjectModal: React.FC<SubjectModalProps> = ({
             <button
               type="submit"
               disabled={loading}
-              className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50 transition-colors inline-flex items-center"
+              className="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 transition-colors inline-flex items-center"
             >
               {loading ? (
                 <>

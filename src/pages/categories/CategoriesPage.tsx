@@ -135,7 +135,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({ isOpen, onClose, category
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                   placeholder="Enter category name"
                   required
                 />
@@ -148,7 +148,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({ isOpen, onClose, category
                 <select
                   value={formData.parent_id}
                   onChange={(e) => setFormData({ ...formData, parent_id: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                 >
                   <option value="">None (Top Level)</option>
                   {categories
@@ -170,7 +170,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({ isOpen, onClose, category
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                 rows={3}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                 placeholder="Enter category description"
               />
             </div>
@@ -188,7 +188,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({ isOpen, onClose, category
                   type="text"
                   value={formData.name_gujarati}
                   onChange={(e) => setFormData({ ...formData, name_gujarati: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                   placeholder="ગુજરાતીમાં કેટેગરીનું નામ"
                 />
               </div>
@@ -201,7 +201,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({ isOpen, onClose, category
                   value={formData.description_gujarati}
                   onChange={(e) => setFormData({ ...formData, description_gujarati: e.target.value })}
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                   placeholder="ગુજરાતીમાં વર્ણન"
                 />
               </div>
@@ -220,7 +220,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({ isOpen, onClose, category
                 <select
                   value={formData.hierarchy_level}
                   onChange={(e) => setFormData({ ...formData, hierarchy_level: parseInt(e.target.value) })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                 >
                   <option value={0}>0 - Exam-wise (Top Level)</option>
                   <option value={1}>1 - Topic-wise (Sub Level)</option>
@@ -237,7 +237,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({ isOpen, onClose, category
                   type="number"
                   value={formData.display_order}
                   onChange={(e) => setFormData({ ...formData, display_order: parseInt(e.target.value) || 0 })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                   min="0"
                   placeholder="0"
                 />
@@ -253,7 +253,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({ isOpen, onClose, category
                 id="is_active"
                 checked={formData.is_active}
                 onChange={(e) => setFormData({ ...formData, is_active: e.target.checked })}
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
               />
               <label htmlFor="is_active" className="ml-2 block text-sm text-gray-700">
                 ✅ Active (category is available for use)
@@ -267,14 +267,14 @@ const CategoryModal: React.FC<CategoryModalProps> = ({ isOpen, onClose, category
               <button
                 type="button"
                 onClick={onClose}
-                className="flex-1 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={loading}
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="flex-1 px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 px-4 py-2 text-sm font-medium text-white bg-primary-600 border border-transparent rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={loading}
               >
                 {loading ? (
@@ -442,8 +442,8 @@ export const CategoriesPage: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <div className="card p-6">
           <div className="flex items-center">
-            <div className="p-3 rounded-full bg-blue-100">
-              <Tag className="h-6 w-6 text-blue-600" />
+            <div className="p-3 rounded-full bg-primary-100">
+              <Tag className="h-6 w-6 text-primary-600" />
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Total Categories</p>
@@ -466,8 +466,8 @@ export const CategoriesPage: React.FC = () => {
 
         <div className="card p-6">
           <div className="flex items-center">
-            <div className="p-3 rounded-full bg-purple-100">
-              <FolderOpen className="h-6 w-6 text-purple-600" />
+            <div className="p-3 rounded-full bg-primary-100">
+              <FolderOpen className="h-6 w-6 text-primary-600" />
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Parent Categories</p>
@@ -583,7 +583,7 @@ export const CategoriesPage: React.FC = () => {
                     </button>
                     <button
                       onClick={() => handleEditCategory(category)}
-                      className="p-2 text-gray-400 hover:text-blue-600 transition-colors"
+                      className="p-2 text-gray-400 hover:text-primary-600 transition-colors"
                     >
                       <Edit className="h-5 w-5" />
                     </button>

@@ -218,7 +218,7 @@ export const UserSubscriptionsModal: React.FC<UserSubscriptionsModalProps> = ({
               </div>
               <button
                 onClick={() => setShowAddForm(!showAddForm)}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700"
               >
                 <Plus className="h-4 w-4 inline mr-2" />
                 Add Subscription
@@ -297,7 +297,7 @@ export const UserSubscriptionsModal: React.FC<UserSubscriptionsModalProps> = ({
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                    className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700"
                   >
                     Add Subscription
                   </button>
@@ -355,7 +355,7 @@ export const UserSubscriptionsModal: React.FC<UserSubscriptionsModalProps> = ({
                         <div className="flex gap-2">
                           <button
                             onClick={() => handleExtendSubscription(subscription.id, 30)}
-                            className="text-sm text-blue-600 hover:text-blue-800"
+                            className="text-sm text-primary-600 hover:text-primary-800"
                             title="Extend by 30 days"
                           >
                             +30d

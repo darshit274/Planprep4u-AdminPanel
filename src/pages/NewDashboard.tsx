@@ -19,7 +19,7 @@ export const NewDashboard: React.FC = () => {
       title: 'Exam Types',
       description: 'Manage exam categories (PSI, GPSC, DSO, etc.)',
       icon: Award,
-      color: 'bg-blue-500',
+      color: 'bg-primary-500',
       path: '/exam-types',
       status: 'ready',
       count: '0'
@@ -37,7 +37,7 @@ export const NewDashboard: React.FC = () => {
       title: 'Exam-wise Test Series',
       description: 'Mock test series for specific exams (DSO, PSI Mock Series)',
       icon: GraduationCap,
-      color: 'bg-purple-500',
+      color: 'bg-primary-500',
       path: '/exam-test-series',
       status: 'development',
       count: '0'
@@ -46,7 +46,7 @@ export const NewDashboard: React.FC = () => {
       title: 'Topic-wise Test Series',
       description: 'Subject/topic based test series with hierarchical structure',
       icon: BookOpen,
-      color: 'bg-indigo-500',
+      color: 'bg-primary-500',
       path: '/topic-test-series',
       status: 'development',
       count: '0'
@@ -175,24 +175,24 @@ export const NewDashboard: React.FC = () => {
       </div>
 
       {/* Current Status */}
-      <div className="card p-6 bg-blue-50 border-blue-200">
+      <div className="card p-6 bg-primary-50 border-primary-200">
         <div className="flex items-start space-x-4">
-          <div className="p-2 bg-blue-100 rounded-lg">
-            <Users className="h-6 w-6 text-blue-600" />
+          <div className="p-2 bg-primary-100 rounded-lg">
+            <Users className="h-6 w-6 text-primary-600" />
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-blue-900 mb-2">
+            <h3 className="text-lg font-semibold text-primary-900 mb-2">
               🚀 Implementation Status
             </h3>
-            <div className="text-blue-800 space-y-1">
+            <div className="text-primary-800 space-y-1">
               <p>✅ <strong>Exam Types Management:</strong> Fully implemented and ready to use</p>
               <p>🔧 <strong>Subjects & Hierarchy:</strong> Database models created, UI in development</p>
               <p>⏳ <strong>Test Series Management:</strong> Being restructured according to documentation</p>
               <p>📋 <strong>Multi-language Questions:</strong> Database structure ready</p>
             </div>
             <div className="mt-4 p-4 bg-white rounded-lg border">
-              <h4 className="font-semibold text-blue-900 mb-2">Next Steps:</h4>
-              <ol className="list-decimal list-inside text-blue-800 space-y-1">
+              <h4 className="font-semibold text-primary-900 mb-2">Next Steps:</h4>
+              <ol className="list-decimal list-inside text-primary-800 space-y-1">
                 <li>Start with <strong>Exam Types</strong> - create your exam categories (PSI, GPSC, etc.)</li>
                 <li>Set up <strong>Subjects</strong> with hierarchical structure</li>
                 <li>Create <strong>Test Series</strong> following the documentation structure</li>

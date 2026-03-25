@@ -391,7 +391,7 @@ const TestSeriesDetailPage: React.FC = () => {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
       </div>
     );
   }
@@ -402,7 +402,7 @@ const TestSeriesDetailPage: React.FC = () => {
         <div className="text-red-600 mb-4">Error loading categories</div>
         <button
           onClick={() => queryClient.invalidateQueries({ queryKey: ['testSeriesCategories', testSeriesUuid] })}
-          className="text-blue-600 hover:text-blue-800"
+          className="text-primary-600 hover:text-primary-800"
         >
           Try again
         </button>
@@ -416,7 +416,7 @@ const TestSeriesDetailPage: React.FC = () => {
     <div className="space-y-6">
       {/* Breadcrumb */}
       <nav className="flex items-center space-x-2 text-sm">
-        <Link to="/test-management" className="text-blue-600 hover:text-blue-800">
+        <Link to="/test-management" className="text-primary-600 hover:text-primary-800">
           Test Management
         </Link>
         <span className="text-gray-400">/</span>
@@ -443,7 +443,7 @@ const TestSeriesDetailPage: React.FC = () => {
             setFormData({ name: '', description: '', name_gujarati: '', description_gujarati: '', is_active: true });
             setShowModal(true);
           }}
-          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 flex items-center gap-2"
+          className="bg-primary-600 text-white px-4 py-2 rounded-md hover:bg-primary-700 flex items-center gap-2"
         >
           <PlusIcon className="h-5 w-5" />
           Add Category
@@ -454,8 +454,8 @@ const TestSeriesDetailPage: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <div className="bg-white rounded-lg shadow p-6">
           <div className="flex items-center">
-            <div className="p-2 bg-blue-100 rounded-lg">
-              <ChartBarIcon className="h-6 w-6 text-blue-600" />
+            <div className="p-2 bg-primary-100 rounded-lg">
+              <ChartBarIcon className="h-6 w-6 text-primary-600" />
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Total Categories</p>
@@ -487,8 +487,8 @@ const TestSeriesDetailPage: React.FC = () => {
         </div>
         <div className="bg-white rounded-lg shadow p-6">
           <div className="flex items-center">
-            <div className="p-2 bg-purple-100 rounded-lg">
-              <ChartBarIcon className="h-6 w-6 text-purple-600" />
+            <div className="p-2 bg-primary-100 rounded-lg">
+              <ChartBarIcon className="h-6 w-6 text-primary-600" />
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">With Sub-categories</p>
@@ -511,7 +511,7 @@ const TestSeriesDetailPage: React.FC = () => {
                   placeholder="Search categories..."
                   value={filters.search}
                   onChange={(e) => handleFilterChange('search', e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                 />
               </div>
             </div>
@@ -520,7 +520,7 @@ const TestSeriesDetailPage: React.FC = () => {
             <select
               value={filters.status}
               onChange={(e) => handleFilterChange('status', e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
               <option value="all">All Status</option>
               <option value="active">Active</option>
@@ -531,7 +531,7 @@ const TestSeriesDetailPage: React.FC = () => {
             <select
               value={filters.sortBy}
               onChange={(e) => handleFilterChange('sortBy', e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
               <option value="created_at">Created Date</option>
               <option value="name">Name</option>
@@ -542,7 +542,7 @@ const TestSeriesDetailPage: React.FC = () => {
             <select
               value={filters.sortOrder}
               onChange={(e) => handleFilterChange('sortOrder', e.target.value)}
-              className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
               <option value="DESC">Descending</option>
               <option value="ASC">Ascending</option>
@@ -552,7 +552,7 @@ const TestSeriesDetailPage: React.FC = () => {
             <select
               value={filters.limit}
               onChange={(e) => handleFilterChange('limit', parseInt(e.target.value))}
-              className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
               <option value={5}>5 per page</option>
               <option value={10}>10 per page</option>
@@ -564,15 +564,15 @@ const TestSeriesDetailPage: React.FC = () => {
 
         {/* Bulk Actions Bar */}
         {selectedCategories.length > 0 && (
-          <div className="px-6 py-4 bg-blue-50 border-b border-blue-200">
+          <div className="px-6 py-4 bg-primary-50 border-b border-primary-200">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <span className="text-sm font-medium text-blue-700">
+                <span className="text-sm font-medium text-primary-700">
                   {selectedCategories.length} categories selected
                 </span>
                 <button
                   onClick={() => setSelectedCategories([])}
-                  className="text-sm text-blue-600 hover:text-blue-800"
+                  className="text-sm text-primary-600 hover:text-primary-800"
                 >
                   Clear selection
                 </button>
@@ -611,7 +611,7 @@ const TestSeriesDetailPage: React.FC = () => {
               <div className="text-gray-500 mb-4">No categories found</div>
               <button
                 onClick={() => setShowModal(true)}
-                className="text-blue-600 hover:text-blue-800"
+                className="text-primary-600 hover:text-primary-800"
               >
                 Create your first category
               </button>
@@ -625,7 +625,7 @@ const TestSeriesDetailPage: React.FC = () => {
                     type="checkbox"
                     checked={selectedCategories.length === categories.length && categories.length > 0}
                     onChange={handleSelectAll}
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
                   />
                   <span className="text-sm font-medium text-gray-700">
                     Select all ({categories.length})
@@ -641,7 +641,7 @@ const TestSeriesDetailPage: React.FC = () => {
                         type="checkbox"
                         checked={selectedCategories.includes(category.uuid)}
                         onChange={() => handleSelectCategory(category.uuid)}
-                        className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded mt-1"
+                        className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded mt-1"
                       />
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
@@ -664,7 +664,7 @@ const TestSeriesDetailPage: React.FC = () => {
                     <div className="flex gap-2 ml-4">
                       <button
                         onClick={() => handleViewSubCategories(category.uuid)}
-                        className="p-2 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-lg"
+                        className="p-2 text-primary-600 hover:text-primary-800 hover:bg-primary-50 rounded-lg"
                         title="View Sub-categories"
                       >
                         <EyeIcon className="h-4 w-4" />
@@ -711,7 +711,7 @@ const TestSeriesDetailPage: React.FC = () => {
                     key={page}
                     onClick={() => handlePageChange(page)}
                     className={`px-3 py-1 border rounded-md ${page === pagination.page
-                      ? 'bg-blue-600 text-white border-blue-600'
+                      ? 'bg-primary-600 text-white border-primary-600'
                       : 'border-gray-300 hover:bg-gray-50'
                       }`}
                   >
@@ -748,7 +748,7 @@ const TestSeriesDetailPage: React.FC = () => {
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                   required
                 />
               </div>
@@ -761,7 +761,7 @@ const TestSeriesDetailPage: React.FC = () => {
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                 /> */}
                 <RichTextEditor
                   value={formData.description}
@@ -781,7 +781,7 @@ const TestSeriesDetailPage: React.FC = () => {
                     type="text"
                     value={formData.name_gujarati}
                     onChange={(e) => setFormData({ ...formData, name_gujarati: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                     placeholder="ગુજરાતીમાં નામ"
                   />
                 </div>
@@ -794,7 +794,7 @@ const TestSeriesDetailPage: React.FC = () => {
                     value={formData.description_gujarati}
                     onChange={(e) => setFormData({ ...formData, description_gujarati: e.target.value })}
                     rows={3}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                     placeholder="ગુજરાતીમાં વર્ણન"
                   /> */}
                   <RichTextEditor
@@ -812,7 +812,7 @@ const TestSeriesDetailPage: React.FC = () => {
                     id="is_active"
                     checked={formData.is_active}
                     onChange={(e) => setFormData({ ...formData, is_active: e.target.checked })}
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
                   />
                   <label htmlFor="is_active" className="ml-2 block text-sm text-gray-700">
                     Active (category is available for use)
@@ -835,7 +835,7 @@ const TestSeriesDetailPage: React.FC = () => {
                 <button
                   type="submit"
                   disabled={createMutation.isPending || updateMutation.isPending}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+                  className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 disabled:opacity-50"
                 >
                   {createMutation.isPending || updateMutation.isPending ? 'Saving...' : 'Save'}
                 </button>

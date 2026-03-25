@@ -31,12 +31,12 @@ export const ExamTypeCard: React.FC<ExamTypeCardProps> = ({
         {/* Header */}
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center">
-            <div className="p-3 rounded-lg bg-blue-50">
-              <BookOpen className="h-6 w-6 text-blue-600" />
+            <div className="p-3 rounded-lg bg-primary-50">
+              <BookOpen className="h-6 w-6 text-primary-600" />
             </div>
             <div className="ml-3">
               <div className="flex items-center">
-                <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                <h3 className="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">
                   {examType.name}
                 </h3>
                 <span className="ml-2 px-2 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded-full">
@@ -109,12 +109,12 @@ export const ExamTypeCard: React.FC<ExamTypeCardProps> = ({
 
         {/* Statistics */}
         <div className="grid grid-cols-2 gap-4 mb-4">
-          <div className="bg-blue-50 rounded-lg p-3">
+          <div className="bg-primary-50 rounded-lg p-3">
             <div className="flex items-center">
-              <FileText className="h-5 w-5 text-blue-600 mr-2" />
+              <FileText className="h-5 w-5 text-primary-600 mr-2" />
               <div>
-                <p className="text-sm font-medium text-blue-900">Test Series</p>
-                <p className="text-lg font-bold text-blue-600">
+                <p className="text-sm font-medium text-primary-900">Test Series</p>
+                <p className="text-lg font-bold text-primary-600">
                   {examType.testSeriesCount || 0}
                 </p>
               </div>
@@ -137,7 +137,7 @@ export const ExamTypeCard: React.FC<ExamTypeCardProps> = ({
         <div className="flex space-x-2">
           <button
             onClick={() => onViewTestSeries(examType)}
-            className="flex-1 bg-blue-50 hover:bg-blue-100 text-blue-700 font-medium py-2 px-3 rounded-lg transition-colors duration-200 inline-flex items-center justify-center"
+            className="flex-1 bg-primary-50 hover:bg-primary-100 text-primary-700 font-medium py-2 px-3 rounded-lg transition-colors duration-200 inline-flex items-center justify-center"
           >
             <FileText className="h-4 w-4 mr-2" />
             Test Series
@@ -151,7 +151,7 @@ export const ExamTypeCard: React.FC<ExamTypeCardProps> = ({
           </button>
           <button
             onClick={() => onEdit(examType)}
-            className="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200"
+            className="p-2 text-gray-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors duration-200"
           >
             <Edit className="h-4 w-4" />
           </button>

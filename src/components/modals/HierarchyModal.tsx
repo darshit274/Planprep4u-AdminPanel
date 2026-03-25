@@ -179,8 +179,8 @@ export const HierarchyModal: React.FC<HierarchyModalProps> = ({
       <div className="bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between p-6 border-b">
           <div className="flex items-center">
-            <div className="p-2 bg-purple-100 rounded-lg mr-3">
-              <Layers className="h-5 w-5 text-purple-600" />
+            <div className="p-2 bg-primary-100 rounded-lg mr-3">
+              <Layers className="h-5 w-5 text-primary-600" />
             </div>
             <div>
               <h2 className="text-xl font-semibold text-gray-900">
@@ -209,7 +209,7 @@ export const HierarchyModal: React.FC<HierarchyModalProps> = ({
                 name="level_name"
                 value={formData.level_name}
                 onChange={handleChange}
-                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent ${
+                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent ${
                   errors.level_name ? 'border-red-300' : 'border-gray-300'
                 }`}
                 placeholder="e.g., Class 6, Chapter 1, Fractions"
@@ -228,7 +228,7 @@ export const HierarchyModal: React.FC<HierarchyModalProps> = ({
                 name="level_type"
                 value={formData.level_type}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 disabled={loading}
               >
                 {levelTypes.map((type) => (
@@ -252,7 +252,7 @@ export const HierarchyModal: React.FC<HierarchyModalProps> = ({
                 name="parent_id"
                 value={formData.parent_id || ''}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 disabled={loading}
               >
                 <option value="">No Parent (Top Level)</option>
@@ -270,7 +270,7 @@ export const HierarchyModal: React.FC<HierarchyModalProps> = ({
                 value={formData.order_index}
                 onChange={handleChange}
                 min="0"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 disabled={loading}
               />
               <p className="mt-1 text-xs text-gray-500">
@@ -288,7 +288,7 @@ export const HierarchyModal: React.FC<HierarchyModalProps> = ({
               value={formData.description}
               onChange={handleChange}
               rows={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               placeholder="Optional description of this hierarchy level"
               disabled={loading}
             />
@@ -301,7 +301,7 @@ export const HierarchyModal: React.FC<HierarchyModalProps> = ({
               name="is_active"
               checked={formData.is_active}
               onChange={handleChange}
-              className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
+              className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
               disabled={loading}
             />
             <label htmlFor="is_active" className="ml-2 block text-sm text-gray-700">
@@ -310,9 +310,9 @@ export const HierarchyModal: React.FC<HierarchyModalProps> = ({
           </div>
 
           {parent && (
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <p className="text-sm font-medium text-blue-900 mb-1">Parent Context</p>
-              <p className="text-sm text-blue-700">
+            <div className="bg-primary-50 border border-primary-200 rounded-lg p-4">
+              <p className="text-sm font-medium text-primary-900 mb-1">Parent Context</p>
+              <p className="text-sm text-primary-700">
                 This will be created under: <strong>{parent.level_name}</strong> ({parent.level_type})
               </p>
             </div>
@@ -330,7 +330,7 @@ export const HierarchyModal: React.FC<HierarchyModalProps> = ({
             <button
               type="submit"
               disabled={loading}
-              className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50 transition-colors inline-flex items-center"
+              className="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 transition-colors inline-flex items-center"
             >
               {loading ? (
                 <>

@@ -209,7 +209,7 @@ export const PYQModal: React.FC<PYQModalProps> = ({
             onClick={() => setActiveTab('basic')}
             className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
               activeTab === 'basic'
-                ? 'border-indigo-500 text-indigo-600'
+                ? 'border-primary-500 text-primary-600'
                 : 'border-transparent text-gray-500 hover:text-gray-700'
             }`}
           >
@@ -219,7 +219,7 @@ export const PYQModal: React.FC<PYQModalProps> = ({
             onClick={() => setActiveTab('details')}
             className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
               activeTab === 'details'
-                ? 'border-indigo-500 text-indigo-600'
+                ? 'border-primary-500 text-primary-600'
                 : 'border-transparent text-gray-500 hover:text-gray-700'
             }`}
           >
@@ -229,7 +229,7 @@ export const PYQModal: React.FC<PYQModalProps> = ({
             onClick={() => setActiveTab('settings')}
             className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${
               activeTab === 'settings'
-                ? 'border-indigo-500 text-indigo-600'
+                ? 'border-primary-500 text-primary-600'
                 : 'border-transparent text-gray-500 hover:text-gray-700'
             }`}
           >
@@ -239,7 +239,7 @@ export const PYQModal: React.FC<PYQModalProps> = ({
 
         {loading ? (
           <div className="flex items-center justify-center py-12">
-            <Loader2 className="h-8 w-8 animate-spin text-indigo-600" />
+            <Loader2 className="h-8 w-8 animate-spin text-primary-600" />
             <span className="ml-2 text-gray-600">Loading form data...</span>
           </div>
         ) : (
@@ -258,7 +258,7 @@ export const PYQModal: React.FC<PYQModalProps> = ({
                         value={formData.title}
                         onChange={(e) => handleInputChange('title', e.target.value)}
                         placeholder="e.g., PSI 2023 Prelims Paper"
-                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                         required
                       />
                     </div>
@@ -272,7 +272,7 @@ export const PYQModal: React.FC<PYQModalProps> = ({
                         onChange={(e) => handleInputChange('description', e.target.value)}
                         placeholder="Brief description of this PYQ..."
                         rows={3}
-                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                       />
                     </div>
 
@@ -283,7 +283,7 @@ export const PYQModal: React.FC<PYQModalProps> = ({
                       <select
                         value={formData.exam_type_id}
                         onChange={(e) => handleInputChange('exam_type_id', e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                         required
                       >
                         <option value="">Select Exam Type</option>
@@ -302,7 +302,7 @@ export const PYQModal: React.FC<PYQModalProps> = ({
                       <select
                         value={formData.exam_year}
                         onChange={(e) => handleInputChange('exam_year', parseInt(e.target.value))}
-                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                         required
                       >
                         {yearOptions.map((year) => (
@@ -322,7 +322,7 @@ export const PYQModal: React.FC<PYQModalProps> = ({
                         value={formData.exam_session}
                         onChange={(e) => handleInputChange('exam_session', e.target.value)}
                         placeholder="e.g., Prelims, Mains, January"
-                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                         list="sessions"
                       />
                       <datalist id="sessions">
@@ -339,7 +339,7 @@ export const PYQModal: React.FC<PYQModalProps> = ({
                       <select
                         value={formData.paper_type}
                         onChange={(e) => handleInputChange('paper_type', e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                         required
                       >
                         {paperTypes.map((type) => (
@@ -360,7 +360,7 @@ export const PYQModal: React.FC<PYQModalProps> = ({
                         onChange={(e) => handleInputChange('paper_number', e.target.value)}
                         placeholder="1, 2, 3..."
                         min="1"
-                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                       />
                     </div>
 
@@ -373,7 +373,7 @@ export const PYQModal: React.FC<PYQModalProps> = ({
                         value={formData.conducting_authority}
                         onChange={(e) => handleInputChange('conducting_authority', e.target.value)}
                         placeholder="e.g., GPSC, Gujarat Police"
-                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                         list="authorities"
                       />
                       <datalist id="authorities">
@@ -401,7 +401,7 @@ export const PYQModal: React.FC<PYQModalProps> = ({
                         onChange={(e) => handleInputChange('total_questions', e.target.value)}
                         placeholder="100"
                         min="1"
-                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                         required
                       />
                     </div>
@@ -417,7 +417,7 @@ export const PYQModal: React.FC<PYQModalProps> = ({
                         onChange={(e) => handleInputChange('duration_minutes', e.target.value)}
                         placeholder="120"
                         min="1"
-                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                         required
                       />
                     </div>
@@ -433,7 +433,7 @@ export const PYQModal: React.FC<PYQModalProps> = ({
                         onChange={(e) => handleInputChange('total_marks', e.target.value)}
                         placeholder="100"
                         min="1"
-                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                         required
                       />
                     </div>
@@ -449,7 +449,7 @@ export const PYQModal: React.FC<PYQModalProps> = ({
                         type="date"
                         value={formData.original_exam_date}
                         onChange={(e) => handleInputChange('original_exam_date', e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                       />
                     </div>
 
@@ -459,7 +459,7 @@ export const PYQModal: React.FC<PYQModalProps> = ({
                           type="checkbox"
                           checked={formData.negative_marking}
                           onChange={(e) => handleInputChange('negative_marking', e.target.checked)}
-                          className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                          className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
                         />
                         <span className="text-sm font-medium text-gray-700">Negative Marking</span>
                       </label>
@@ -471,7 +471,7 @@ export const PYQModal: React.FC<PYQModalProps> = ({
                           placeholder="0.25"
                           step="0.01"
                           min="0"
-                          className="w-full mt-2 px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                          className="w-full mt-2 px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                         />
                       )}
                     </div>
@@ -486,7 +486,7 @@ export const PYQModal: React.FC<PYQModalProps> = ({
                       onChange={(e) => handleInputChange('instructions', e.target.value)}
                       placeholder="Original exam instructions..."
                       rows={4}
-                      className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     />
                   </div>
 
@@ -499,7 +499,7 @@ export const PYQModal: React.FC<PYQModalProps> = ({
                       onChange={(e) => handleInputChange('exam_pattern_notes', e.target.value)}
                       placeholder="Notes about marking scheme, exam pattern, etc..."
                       rows={3}
-                      className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     />
                   </div>
                 </div>
@@ -516,7 +516,7 @@ export const PYQModal: React.FC<PYQModalProps> = ({
                           type="checkbox"
                           checked={formData.is_active}
                           onChange={(e) => handleInputChange('is_active', e.target.checked)}
-                          className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                          className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
                         />
                         <div>
                           <span className="text-sm font-medium text-gray-700">Active</span>
@@ -529,7 +529,7 @@ export const PYQModal: React.FC<PYQModalProps> = ({
                           type="checkbox"
                           checked={formData.is_featured}
                           onChange={(e) => handleInputChange('is_featured', e.target.checked)}
-                          className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                          className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
                         />
                         <div>
                           <span className="text-sm font-medium text-gray-700">Featured</span>
@@ -542,7 +542,7 @@ export const PYQModal: React.FC<PYQModalProps> = ({
                           type="checkbox"
                           checked={formData.supports_multilanguage}
                           onChange={(e) => handleInputChange('supports_multilanguage', e.target.checked)}
-                          className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                          className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
                         />
                         <div>
                           <span className="text-sm font-medium text-gray-700">Multi-language Support</span>
@@ -568,7 +568,7 @@ export const PYQModal: React.FC<PYQModalProps> = ({
               <button
                 type="submit"
                 disabled={saving}
-                className="inline-flex items-center px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="inline-flex items-center px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 {saving ? (
                   <>

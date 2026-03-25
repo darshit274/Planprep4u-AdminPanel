@@ -140,7 +140,7 @@ export const QuestionReportCard: React.FC<QuestionReportCardProps> = ({
             </span>
           )}
           {question.reportBreakdown.other > 0 && (
-            <span className="inline-flex items-center gap-1 text-blue-600">
+            <span className="inline-flex items-center gap-1 text-primary-600">
               <span className="font-semibold">
                 {question.reportBreakdown.other}
               </span>
@@ -180,7 +180,7 @@ export const QuestionReportCard: React.FC<QuestionReportCardProps> = ({
             </span>
           )}
           {question.statusBreakdown.under_review > 0 && (
-            <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full font-medium">
+            <span className="px-2 py-1 bg-primary-100 text-primary-800 rounded-full font-medium">
               {question.statusBreakdown.under_review} Under Review
             </span>
           )}
@@ -201,7 +201,7 @@ export const QuestionReportCard: React.FC<QuestionReportCardProps> = ({
       <div className="flex flex-wrap gap-3">
         <button
           onClick={() => navigate(`/reports/question/${question.questionId}`)}
-          className="flex-1 min-w-[200px] px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 font-medium"
+          className="flex-1 min-w-[200px] px-4 py-2.5 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors flex items-center justify-center gap-2 font-medium"
         >
           <Eye className="h-4 w-4" />
           View All Reports ({question.totalReports})

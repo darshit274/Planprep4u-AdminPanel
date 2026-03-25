@@ -289,7 +289,7 @@ const CategoryDetailPageNew: React.FC = () => {
     <div className="flex gap-2">
       <button
         onClick={() => navigate(`/sub-categories/${item.uuid}`)}
-        className="p-2 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-lg"
+        className="p-2 text-primary-600 hover:text-primary-800 hover:bg-primary-50 rounded-lg"
         title="View Tests"
       >
         <EyeIcon className="h-4 w-4" />
@@ -343,7 +343,7 @@ const CategoryDetailPageNew: React.FC = () => {
         <div className="text-red-600 mb-4">Error loading sub-categories</div>
         <button
           onClick={() => queryClient.invalidateQueries({ queryKey: ['subCategories', categoryUuid] })}
-          className="text-blue-600 hover:text-blue-800"
+          className="text-primary-600 hover:text-primary-800"
         >
           Try again
         </button>
@@ -359,11 +359,11 @@ const CategoryDetailPageNew: React.FC = () => {
     <div className="space-y-6">
       {/* Breadcrumb */}
       <nav className="flex items-center space-x-2 text-sm">
-        <Link to="/test-management" className="text-blue-600 hover:text-blue-800">
+        <Link to="/test-management" className="text-primary-600 hover:text-primary-800">
           Test Management
         </Link>
         <span className="text-gray-400">/</span>
-        <button onClick={() => navigate(-1)} className="text-blue-600 hover:text-blue-800">
+        <button onClick={() => navigate(-1)} className="text-primary-600 hover:text-primary-800">
           Categories
         </button>
         <span className="text-gray-400">/</span>
@@ -388,7 +388,7 @@ const CategoryDetailPageNew: React.FC = () => {
         </div>
         <button
           onClick={handleCreate}
-          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 flex items-center gap-2"
+          className="bg-primary-600 text-white px-4 py-2 rounded-md hover:bg-primary-700 flex items-center gap-2"
         >
           <PlusIcon className="h-5 w-5" />
           Add Sub-category
@@ -400,8 +400,8 @@ const CategoryDetailPageNew: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center">
-              <div className="p-2 bg-blue-100 rounded-lg">
-                <ChartBarIcon className="h-6 w-6 text-blue-600" />
+              <div className="p-2 bg-primary-100 rounded-lg">
+                <ChartBarIcon className="h-6 w-6 text-primary-600" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Total Sub-categories</p>
@@ -433,8 +433,8 @@ const CategoryDetailPageNew: React.FC = () => {
           </div>
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center">
-              <div className="p-2 bg-purple-100 rounded-lg">
-                <ChartBarIcon className="h-6 w-6 text-purple-600" />
+              <div className="p-2 bg-primary-100 rounded-lg">
+                <ChartBarIcon className="h-6 w-6 text-primary-600" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">With Tests</p>
@@ -513,7 +513,7 @@ const CategoryDetailPageNew: React.FC = () => {
                   type="text"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                   required
                 />
               </div>
@@ -526,7 +526,7 @@ const CategoryDetailPageNew: React.FC = () => {
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                 />
               </div>
 
@@ -542,7 +542,7 @@ const CategoryDetailPageNew: React.FC = () => {
                     type="text"
                     value={formData.name_gujarati}
                     onChange={(e) => setFormData({ ...formData, name_gujarati: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                     placeholder="ગુજરાતીમાં નામ"
                   />
                 </div>
@@ -555,7 +555,7 @@ const CategoryDetailPageNew: React.FC = () => {
                     value={formData.description_gujarati}
                     onChange={(e) => setFormData({ ...formData, description_gujarati: e.target.value })}
                     rows={3}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                     placeholder="ગુજરાતીમાં વર્ણન"
                   />
                 </div>
@@ -569,7 +569,7 @@ const CategoryDetailPageNew: React.FC = () => {
                     id="is_active"
                     checked={formData.is_active}
                     onChange={(e) => setFormData({ ...formData, is_active: e.target.checked })}
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
                   />
                   <label htmlFor="is_active" className="ml-2 block text-sm text-gray-700">
                     Active (sub-category is available for use)
@@ -592,7 +592,7 @@ const CategoryDetailPageNew: React.FC = () => {
                 <button
                   type="submit"
                   disabled={createMutation.isPending || updateMutation.isPending}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+                  className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 disabled:opacity-50"
                 >
                   {createMutation.isPending || updateMutation.isPending ? 'Saving...' : 'Save'}
                 </button>

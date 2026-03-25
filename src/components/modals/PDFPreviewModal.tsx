@@ -89,7 +89,7 @@ export const PDFPreviewModal: React.FC<PDFPreviewModalProps> = ({
           <div className="flex items-center space-x-2">
             <button
               onClick={handleDownload}
-              className="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 inline-flex items-center"
+              className="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 inline-flex items-center"
               title="Download PDF"
             >
               <Download className="h-4 w-4 mr-1" />
@@ -108,7 +108,7 @@ export const PDFPreviewModal: React.FC<PDFPreviewModalProps> = ({
           {loading ? (
             <div className="flex items-center justify-center h-full">
               <div className="text-center">
-                <Loader className="animate-spin h-8 w-8 text-blue-600 mx-auto mb-4" />
+                <Loader className="animate-spin h-8 w-8 text-primary-600 mx-auto mb-4" />
                 <p className="text-gray-600">Loading PDF preview...</p>
               </div>
             </div>
@@ -119,7 +119,7 @@ export const PDFPreviewModal: React.FC<PDFPreviewModalProps> = ({
                 <p className="text-gray-600 mb-4">{error}</p>
                 <button
                   onClick={loadPdfPreview}
-                  className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  className="px-4 py-2 text-sm font-medium text-white bg-primary-600 border border-transparent rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
                 >
                   Try Again
                 </button>

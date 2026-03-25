@@ -282,12 +282,12 @@ export const QuestionImportModal: React.FC<QuestionImportModalProps> = ({
           {currentStep === 'upload' && (
             <div className="space-y-6">
               {/* Step 1: Download Template */}
-              <div className="border border-blue-200 bg-blue-50 rounded-lg p-4">
-                <h3 className="font-semibold text-blue-800 mb-2 flex items-center">
+              <div className="border border-primary-200 bg-primary-50 rounded-lg p-4">
+                <h3 className="font-semibold text-primary-800 mb-2 flex items-center">
                   <Download size={20} className="mr-2" />
                   Step 1: Download Template
                 </h3>
-                <p className="text-blue-700 mb-4 text-sm">
+                <p className="text-primary-700 mb-4 text-sm">
                   Download the template file, fill it with your questions, and then upload it.
                 </p>
                 <div className="flex gap-3">
@@ -300,7 +300,7 @@ export const QuestionImportModal: React.FC<QuestionImportModalProps> = ({
                   </button>
                   <button
                     onClick={() => downloadTemplate('csv')}
-                    className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                    className="flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
                   >
                     <FileText size={16} className="mr-2" />
                     Download CSV Template
@@ -338,7 +338,7 @@ export const QuestionImportModal: React.FC<QuestionImportModalProps> = ({
                   <button
                     onClick={uploadFile}
                     disabled={!selectedFile || isUploading}
-                    className="w-full flex items-center justify-center px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                    className="w-full flex items-center justify-center px-4 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
                   >
                     {isUploading ? (
                       <>
@@ -360,8 +360,8 @@ export const QuestionImportModal: React.FC<QuestionImportModalProps> = ({
           {currentStep === 'preview' && previewData && (
             <div className="space-y-6">
               {/* Import Summary */}
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                <h3 className="font-semibold text-blue-800 mb-3 flex items-center">
+              <div className="bg-primary-50 border border-primary-200 rounded-lg p-4">
+                <h3 className="font-semibold text-primary-800 mb-3 flex items-center">
                   <Eye size={20} className="mr-2" />
                   Import Preview
                 </h3>
@@ -375,7 +375,7 @@ export const QuestionImportModal: React.FC<QuestionImportModalProps> = ({
                     <div className="text-sm text-gray-600">Errors</div>
                   </div>
                   <div>
-                    <div className="text-2xl font-bold text-blue-600">{previewData.preview_questions.length}</div>
+                    <div className="text-2xl font-bold text-primary-600">{previewData.preview_questions.length}</div>
                     <div className="text-sm text-gray-600">Preview Shown</div>
                   </div>
                 </div>
@@ -421,7 +421,7 @@ export const QuestionImportModal: React.FC<QuestionImportModalProps> = ({
                       <div key={index} className="bg-white p-4 rounded border">
                         <div className="flex justify-between items-start mb-2">
                           <div className="font-medium text-gray-800 flex-1">{questionText}</div>
-                          <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded ml-2">{language}</span>
+                          <span className="text-xs bg-primary-100 text-primary-800 px-2 py-1 rounded ml-2">{language}</span>
                         </div>
                         <div className="grid grid-cols-2 gap-2 mt-2 text-sm">
                           <div>A: {optionA}</div>
@@ -459,11 +459,11 @@ export const QuestionImportModal: React.FC<QuestionImportModalProps> = ({
 
           {currentStep === 'importing' && (
             <div className="text-center py-8">
-              <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-500 border-t-transparent mx-auto mb-4"></div>
+              <div className="animate-spin rounded-full h-16 w-16 border-4 border-primary-500 border-t-transparent mx-auto mb-4"></div>
               <h3 className="text-xl font-semibold text-gray-800 mb-2">Importing Questions...</h3>
               <p className="text-gray-600">Please wait while we import your questions to the database.</p>
               {importStatus && (
-                <div className="mt-4 bg-blue-50 p-4 rounded-lg">
+                <div className="mt-4 bg-primary-50 p-4 rounded-lg">
                   <p className="text-sm">Status: {importStatus.status}</p>
                   {importStatus.successful_imports > 0 && (
                     <p className="text-sm text-green-600">Imported: {importStatus.successful_imports} questions</p>
@@ -491,7 +491,7 @@ export const QuestionImportModal: React.FC<QuestionImportModalProps> = ({
               </div>
               <button
                 onClick={handleClose}
-                className="mt-6 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className="mt-6 px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
               >
                 Close
               </button>

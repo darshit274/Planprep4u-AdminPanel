@@ -18,7 +18,7 @@ const TestSeriesDetailPageNew: React.FC = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
       </div>
     );
   }
@@ -32,7 +32,7 @@ const TestSeriesDetailPageNew: React.FC = () => {
           </div>
           <button
             onClick={() => navigate('/test-management')}
-            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+            className="bg-primary-600 text-white px-4 py-2 rounded-md hover:bg-primary-700"
           >
             Back to Test Management
           </button>
@@ -45,7 +45,7 @@ const TestSeriesDetailPageNew: React.FC = () => {
     <div className="space-y-6">
       {/* Breadcrumb */}
       <nav className="flex items-center space-x-2 text-sm">
-        <Link to="/test-management" className="text-blue-600 hover:text-blue-800">
+        <Link to="/test-management" className="text-primary-600 hover:text-primary-800">
           Test Management
         </Link>
         <span className="text-gray-400">/</span>
@@ -69,7 +69,7 @@ const TestSeriesDetailPageNew: React.FC = () => {
         </div>
         <button
           onClick={() => navigate(`/simple-hierarchy/${testSeriesUuid}`)}
-          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 flex items-center gap-2"
+          className="bg-primary-600 text-white px-4 py-2 rounded-md hover:bg-primary-700 flex items-center gap-2"
         >
           <ChartBarIcon className="h-5 w-5" />
           Manage Categories
@@ -113,15 +113,15 @@ const TestSeriesDetailPageNew: React.FC = () => {
       </div>
 
       {/* Dynamic Hierarchy Notice */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+      <div className="bg-primary-50 border border-primary-200 rounded-lg p-6">
         <div className="flex items-center">
-          <ChartBarIcon className="h-6 w-6 text-blue-600 mr-3" />
+          <ChartBarIcon className="h-6 w-6 text-primary-600 mr-3" />
           <div>
-            <h3 className="text-lg font-medium text-blue-900">Dynamic Hierarchy System</h3>
-            <p className="text-blue-700 mt-1">
+            <h3 className="text-lg font-medium text-primary-900">Dynamic Hierarchy System</h3>
+            <p className="text-primary-700 mt-1">
               This test series now uses the new dynamic hierarchy system. Click "Manage Categories" to create and organize your test structure with flexible categories and questions.
             </p>
-            <ul className="text-sm text-blue-600 mt-2 space-y-1">
+            <ul className="text-sm text-primary-600 mt-2 space-y-1">
               <li>• Categories can contain subcategories OR questions, not both</li>
               <li>• Unlimited nesting levels with proper constraint enforcement</li>
               <li>• Real-time statistics and progress tracking</li>

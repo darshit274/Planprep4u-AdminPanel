@@ -91,11 +91,11 @@ export function DataTable<T>({
     }
     
     return sortOrder === 'ASC' ? (
-      <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 11l5-5m0 0l5 5m-5-5v12" />
       </svg>
     ) : (
-      <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 13l-5 5m0 0l-5-5m5 5V6" />
       </svg>
     );
@@ -146,7 +146,7 @@ export function DataTable<T>({
                 key={itemId}
                 className={`${
                   onRowClick ? 'cursor-pointer hover:bg-gray-50' : ''
-                } ${isSelected ? 'bg-blue-50' : ''}`}
+                } ${isSelected ? 'bg-primary-50' : ''}`}
                 onClick={() => onRowClick?.(item)}
               >
                 {selectable && (

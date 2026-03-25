@@ -20,7 +20,7 @@ export const Loader: React.FC<LoaderProps> = ({
   return (
     <div className={`flex flex-col items-center justify-center ${className}`}>
       <div 
-        className={`animate-spin rounded-full border-gray-300 border-t-blue-600 ${sizeClasses[size]}`}
+        className={`animate-spin rounded-full border-gray-300 border-t-primary-600 ${sizeClasses[size]}`}
       />
       {text && (
         <p className="mt-2 text-sm text-gray-600">{text}</p>

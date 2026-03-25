@@ -187,7 +187,7 @@ export const QuestionReportDetails: React.FC = () => {
           <p className="text-gray-500">Question not found</p>
           <button
             onClick={() => navigate('/reports')}
-            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+            className="mt-4 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700"
           >
             Back to Reports
           </button>
@@ -220,12 +220,12 @@ export const QuestionReportDetails: React.FC = () => {
 
       {/* Location Card */}
       {(question.testSeries || (question.hierarchyPath && question.hierarchyPath.length > 0)) && (
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-          <h3 className="font-medium text-blue-900 mb-2 flex items-center gap-2">
+        <div className="bg-primary-50 border border-primary-200 rounded-lg p-4">
+          <h3 className="font-medium text-primary-900 mb-2 flex items-center gap-2">
             <Folder className="h-4 w-4" />
             Location
           </h3>
-          <div className="text-sm text-blue-800">
+          <div className="text-sm text-primary-800">
             {question.testSeries && (
               <div className="mb-1 flex items-center gap-2">
                 <BookOpen className="h-4 w-4 flex-shrink-0" />
@@ -235,7 +235,7 @@ export const QuestionReportDetails: React.FC = () => {
               </div>
             )}
             {question.hierarchyPath && question.hierarchyPath.length > 0 && (
-              <div className="flex items-center gap-2 text-xs text-blue-700">
+              <div className="flex items-center gap-2 text-xs text-primary-700">
                 <span>Path:</span>
                 <span>
                   {question.hierarchyPath.map((item, index) => (
@@ -286,7 +286,7 @@ export const QuestionReportDetails: React.FC = () => {
         </div>
 
         {question.explanation && (
-          <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+          <div className="mt-4 p-4 bg-primary-50 rounded-lg border border-primary-200">
             <h4 className="font-medium text-gray-700 mb-2 text-sm">
               📖 Solution:
             </h4>
@@ -300,7 +300,7 @@ export const QuestionReportDetails: React.FC = () => {
         <div className="flex gap-3 mt-4">
           <button
             onClick={() => setQuestionModal({ isOpen: true })}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2"
+            className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors flex items-center gap-2"
           >
             <Edit className="h-4 w-4" />
             Edit Question
@@ -320,11 +320,11 @@ export const QuestionReportDetails: React.FC = () => {
             </div>
             <div className="text-sm text-yellow-600">Pending</div>
           </div>
-          <div className="text-center p-3 bg-blue-50 rounded-lg border border-blue-200">
-            <div className="text-2xl font-bold text-blue-800">
+          <div className="text-center p-3 bg-primary-50 rounded-lg border border-primary-200">
+            <div className="text-2xl font-bold text-primary-800">
               {summary.statusBreakdown.under_review}
             </div>
-            <div className="text-sm text-blue-600">Under Review</div>
+            <div className="text-sm text-primary-600">Under Review</div>
           </div>
           <div className="text-center p-3 bg-green-50 rounded-lg border border-green-200">
             <div className="text-2xl font-bold text-green-800">
@@ -354,7 +354,7 @@ export const QuestionReportDetails: React.FC = () => {
             <div className="text-xs text-gray-600">Wrong Solution</div>
           </div>
           <div className="text-center">
-            <div className="text-lg font-semibold text-blue-600">
+            <div className="text-lg font-semibold text-primary-600">
               {summary.reportBreakdown.other}
             </div>
             <div className="text-xs text-gray-600">Other</div>
@@ -373,7 +373,7 @@ export const QuestionReportDetails: React.FC = () => {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="text-sm border border-gray-300 rounded-lg px-3 py-1 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="text-sm border border-gray-300 rounded-lg px-3 py-1 focus:ring-2 focus:ring-primary-500 focus:border-transparent"
             >
               <option value="all">All Status</option>
               <option value="pending">Pending</option>
@@ -385,7 +385,7 @@ export const QuestionReportDetails: React.FC = () => {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="text-sm border border-gray-300 rounded-lg px-3 py-1 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="text-sm border border-gray-300 rounded-lg px-3 py-1 focus:ring-2 focus:ring-primary-500 focus:border-transparent"
             >
               <option value="latest">Latest First</option>
               <option value="oldest">Oldest First</option>
@@ -434,7 +434,7 @@ export const QuestionReportDetails: React.FC = () => {
             </button>
             <button
               onClick={() => handleBulkActionClick('mark_under_review')}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
             >
               Mark All as Under Review
             </button>

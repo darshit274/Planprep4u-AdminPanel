@@ -42,9 +42,9 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
         };
       case 'info':
         return {
-          iconBg: 'bg-blue-100',
-          iconColor: 'text-blue-600',
-          confirmBtn: 'bg-blue-600 hover:bg-blue-700 text-white'
+          iconBg: 'bg-primary-100',
+          iconColor: 'text-primary-600',
+          confirmBtn: 'bg-primary-600 hover:bg-primary-700 text-white'
         };
       default:
         return {

@@ -107,7 +107,7 @@ export const Pagination: React.FC<PaginationProps> = ({
                 onClick={() => onPageChange(page)}
                 className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 ${
                   page === currentPage
-                    ? 'z-10 bg-blue-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600'
+                    ? 'z-10 bg-primary-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600'
                     : 'text-gray-900'
                 }`}
               >
@@ -165,7 +165,7 @@ export const Pagination: React.FC<PaginationProps> = ({
                   id="items-per-page"
                   value={itemsPerPage || 10}
                   onChange={(e) => onItemsPerPageChange(parseInt(e.target.value))}
-                  className="text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="text-sm border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-primary-500"
                 >
                   <option value={5}>5</option>
                   <option value={10}>10</option>

@@ -76,7 +76,7 @@ export const PDFFilters: React.FC<PDFFiltersProps> = ({
             value={localFilters.search || ''}
             onChange={(e) => handleInputChange('search', e.target.value)}
             placeholder="Search PDFs by title or description..."
-            className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+            className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
             disabled={loading}
           />
         </div>
@@ -84,7 +84,7 @@ export const PDFFilters: React.FC<PDFFiltersProps> = ({
           onClick={() => setIsAdvancedOpen(!isAdvancedOpen)}
           className={`flex items-center px-4 py-3 border rounded-lg transition-colors ${
             isAdvancedOpen || hasActiveFilters
-              ? 'bg-blue-50 border-blue-200 text-blue-700'
+              ? 'bg-primary-50 border-primary-200 text-primary-700'
               : 'border-gray-200 text-gray-700 hover:bg-gray-50'
           }`}
           disabled={loading}
@@ -92,7 +92,7 @@ export const PDFFilters: React.FC<PDFFiltersProps> = ({
           <Filter className="h-4 w-4 mr-2" />
           Filters
           {hasActiveFilters && (
-            <span className="ml-2 bg-blue-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+            <span className="ml-2 bg-primary-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
               {[localFilters.access_level, localFilters.exam_type_id, localFilters.test_series_id, localFilters.search].filter(Boolean).length}
             </span>
           )}
@@ -122,7 +122,7 @@ export const PDFFilters: React.FC<PDFFiltersProps> = ({
               <select
                 value={localFilters.access_level || ''}
                 onChange={(e) => handleInputChange('access_level', e.target.value as any)}
-                className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 disabled={loading}
               >
                 <option value="">All Levels</option>
@@ -140,7 +140,7 @@ export const PDFFilters: React.FC<PDFFiltersProps> = ({
               <select
                 value={localFilters.exam_type_id || ''}
                 onChange={(e) => handleInputChange('exam_type_id', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 disabled={loading}
               >
                 <option value="">All Exam Types</option>
@@ -162,7 +162,7 @@ export const PDFFilters: React.FC<PDFFiltersProps> = ({
               <select
                 value={localFilters.test_series_id || ''}
                 onChange={(e) => handleInputChange('test_series_id', e.target.value)}
-                className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 disabled={loading}
               >
                 <option value="">All Courses</option>
@@ -186,7 +186,7 @@ export const PDFFilters: React.FC<PDFFiltersProps> = ({
               <select
                 value={localFilters.sort_by || 'created_at'}
                 onChange={(e) => handleInputChange('sort_by', e.target.value as any)}
-                className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 disabled={loading}
               >
                 <option value="created_at">Upload Date</option>
@@ -203,7 +203,7 @@ export const PDFFilters: React.FC<PDFFiltersProps> = ({
               <select
                 value={localFilters.sort_order || 'DESC'}
                 onChange={(e) => handleInputChange('sort_order', e.target.value as any)}
-                className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 disabled={loading}
               >
                 <option value="DESC">Newest First</option>

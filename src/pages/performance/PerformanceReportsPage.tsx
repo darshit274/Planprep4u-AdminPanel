@@ -266,7 +266,7 @@ export const PerformanceReportsPage: React.FC = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
       </div>
     );
   }
@@ -283,7 +283,7 @@ export const PerformanceReportsPage: React.FC = () => {
           <select
             value={filters.dateRange}
             onChange={(e) => setFilters(prev => ({ ...prev, dateRange: e.target.value }))}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
           >
             <option value="7d">Last 7 days</option>
             <option value="30d">Last 30 days</option>
@@ -311,8 +311,8 @@ export const PerformanceReportsPage: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
         <div className="card p-6">
           <div className="flex items-center">
-            <div className="p-3 rounded-full bg-blue-100">
-              <Users className="h-6 w-6 text-blue-600" />
+            <div className="p-3 rounded-full bg-primary-100">
+              <Users className="h-6 w-6 text-primary-600" />
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Total Students</p>
@@ -339,8 +339,8 @@ export const PerformanceReportsPage: React.FC = () => {
 
         <div className="card p-6">
           <div className="flex items-center">
-            <div className="p-3 rounded-full bg-purple-100">
-              <Target className="h-6 w-6 text-purple-600" />
+            <div className="p-3 rounded-full bg-primary-100">
+              <Target className="h-6 w-6 text-primary-600" />
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Avg Performance</p>
@@ -367,8 +367,8 @@ export const PerformanceReportsPage: React.FC = () => {
 
         <div className="card p-6">
           <div className="flex items-center">
-            <div className="p-3 rounded-full bg-indigo-100">
-              <Award className="h-6 w-6 text-indigo-600" />
+            <div className="p-3 rounded-full bg-primary-100">
+              <Award className="h-6 w-6 text-primary-600" />
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Completion Rate</p>
@@ -555,13 +555,13 @@ export const PerformanceReportsPage: React.FC = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Search students..."
-                  className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 />
               </div>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               >
                 <option value="name">Sort by Name</option>
                 <option value="average_score">Sort by Score</option>

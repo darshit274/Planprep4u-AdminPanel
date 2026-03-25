@@ -68,8 +68,8 @@ export const PDFStats: React.FC<PDFStatsProps> = ({ stats, loading = false }) =>
         <StatCard
           title="Total PDFs"
           value={stats.total_pdfs || 0}
-          icon={<FileText className="h-6 w-6 text-blue-600" />}
-          color="bg-blue-100"
+          icon={<FileText className="h-6 w-6 text-primary-600" />}
+          color="bg-primary-100"
         />
         
         <StatCard
@@ -89,8 +89,8 @@ export const PDFStats: React.FC<PDFStatsProps> = ({ stats, loading = false }) =>
         <StatCard
           title="Total Downloads"
           value={stats.total_downloads || 0}
-          icon={<Download className="h-6 w-6 text-purple-600" />}
-          color="bg-purple-100"
+          icon={<Download className="h-6 w-6 text-primary-600" />}
+          color="bg-primary-100"
         />
       </div>
 
@@ -107,7 +107,7 @@ export const PDFStats: React.FC<PDFStatsProps> = ({ stats, loading = false }) =>
               stats.category_stats.slice(0, 5).map((stat, index) => (
                 <div key={index} className="flex items-center justify-between">
                   <div className="flex items-center">
-                    <div className="w-3 h-3 rounded-full bg-blue-500 mr-3"></div>
+                    <div className="w-3 h-3 rounded-full bg-primary-500 mr-3"></div>
                     <span className="text-sm font-medium text-gray-700 truncate">
                       {stat.category || 'Uncategorized'}
                     </span>
@@ -142,7 +142,7 @@ export const PDFStats: React.FC<PDFStatsProps> = ({ stats, loading = false }) =>
                     <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white mr-3 ${
                       index === 0 ? 'bg-yellow-500' : 
                       index === 1 ? 'bg-gray-400' : 
-                      index === 2 ? 'bg-orange-500' : 'bg-blue-500'
+                      index === 2 ? 'bg-orange-500' : 'bg-primary-500'
                     }`}>
                       {index + 1}
                     </div>

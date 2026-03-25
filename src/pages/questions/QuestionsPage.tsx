@@ -295,8 +295,8 @@ export const QuestionsPage: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <div className="card p-6">
             <div className="flex items-center">
-              <div className="p-3 rounded-full bg-blue-100">
-                <Edit className="h-6 w-6 text-blue-600" />
+              <div className="p-3 rounded-full bg-primary-100">
+                <Edit className="h-6 w-6 text-primary-600" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Total Questions</p>
@@ -501,7 +501,7 @@ export const QuestionsPage: React.FC = () => {
                           <span className={`px-2 py-1 text-xs font-medium rounded-full ${getDifficultyBadge(question.difficulty)}`}>
                             {question.difficulty}
                           </span>
-                          <span className="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
+                          <span className="px-2 py-1 text-xs font-medium bg-primary-100 text-primary-800 rounded-full">
                             {question.subject}
                           </span>
                         </div>
@@ -512,8 +512,8 @@ export const QuestionsPage: React.FC = () => {
                           </h4>
                           {/* Language indicator */}
                           <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                            question.question_text && question.question_text_gujarati ? 'bg-purple-100 text-purple-800' :
-                            question.question_text ? 'bg-blue-100 text-blue-800' :
+                            question.question_text && question.question_text_gujarati ? 'bg-primary-100 text-primary-800' :
+                            question.question_text ? 'bg-primary-100 text-primary-800' :
                             question.question_text_gujarati ? 'bg-orange-100 text-orange-800' : 'bg-gray-100 text-gray-800'
                           }`}>
                             {question.question_text && question.question_text_gujarati ? 'Both' :

@@ -157,7 +157,7 @@ export const ExamManagement: React.FC = () => {
           onClick={() => handlePageChange(i)}
           className={`px-3 py-2 text-sm font-medium rounded-md ${
             i === pagination.page
-              ? 'bg-blue-600 text-white'
+              ? 'bg-primary-600 text-white'
               : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
           }`}
         >
@@ -219,20 +219,20 @@ export const ExamManagement: React.FC = () => {
             <div className="flex items-center bg-white border border-gray-200 rounded-lg">
               <button
                 onClick={() => setViewMode('grid')}
-                className={`p-2 ${viewMode === 'grid' ? 'bg-blue-100 text-blue-600' : 'text-gray-400'}`}
+                className={`p-2 ${viewMode === 'grid' ? 'bg-primary-100 text-primary-600' : 'text-gray-400'}`}
               >
                 <Grid className="h-4 w-4" />
               </button>
               <button
                 onClick={() => setViewMode('list')}
-                className={`p-2 ${viewMode === 'list' ? 'bg-blue-100 text-blue-600' : 'text-gray-400'}`}
+                className={`p-2 ${viewMode === 'list' ? 'bg-primary-100 text-primary-600' : 'text-gray-400'}`}
               >
                 <List className="h-4 w-4" />
               </button>
             </div>
             <button
               onClick={handleCreateExam}
-              className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
             >
               <Plus className="h-4 w-4 mr-2" />
               Add Exam Type
@@ -244,8 +244,8 @@ export const ExamManagement: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
             <div className="flex items-center">
-              <div className="p-3 rounded-full bg-blue-100">
-                <BookOpen className="h-6 w-6 text-blue-600" />
+              <div className="p-3 rounded-full bg-primary-100">
+                <BookOpen className="h-6 w-6 text-primary-600" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Total Exam Types</p>
@@ -268,8 +268,8 @@ export const ExamManagement: React.FC = () => {
 
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
             <div className="flex items-center">
-              <div className="p-3 rounded-full bg-purple-100">
-                <BarChart3 className="h-6 w-6 text-purple-600" />
+              <div className="p-3 rounded-full bg-primary-100">
+                <BarChart3 className="h-6 w-6 text-primary-600" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">PYQs</p>
@@ -301,14 +301,14 @@ export const ExamManagement: React.FC = () => {
                 value={filters.search || ''}
                 onChange={(e) => handleSearch(e.target.value)}
                 placeholder="Search exam types by name or code..."
-                className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
                 disabled={loading}
               />
             </div>
             <select
               value={filters.sortBy || 'created_at'}
               onChange={(e) => setFilters(prev => ({ ...prev, sortBy: e.target.value as any, page: 1 }))}
-              className="px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               disabled={loading}
             >
               <option value="created_at">Sort by Date</option>
@@ -318,7 +318,7 @@ export const ExamManagement: React.FC = () => {
             <select
               value={filters.sortOrder || 'DESC'}
               onChange={(e) => setFilters(prev => ({ ...prev, sortOrder: e.target.value as any, page: 1 }))}
-              className="px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               disabled={loading}
             >
               <option value="DESC">Newest First</option>
@@ -342,7 +342,7 @@ export const ExamManagement: React.FC = () => {
               </p>
               <button
                 onClick={handleCreateExam}
-                className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className="inline-flex items-center px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
               >
                 <Plus className="h-5 w-5 mr-2" />
                 Add Exam Type

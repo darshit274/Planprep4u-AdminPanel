@@ -30,9 +30,9 @@ export const QuestionImportButton: React.FC<QuestionImportButtonProps> = ({
   };
 
   const variantClasses = {
-    primary: 'bg-blue-600 text-white hover:bg-blue-700 border-transparent',
+    primary: 'bg-primary-600 text-white hover:bg-primary-700 border-transparent',
     secondary: 'bg-gray-600 text-white hover:bg-gray-700 border-transparent',
-    outline: 'bg-transparent text-blue-600 hover:bg-blue-50 border-blue-600'
+    outline: 'bg-transparent text-primary-600 hover:bg-primary-50 border-primary-600'
   };
 
   const iconSizes = {

@@ -44,7 +44,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
             key={filter.key}
             value={filter.value}
             onChange={(e) => onFilterChange(filter.key, e.target.value)}
-            className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+            className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm"
           >
             <option value="all">All {filter.label}</option>
             {filter.options?.map((option) => (
@@ -63,7 +63,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
             placeholder={filter.placeholder || `Filter by ${filter.label.toLowerCase()}`}
             value={filter.value}
             onChange={(e) => onFilterChange(filter.key, e.target.value)}
-            className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+            className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm"
           />
         );
       
@@ -74,7 +74,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
             type="date"
             value={filter.value}
             onChange={(e) => onFilterChange(filter.key, e.target.value)}
-            className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+            className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm"
           />
         );
       
@@ -95,7 +95,7 @@ export const SearchFilters: React.FC<SearchFiltersProps> = ({
               placeholder="Search..."
               value={searchValue}
               onChange={(e) => onSearchChange(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
             />
           </div>
         </div>

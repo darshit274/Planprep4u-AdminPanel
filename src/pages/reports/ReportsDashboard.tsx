@@ -195,7 +195,7 @@ export const ReportsDashboard: React.FC = () => {
             <select
               value={filters.status || 'all'}
               onChange={(e) => handleFilterChange('status', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all text-sm"
             >
               <option value="all">All Status</option>
               <option value="pending">Pending</option>
@@ -213,7 +213,7 @@ export const ReportsDashboard: React.FC = () => {
             <select
               value={filters.reportType || 'all'}
               onChange={(e) => handleFilterChange('reportType', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all text-sm"
             >
               <option value="all">All Types</option>
               <option value="wrong_question">Wrong Question</option>
@@ -230,7 +230,7 @@ export const ReportsDashboard: React.FC = () => {
             <select
               value={filters.sortBy || 'reportCount'}
               onChange={(e) => handleFilterChange('sortBy', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all text-sm"
             >
               <option value="reportCount">Most Reports</option>
               <option value="latest">Latest Reports</option>
@@ -249,7 +249,7 @@ export const ReportsDashboard: React.FC = () => {
                 placeholder="Search question text..."
                 value={filters.search || ''}
                 onChange={(e) => handleFilterChange('search', e.target.value)}
-                className="w-full px-3 py-2 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm"
+                className="w-full px-3 py-2 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all text-sm"
               />
               <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
             </div>

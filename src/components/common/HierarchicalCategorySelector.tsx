@@ -140,16 +140,16 @@ export const HierarchicalCategorySelector: React.FC<HierarchicalCategorySelector
     <div className={`space-y-3 ${className}`}>
       {/* Selected Path Display */}
       {selectedPath.length > 0 && (
-        <div className="bg-blue-50 border border-blue-200 rounded-md p-3">
+        <div className="bg-primary-50 border border-primary-200 rounded-md p-3">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-blue-900">Selected Category:</p>
-              <p className="text-sm text-blue-700">{getSelectedCategoryPath()}</p>
+              <p className="text-sm font-medium text-primary-900">Selected Category:</p>
+              <p className="text-sm text-primary-700">{getSelectedCategoryPath()}</p>
             </div>
             <button
               type="button"
               onClick={handleClearSelection}
-              className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+              className="text-primary-600 hover:text-primary-800 text-sm font-medium"
             >
               Clear
             </button>
@@ -184,7 +184,7 @@ export const HierarchicalCategorySelector: React.FC<HierarchicalCategorySelector
                   }
                 }}
                 disabled={disabled || level.categories.length === 0}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-50 disabled:text-gray-500 appearance-none"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 disabled:bg-gray-50 disabled:text-gray-500 appearance-none"
                 required={required && levelIndex === 0}
               >
                 <option value="">

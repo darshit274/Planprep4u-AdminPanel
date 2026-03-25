@@ -246,7 +246,7 @@ export const Dashboard: React.FC = () => {
                 {recentActivity.map((activity, index) => (
                   <div key={index} className="flex items-center space-x-3">
                     <div className={`w-2 h-2 rounded-full ${
-                      activity.type === 'user' ? 'bg-blue-500' :
+                      activity.type === 'user' ? 'bg-primary-500' :
                       activity.type === 'test' ? 'bg-green-500' : 'bg-yellow-500'
                     }`} />
                     <div className="flex-1 min-w-0">
@@ -276,7 +276,7 @@ export const Dashboard: React.FC = () => {
                 onClick={() => setSeriesPeriod('week')}
                 className={`px-3 py-1.5 text-sm font-medium transition-colors ${
                   seriesPeriod === 'week'
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-primary-600 text-white'
                     : 'bg-white text-gray-600 hover:bg-gray-50'
                 }`}
               >
@@ -286,7 +286,7 @@ export const Dashboard: React.FC = () => {
                 onClick={() => setSeriesPeriod('month')}
                 className={`px-3 py-1.5 text-sm font-medium border-l border-gray-200 transition-colors ${
                   seriesPeriod === 'month'
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-primary-600 text-white'
                     : 'bg-white text-gray-600 hover:bg-gray-50'
                 }`}
               >
@@ -329,11 +329,11 @@ export const Dashboard: React.FC = () => {
                         return (
                           <div className="bg-white border border-gray-200 rounded-lg shadow-lg p-3 text-sm">
                             <p className="font-semibold text-gray-900 mb-2">{d.name}</p>
-                            <p className="text-gray-600">Total attempts: <span className="font-medium text-blue-600">{d.total_attempts}</span></p>
+                            <p className="text-gray-600">Total attempts: <span className="font-medium text-primary-600">{d.total_attempts}</span></p>
                             <p className="text-gray-600">Completed: <span className="font-medium text-green-600">{d.completed_attempts}</span></p>
                             <p className="text-gray-600">Completion rate: <span className="font-medium text-yellow-600">{d.completion_rate}%</span></p>
                             {d.avg_score > 0 && (
-                              <p className="text-gray-600">Avg score: <span className="font-medium text-purple-600">{d.avg_score}%</span></p>
+                              <p className="text-gray-600">Avg score: <span className="font-medium text-primary-600">{d.avg_score}%</span></p>
                             )}
                           </div>
                         );
@@ -351,7 +351,7 @@ export const Dashboard: React.FC = () => {
                   {seriesAttemptsData.slice(0, 5).map((s, i) => (
                     <div key={s.name} className="flex items-start gap-2">
                       <span className={`mt-0.5 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold text-white shrink-0 ${
-                        i === 0 ? 'bg-yellow-500' : i === 1 ? 'bg-gray-400' : i === 2 ? 'bg-amber-600' : 'bg-blue-400'
+                        i === 0 ? 'bg-yellow-500' : i === 1 ? 'bg-gray-400' : i === 2 ? 'bg-amber-600' : 'bg-primary-400'
                       }`}>
                         {i + 1}
                       </span>

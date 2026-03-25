@@ -231,7 +231,7 @@ const DynamicHierarchyPage: React.FC = () => {
   const renderCategoryIcon = (category: HierarchyNode) => {
     switch (category.node_type) {
       case 'container':
-        return <FolderIcon className="w-5 h-5 text-blue-500" />;
+        return <FolderIcon className="w-5 h-5 text-primary-500" />;
       case 'question_holder':
         return <DocumentTextIcon className="w-5 h-5 text-green-500" />;
       default:
@@ -251,7 +251,7 @@ const DynamicHierarchyPage: React.FC = () => {
           className={`
             flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 mb-1
             ${isSelected 
-              ? 'bg-blue-50 border-2 border-blue-200' 
+              ? 'bg-primary-50 border-2 border-primary-200' 
               : 'hover:bg-gray-50 border-2 border-transparent'
             }
           `}
@@ -297,7 +297,7 @@ const DynamicHierarchyPage: React.FC = () => {
                     <span>{category.subcategories_count} subcategories</span>
                   )}
                   {category.total_questions_count > 0 && (
-                    <span className="text-blue-600">({category.total_questions_count} total Q)</span>
+                    <span className="text-primary-600">({category.total_questions_count} total Q)</span>
                   )}
                 </div>
               </div>
@@ -310,7 +310,7 @@ const DynamicHierarchyPage: React.FC = () => {
                   </span>
                 )}
                 {category.node_type === 'container' && (
-                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary-100 text-primary-800">
                     Subs: {category.subcategories_count}
                   </span>
                 )}
@@ -384,7 +384,7 @@ const DynamicHierarchyPage: React.FC = () => {
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-gray-500">Total Questions:</span>
-            <span className="font-medium text-blue-600">{selectedCategory.total_questions_count}</span>
+            <span className="font-medium text-primary-600">{selectedCategory.total_questions_count}</span>
           </div>
         </div>
 
@@ -396,7 +396,7 @@ const DynamicHierarchyPage: React.FC = () => {
           {(selectedCategory.node_type === 'unset' || selectedCategory.node_type === 'container') && selectedCategory.hierarchy_level === 0 && (
             <button
               onClick={() => handleAddCategory(selectedCategory.id)}
-              className="w-full flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
+              className="w-full flex items-center px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700 transition-colors"
             >
               <PlusIcon className="w-4 h-4 mr-2" />
               Add Subcategory
@@ -452,7 +452,7 @@ const DynamicHierarchyPage: React.FC = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
       </div>
     );
   }
@@ -466,7 +466,7 @@ const DynamicHierarchyPage: React.FC = () => {
           </div>
           <button 
             onClick={fetchHierarchy}
-            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+            className="bg-primary-600 text-white px-4 py-2 rounded-md hover:bg-primary-700"
           >
             Try Again
           </button>
@@ -505,7 +505,7 @@ const DynamicHierarchyPage: React.FC = () => {
             
             <button
               onClick={() => handleAddCategory(null)}
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700"
             >
               <PlusIcon className="w-4 h-4 mr-2" />
               Add Category
@@ -527,10 +527,10 @@ const DynamicHierarchyPage: React.FC = () => {
                   {/* Statistics */}
                   {data?.statistics && (
                     <div className="flex space-x-4 text-sm">
-                      <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full">
+                      <span className="px-3 py-1 bg-primary-100 text-primary-800 rounded-full">
                         {data.statistics.totalCategories} Categories
                       </span>
-                      <span className="px-3 py-1 bg-purple-100 text-purple-800 rounded-full">
+                      <span className="px-3 py-1 bg-primary-100 text-primary-800 rounded-full">
                         {data.statistics.totalSubCategories} Subcategories
                       </span>
                       <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full">
@@ -555,7 +555,7 @@ const DynamicHierarchyPage: React.FC = () => {
                       <div className="mt-6">
                         <button
                           onClick={() => handleAddCategory(null)}
-                          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700"
                         >
                           <PlusIcon className="w-4 h-4 mr-2" />
                           Create Category
@@ -632,8 +632,8 @@ const CreateCategoryModal: React.FC<{
         </h3>
         
         {parentCategory && (
-          <div className="mb-4 p-3 bg-blue-50 rounded-lg">
-            <p className="text-sm text-blue-800">
+          <div className="mb-4 p-3 bg-primary-50 rounded-lg">
+            <p className="text-sm text-primary-800">
               Parent: <span className="font-medium">{parentCategory.name}</span>
             </p>
           </div>
@@ -648,7 +648,7 @@ const CreateCategoryModal: React.FC<{
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
               placeholder="Enter category name"
               required
             />
@@ -661,7 +661,7 @@ const CreateCategoryModal: React.FC<{
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
               placeholder="Enter description (optional)"
               rows={3}
             />
@@ -677,7 +677,7 @@ const CreateCategoryModal: React.FC<{
             </button>
             <button
               type="submit"
-              className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700"
+              className="px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-md hover:bg-primary-700"
             >
               Create
             </button>

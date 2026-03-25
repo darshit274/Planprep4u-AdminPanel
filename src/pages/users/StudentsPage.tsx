@@ -255,12 +255,12 @@ export const StudentsPage: React.FC = () => {
             <button 
               type="button" 
               onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
-              className={`btn-secondary ${hasActiveFilters ? 'border-blue-500 bg-blue-50 text-blue-700' : ''}`}
+              className={`btn-secondary ${hasActiveFilters ? 'border-primary-500 bg-primary-50 text-primary-700' : ''}`}
             >
               <Filter className="h-4 w-4 mr-2" />
               Filters
               {hasActiveFilters && (
-                <span className="ml-2 bg-blue-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                <span className="ml-2 bg-primary-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                   {[statusFilter !== 'all', verificationFilter !== 'all', premiumFilter !== 'all', dateFilter.from, dateFilter.to, searchTerm].filter(Boolean).length}
                 </span>
               )}
@@ -280,7 +280,7 @@ export const StudentsPage: React.FC = () => {
 
         {/* Advanced Filters Panel */}
         {showAdvancedFilters && (
-          <div className="card p-6 border-t-2 border-blue-500">
+          <div className="card p-6 border-t-2 border-primary-500">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-medium text-gray-900">Advanced Filters</h3>
               <button
@@ -386,8 +386,8 @@ export const StudentsPage: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <div className="card p-6">
             <div className="flex items-center">
-              <div className="p-3 rounded-full bg-blue-100">
-                <UserPlus className="h-6 w-6 text-blue-600" />
+              <div className="p-3 rounded-full bg-primary-100">
+                <UserPlus className="h-6 w-6 text-primary-600" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Total Students</p>
@@ -426,8 +426,8 @@ export const StudentsPage: React.FC = () => {
 
           <div className="card p-6">
             <div className="flex items-center">
-              <div className="p-3 rounded-full bg-purple-100">
-                <Trash2 className="h-6 w-6 text-purple-600" />
+              <div className="p-3 rounded-full bg-primary-100">
+                <Trash2 className="h-6 w-6 text-primary-600" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">This Week</p>
@@ -555,7 +555,7 @@ export const StudentsPage: React.FC = () => {
                         <div className="flex space-x-2">
                           <button 
                             onClick={() => handleEditStudent(student)}
-                            className="text-blue-600 hover:text-blue-900"
+                            className="text-primary-600 hover:text-primary-900"
                             title="View Details"
                           >
                             <Eye className="h-4 w-4" />

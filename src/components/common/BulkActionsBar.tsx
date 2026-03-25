@@ -44,7 +44,7 @@ export const BulkActionsBar: React.FC<BulkActionsBarProps> = ({
       case 'danger':
         return `${baseClasses} bg-red-600 hover:bg-red-700`;
       default:
-        return `${baseClasses} bg-blue-600 hover:bg-blue-700`;
+        return `${baseClasses} bg-primary-600 hover:bg-primary-700`;
     }
   };
 
@@ -71,15 +71,15 @@ export const BulkActionsBar: React.FC<BulkActionsBarProps> = ({
   ];
 
   return (
-    <div className={`px-6 py-4 bg-blue-50 border-b border-blue-200 ${className}`}>
+    <div className={`px-6 py-4 bg-primary-50 border-b border-primary-200 ${className}`}>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <span className="text-sm font-medium text-blue-700">
+          <span className="text-sm font-medium text-primary-700">
             {selectedCount} of {totalCount} selected
           </span>
           <button
             onClick={onClearSelection}
-            className="text-sm text-blue-600 hover:text-blue-800 transition-colors"
+            className="text-sm text-primary-600 hover:text-primary-800 transition-colors"
           >
             Clear selection
           </button>

@@ -467,7 +467,7 @@ const TestDetailPageNew: React.FC = () => {
           onClick={() =>
             queryClient.invalidateQueries({ queryKey: ["questions", testUuid] })
           }
-          className="text-blue-600 hover:text-blue-800"
+          className="text-primary-600 hover:text-primary-800"
         >
           Try again
         </button>
@@ -485,14 +485,14 @@ const TestDetailPageNew: React.FC = () => {
       <nav className="flex items-center space-x-2 text-sm">
         <Link
           to="/test-management"
-          className="text-blue-600 hover:text-blue-800"
+          className="text-primary-600 hover:text-primary-800"
         >
           Test Management
         </Link>
         <span className="text-gray-400">/</span>
         <button
           onClick={() => navigate(-1)}
-          className="text-blue-600 hover:text-blue-800"
+          className="text-primary-600 hover:text-primary-800"
         >
           Tests
         </button>
@@ -531,7 +531,7 @@ const TestDetailPageNew: React.FC = () => {
         </div>
         <button
           onClick={handleCreate}
-          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 flex items-center gap-2"
+          className="bg-primary-600 text-white px-4 py-2 rounded-md hover:bg-primary-700 flex items-center gap-2"
         >
           <PlusIcon className="h-5 w-5" />
           Add Question
@@ -543,8 +543,8 @@ const TestDetailPageNew: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center">
-              <div className="p-2 bg-blue-100 rounded-lg">
-                <ChartBarIcon className="h-6 w-6 text-blue-600" />
+              <div className="p-2 bg-primary-100 rounded-lg">
+                <ChartBarIcon className="h-6 w-6 text-primary-600" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">
@@ -584,8 +584,8 @@ const TestDetailPageNew: React.FC = () => {
           </div>
           <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center">
-              <div className="p-2 bg-purple-100 rounded-lg">
-                <ChartBarIcon className="h-6 w-6 text-purple-600" />
+              <div className="p-2 bg-primary-100 rounded-lg">
+                <ChartBarIcon className="h-6 w-6 text-primary-600" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Total Marks</p>
@@ -672,7 +672,7 @@ const TestDetailPageNew: React.FC = () => {
                       })
                     }
                     rows={3}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                     required
                   />
                 </div>
@@ -688,7 +688,7 @@ const TestDetailPageNew: React.FC = () => {
                       onChange={(e) =>
                         setFormData({ ...formData, option_a: e.target.value })
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                       required
                     />
                   </div>
@@ -702,7 +702,7 @@ const TestDetailPageNew: React.FC = () => {
                       onChange={(e) =>
                         setFormData({ ...formData, option_b: e.target.value })
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                       required
                     />
                   </div>
@@ -716,7 +716,7 @@ const TestDetailPageNew: React.FC = () => {
                       onChange={(e) =>
                         setFormData({ ...formData, option_c: e.target.value })
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                       required
                     />
                   </div>
@@ -730,7 +730,7 @@ const TestDetailPageNew: React.FC = () => {
                       onChange={(e) =>
                         setFormData({ ...formData, option_d: e.target.value })
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                       required
                     />
                   </div>
@@ -753,7 +753,7 @@ const TestDetailPageNew: React.FC = () => {
                             | "D",
                         })
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                       required
                     >
                       <option value="A">Option A</option>
@@ -775,7 +775,7 @@ const TestDetailPageNew: React.FC = () => {
                           marks: parseInt(e.target.value) || 1,
                         })
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                       min="1"
                       required
                     />
@@ -792,7 +792,7 @@ const TestDetailPageNew: React.FC = () => {
                       setFormData({ ...formData, explanation: e.target.value })
                     }
                     rows={3}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                     placeholder="Optional explanation for the correct answer"
                   />
                 </div>
@@ -816,7 +816,7 @@ const TestDetailPageNew: React.FC = () => {
                         })
                       }
                       rows={3}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                       placeholder="ગુજરાતીમાં પ્રશ્ન"
                     />
                   </div>
@@ -835,7 +835,7 @@ const TestDetailPageNew: React.FC = () => {
                             option_a_gujarati: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                         placeholder="વિકલ્પ A"
                       />
                     </div>
@@ -852,7 +852,7 @@ const TestDetailPageNew: React.FC = () => {
                             option_b_gujarati: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                         placeholder="વિકલ્પ B"
                       />
                     </div>
@@ -869,7 +869,7 @@ const TestDetailPageNew: React.FC = () => {
                             option_c_gujarati: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                         placeholder="વિકલ્પ C"
                       />
                     </div>
@@ -886,7 +886,7 @@ const TestDetailPageNew: React.FC = () => {
                             option_d_gujarati: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                         placeholder="વિકલ્પ D"
                       />
                     </div>
@@ -905,7 +905,7 @@ const TestDetailPageNew: React.FC = () => {
                         })
                       }
                       rows={3}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                       placeholder="ગુજરાતીમાં સમજૂતી"
                     />
                   </div>
@@ -924,7 +924,7 @@ const TestDetailPageNew: React.FC = () => {
                           is_active: e.target.checked,
                         })
                       }
-                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                      className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
                     />
                     <label
                       htmlFor="is_active"
@@ -952,7 +952,7 @@ const TestDetailPageNew: React.FC = () => {
                     disabled={
                       createMutation.isPending || updateMutation.isPending
                     }
-                    className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+                    className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 disabled:opacity-50"
                   >
                     {createMutation.isPending || updateMutation.isPending
                       ? "Saving..."

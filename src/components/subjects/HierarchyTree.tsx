@@ -12,10 +12,10 @@ interface HierarchyTreeProps {
 }
 
 const levelColors = {
-  standard: 'bg-blue-50 border-blue-200 text-blue-800',
+  standard: 'bg-primary-50 border-primary-200 text-primary-800',
   class: 'bg-green-50 border-green-200 text-green-800',
   chapter: 'bg-yellow-50 border-yellow-200 text-yellow-800',
-  topic: 'bg-purple-50 border-purple-200 text-purple-800'
+  topic: 'bg-primary-50 border-primary-200 text-primary-800'
 };
 
 const levelIcons = {
@@ -82,7 +82,7 @@ export const HierarchyTree: React.FC<HierarchyTreeProps> = ({
             </div>
 
             <div className="ml-3 flex-1">
-              <h4 className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">
+              <h4 className="font-medium text-gray-900 group-hover:text-primary-600 transition-colors">
                 {hierarchy.level_name}
               </h4>
               {hierarchy.description && (
@@ -112,7 +112,7 @@ export const HierarchyTree: React.FC<HierarchyTreeProps> = ({
             </button>
             <button
               onClick={() => onViewTestSeries(hierarchy)}
-              className="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+              className="p-2 text-gray-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
               title="View test series"
             >
               <FileText className="h-4 w-4" />
@@ -183,7 +183,7 @@ export const HierarchyTree: React.FC<HierarchyTreeProps> = ({
         <p className="text-gray-600">No hierarchy items found</p>
         <button
           onClick={() => onCreateChild(null)}
-          className="mt-4 inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          className="mt-4 inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
         >
           <Plus className="h-4 w-4 mr-2" />
           Add First Item

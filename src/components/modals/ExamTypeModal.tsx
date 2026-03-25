@@ -126,8 +126,8 @@ export const ExamTypeModal: React.FC<ExamTypeModalProps> = ({
       <div className="bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between p-6 border-b">
           <div className="flex items-center">
-            <div className="p-2 bg-blue-100 rounded-lg mr-3">
-              <BookOpen className="h-5 w-5 text-blue-600" />
+            <div className="p-2 bg-primary-100 rounded-lg mr-3">
+              <BookOpen className="h-5 w-5 text-primary-600" />
             </div>
             <h2 className="text-xl font-semibold text-gray-900">
               {isEditing ? 'Edit Exam Type' : 'Create New Exam Type'}
@@ -153,7 +153,7 @@ export const ExamTypeModal: React.FC<ExamTypeModalProps> = ({
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent ${
                   errors.name ? 'border-red-300' : 'border-gray-300'
                 }`}
                 placeholder="e.g., Joint Entrance Examination"
@@ -173,7 +173,7 @@ export const ExamTypeModal: React.FC<ExamTypeModalProps> = ({
                 name="code"
                 value={formData.code}
                 onChange={handleChange}
-                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent ${
                   errors.code ? 'border-red-300' : 'border-gray-300'
                 }`}
                 placeholder="e.g., JEE"
@@ -198,7 +198,7 @@ export const ExamTypeModal: React.FC<ExamTypeModalProps> = ({
               value={formData.description}
               onChange={handleChange}
               rows={4}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               placeholder="Brief description of the exam (optional)"
               disabled={loading}
             />
@@ -218,7 +218,7 @@ export const ExamTypeModal: React.FC<ExamTypeModalProps> = ({
                   name="name_gujarati"
                   value={formData.name_gujarati}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   placeholder="ગુજરાતીમાં પરીક્ષાનું નામ"
                   disabled={loading}
                 />
@@ -243,7 +243,7 @@ export const ExamTypeModal: React.FC<ExamTypeModalProps> = ({
                 value={formData.description_gujarati}
                 onChange={handleChange}
                 rows={4}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 placeholder="ગુજરાતીમાં પરીક્ષાનું વર્ણન (વૈકલ્પિક)"
                 disabled={loading}
               />
@@ -257,7 +257,7 @@ export const ExamTypeModal: React.FC<ExamTypeModalProps> = ({
               name="is_active"
               checked={formData.is_active}
               onChange={handleChange}
-              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
               disabled={loading}
             />
             <label htmlFor="is_active" className="ml-2 block text-sm text-gray-700">
@@ -293,7 +293,7 @@ export const ExamTypeModal: React.FC<ExamTypeModalProps> = ({
             <button
               type="submit"
               disabled={loading}
-              className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors inline-flex items-center"
+              className="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 transition-colors inline-flex items-center"
             >
               {loading ? (
                 <>

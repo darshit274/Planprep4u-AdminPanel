@@ -100,7 +100,7 @@ export const CategoryManager: React.FC<CategoryManagerProps> = ({
               <h3 className="text-lg font-medium text-gray-900">Categories</h3>
               <button
                 onClick={() => setShowCreateForm(true)}
-                className="inline-flex items-center px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className="inline-flex items-center px-3 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
               >
                 <Plus className="h-4 w-4 mr-2" />
                 Add Category
@@ -131,7 +131,7 @@ export const CategoryManager: React.FC<CategoryManagerProps> = ({
                   <div className="flex items-center space-x-2">
                     <button
                       onClick={() => handleEditCategory(category)}
-                      className="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                      className="p-2 text-gray-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
                     >
                       <Edit className="h-4 w-4" />
                     </button>
@@ -169,7 +169,7 @@ export const CategoryManager: React.FC<CategoryManagerProps> = ({
                     value={formData.name}
                     onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                     required
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     placeholder="Category name"
                   />
                 </div>
@@ -182,7 +182,7 @@ export const CategoryManager: React.FC<CategoryManagerProps> = ({
                     value={formData.description}
                     onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
                     rows={3}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     placeholder="Optional description"
                   />
                 </div>
@@ -213,7 +213,7 @@ export const CategoryManager: React.FC<CategoryManagerProps> = ({
                   <select
                     value={formData.icon}
                     onChange={(e) => setFormData(prev => ({ ...prev, icon: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   >
                     {predefinedIcons.map((icon) => (
                       <option key={icon} value={icon}>
@@ -231,7 +231,7 @@ export const CategoryManager: React.FC<CategoryManagerProps> = ({
                     type="number"
                     value={formData.sort_order}
                     onChange={(e) => setFormData(prev => ({ ...prev, sort_order: parseInt(e.target.value) || 0 }))}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     placeholder="0"
                   />
                 </div>
@@ -247,7 +247,7 @@ export const CategoryManager: React.FC<CategoryManagerProps> = ({
                   <button
                     type="submit"
                     disabled={loading}
-                    className="flex-1 inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors"
+                    className="flex-1 inline-flex items-center justify-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 transition-colors"
                   >
                     {loading ? (
                       <>

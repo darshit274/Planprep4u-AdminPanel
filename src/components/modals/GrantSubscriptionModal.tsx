@@ -149,7 +149,7 @@ export const GrantSubscriptionModal: React.FC<GrantSubscriptionModalProps> = ({
       <div className="bg-white rounded-lg w-full max-w-2xl max-h-[90vh] overflow-hidden">
         <div className="flex items-center justify-between p-6 border-b">
           <div className="flex items-center">
-            <CreditCard className="h-6 w-6 text-blue-600 mr-3" />
+            <CreditCard className="h-6 w-6 text-primary-600 mr-3" />
             <div>
               <h2 className="text-xl font-semibold">Grant Subscription</h2>
               <p className="text-sm text-gray-600">Give a subscription to any user</p>
@@ -175,13 +175,13 @@ export const GrantSubscriptionModal: React.FC<GrantSubscriptionModalProps> = ({
                     placeholder="Search users by name or email..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                   />
                 </div>
                 <select
                   value={formData.user_id}
                   onChange={(e) => setFormData({ ...formData, user_id: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                   required
                 >
                   <option value="">Select a user</option>
@@ -202,7 +202,7 @@ export const GrantSubscriptionModal: React.FC<GrantSubscriptionModalProps> = ({
               <select
                 value={formData.test_series_id}
                 onChange={(e) => handleTestSeriesChange(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                 required
               >
                 <option value="">Select test series</option>
@@ -224,7 +224,7 @@ export const GrantSubscriptionModal: React.FC<GrantSubscriptionModalProps> = ({
                   type="number"
                   value={formData.amount_paid}
                   onChange={(e) => setFormData({ ...formData, amount_paid: parseFloat(e.target.value) || 0 })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                   min="0"
                   step="0.01"
                 />
@@ -239,7 +239,7 @@ export const GrantSubscriptionModal: React.FC<GrantSubscriptionModalProps> = ({
                   value={`${formData.expiry_days} Days`}
                   disabled
                   // onChange={(e) => setFormData({ ...formData, expiry_days: parseInt(e.target.value) })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                 />
               </div>
             </div>
@@ -251,7 +251,7 @@ export const GrantSubscriptionModal: React.FC<GrantSubscriptionModalProps> = ({
               <select
                 value={formData.payment_method}
                 onChange={(e) => setFormData({ ...formData, payment_method: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
               >
                 <option value="admin_grant">Admin Grant (Free)</option>
                 <option value="manual_payment">Manual Payment</option>
@@ -262,9 +262,9 @@ export const GrantSubscriptionModal: React.FC<GrantSubscriptionModalProps> = ({
 
             {/* Summary */}
             {formData.user_id && formData.test_series_id && (
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <h3 className="font-medium text-blue-900 mb-2">Subscription Summary</h3>
-                <div className="text-sm text-blue-800 space-y-1">
+              <div className="bg-primary-50 p-4 rounded-lg">
+                <h3 className="font-medium text-primary-900 mb-2">Subscription Summary</h3>
+                <div className="text-sm text-primary-800 space-y-1">
                   <p><span className="font-medium">User:</span> {users.find(u => u.uuid === formData.user_id)?.username}</p>
                   <p><span className="font-medium">Test Series:</span> {testSeries.find(ts => ts.id.toString() === formData.test_series_id)?.title}</p>
                   <p><span className="font-medium">Amount:</span> ₹{formData.amount_paid} {formData.amount_paid === 0 ? '(Free)' : ''}</p>
@@ -288,7 +288,7 @@ export const GrantSubscriptionModal: React.FC<GrantSubscriptionModalProps> = ({
             </button>
             <button
               onClick={handleSubmit}
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+              className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 disabled:opacity-50"
               disabled={loading || !formData.user_id || !formData.test_series_id}
             >
               {loading ? 'Granting...' : 'Grant Subscription'}

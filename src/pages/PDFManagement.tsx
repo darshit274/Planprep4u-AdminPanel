@@ -274,7 +274,7 @@ export const PDFManagement: React.FC = () => {
           onClick={() => handlePageChange(i)}
           className={`px-3 py-2 text-sm font-medium rounded-md ${
             i === pagination.page
-              ? 'bg-blue-600 text-white'
+              ? 'bg-primary-600 text-white'
               : 'text-gray-700 bg-white border border-gray-300 hover:bg-gray-50'
           }`}
         >
@@ -340,20 +340,20 @@ export const PDFManagement: React.FC = () => {
                 <div className="flex items-center bg-white border border-gray-200 rounded-lg">
                   <button
                     onClick={() => setViewMode('grid')}
-                    className={`p-2 ${viewMode === 'grid' ? 'bg-blue-100 text-blue-600' : 'text-gray-400'}`}
+                    className={`p-2 ${viewMode === 'grid' ? 'bg-primary-100 text-primary-600' : 'text-gray-400'}`}
                   >
                     <Grid className="h-4 w-4" />
                   </button>
                   <button
                     onClick={() => setViewMode('list')}
-                    className={`p-2 ${viewMode === 'list' ? 'bg-blue-100 text-blue-600' : 'text-gray-400'}`}
+                    className={`p-2 ${viewMode === 'list' ? 'bg-primary-100 text-primary-600' : 'text-gray-400'}`}
                   >
                     <List className="h-4 w-4" />
                   </button>
                 </div>
                 <button
                   onClick={() => setShowUploadForm(true)}
-                  className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
                 >
                   <Upload className="h-4 w-4 mr-2" />
                   Upload PDF
@@ -420,7 +420,7 @@ export const PDFManagement: React.FC = () => {
               </p>
               <button
                 onClick={() => setShowUploadForm(true)}
-                className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className="inline-flex items-center px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
               >
                 <Upload className="h-5 w-5 mr-2" />
                 Upload PDF

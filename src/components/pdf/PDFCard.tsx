@@ -48,7 +48,7 @@ export const PDFCard: React.FC<PDFCardProps> = ({
               <FileText className="h-6 w-6 text-red-600" />
             </div>
             <div className="ml-3 flex-1 min-w-0">
-              <h3 className="text-lg font-semibold text-gray-900 truncate group-hover:text-blue-600 transition-colors">
+              <h3 className="text-lg font-semibold text-gray-900 truncate group-hover:text-primary-600 transition-colors">
                 {pdf.title}
               </h3>
               <p className="text-sm text-gray-500">
@@ -81,12 +81,12 @@ export const PDFCard: React.FC<PDFCardProps> = ({
             </span>
           )}
           {pdf.examType && (
-            <span className="inline-flex items-center px-2 py-1 text-xs font-medium bg-purple-100 text-purple-800 rounded-md">
+            <span className="inline-flex items-center px-2 py-1 text-xs font-medium bg-primary-100 text-primary-800 rounded-md">
               {pdf.examType.name}
             </span>
           )}
           {pdf.testSeries && (
-            <span className="inline-flex items-center px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-md">
+            <span className="inline-flex items-center px-2 py-1 text-xs font-medium bg-primary-100 text-primary-800 rounded-md">
               {pdf.testSeries.title}
             </span>
           )}
@@ -127,14 +127,14 @@ export const PDFCard: React.FC<PDFCardProps> = ({
         <div className="flex items-center gap-2">
           <button 
             onClick={() => onPreview(pdf)}
-            className="flex-1 bg-blue-50 hover:bg-blue-100 text-blue-700 font-medium py-2 px-3 rounded-lg transition-colors duration-200 inline-flex items-center justify-center"
+            className="flex-1 bg-primary-50 hover:bg-primary-100 text-primary-700 font-medium py-2 px-3 rounded-lg transition-colors duration-200 inline-flex items-center justify-center"
           >
             <Eye className="h-4 w-4 mr-2" />
             Preview
           </button>
           <button 
             onClick={() => onEdit(pdf)}
-            className="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200"
+            className="p-2 text-gray-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors duration-200"
             title="Edit PDF"
           >
             <Edit className="h-4 w-4" />

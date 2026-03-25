@@ -116,7 +116,7 @@ export const PDFEditModal: React.FC<PDFEditModalProps> = ({
               value={formData.title}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
               placeholder="Enter PDF title"
             />
           </div>
@@ -130,7 +130,7 @@ export const PDFEditModal: React.FC<PDFEditModalProps> = ({
               value={formData.description}
               onChange={handleChange}
               rows={4}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
               placeholder="Enter PDF description"
             />
           </div>
@@ -144,7 +144,7 @@ export const PDFEditModal: React.FC<PDFEditModalProps> = ({
                 name="course_id"
                 value={formData.course_id}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
               >
                 <option value="">Select course</option>
                 {Array.isArray(courses) && courses.length > 0 ? courses.map((course) => (
@@ -165,7 +165,7 @@ export const PDFEditModal: React.FC<PDFEditModalProps> = ({
                 name="access_level"
                 value={formData.access_level}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
               >
                 <option value="free">Free</option>
                 <option value="premium">Premium</option>
@@ -183,7 +183,7 @@ export const PDFEditModal: React.FC<PDFEditModalProps> = ({
               name="tags"
               value={formData.tags}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
               placeholder="Enter tags separated by commas"
             />
             <p className="text-sm text-gray-500 mt-1">
@@ -210,7 +210,7 @@ export const PDFEditModal: React.FC<PDFEditModalProps> = ({
                       onChange={handleChange}
                       step="0.01"
                       min="0"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                       placeholder="0.00"
                     />
                   </div>
@@ -222,7 +222,7 @@ export const PDFEditModal: React.FC<PDFEditModalProps> = ({
                       name="currency"
                       value={formData.currency}
                       onChange={handleChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                     >
                       <option value="INR">INR (₹)</option>
                       <option value="USD">USD ($)</option>
@@ -246,7 +246,7 @@ export const PDFEditModal: React.FC<PDFEditModalProps> = ({
                     min="0"
                     max="100"
                     step="0.01"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                     placeholder="0.00"
                   />
                   <p className="text-sm text-gray-500 mt-1">Optional discount percentage (0-100)</p>
@@ -262,7 +262,7 @@ export const PDFEditModal: React.FC<PDFEditModalProps> = ({
                     id="subscription_required"
                     checked={formData.subscription_required}
                     onChange={handleChange}
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
                   />
                   <label htmlFor="subscription_required" className="ml-2 block text-sm text-gray-700">
                     Requires subscription
@@ -280,7 +280,7 @@ export const PDFEditModal: React.FC<PDFEditModalProps> = ({
                     value={formData.preview_pages}
                     onChange={handleChange}
                     min="0"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                     placeholder="0"
                   />
                   <p className="text-sm text-gray-500 mt-1">Number of free preview pages</p>
@@ -294,14 +294,14 @@ export const PDFEditModal: React.FC<PDFEditModalProps> = ({
               type="button"
               onClick={onClose}
               disabled={loading}
-              className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center"
+              className="px-4 py-2 text-sm font-medium text-white bg-primary-600 border border-transparent rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center"
             >
               {loading ? (
                 <>

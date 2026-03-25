@@ -13,9 +13,9 @@ interface StatsCardProps {
 
 const colorClasses = {
   blue: {
-    bg: 'bg-blue-50',
-    icon: 'text-blue-600',
-    text: 'text-blue-600',
+    bg: 'bg-primary-50',
+    icon: 'text-primary-600',
+    text: 'text-primary-600',
   },
   green: {
     bg: 'bg-green-50',
@@ -33,9 +33,9 @@ const colorClasses = {
     text: 'text-red-600',
   },
   purple: {
-    bg: 'bg-purple-50',
-    icon: 'text-purple-600',
-    text: 'text-purple-600',
+    bg: 'bg-primary-50',
+    icon: 'text-primary-600',
+    text: 'text-primary-600',
   },
 };
 

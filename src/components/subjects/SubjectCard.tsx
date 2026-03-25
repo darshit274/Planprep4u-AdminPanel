@@ -31,12 +31,12 @@ export const SubjectCard: React.FC<SubjectCardProps> = ({
         {/* Header */}
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center">
-            <div className="p-3 rounded-lg bg-indigo-50">
-              <BookOpen className="h-6 w-6 text-indigo-600" />
+            <div className="p-3 rounded-lg bg-primary-50">
+              <BookOpen className="h-6 w-6 text-primary-600" />
             </div>
             <div className="ml-3">
               <div className="flex items-center">
-                <h3 className="text-lg font-semibold text-gray-900 group-hover:text-indigo-600 transition-colors">
+                <h3 className="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors">
                   {subject.name}
                 </h3>
                 <span className="ml-2 px-2 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded-full">
@@ -118,12 +118,12 @@ export const SubjectCard: React.FC<SubjectCardProps> = ({
         {/* Statistics */}
         <div className="grid grid-cols-2 gap-4 mb-4">
           {subject.has_hierarchy && (
-            <div className="bg-blue-50 rounded-lg p-3">
+            <div className="bg-primary-50 rounded-lg p-3">
               <div className="flex items-center">
-                <Layers className="h-5 w-5 text-blue-600 mr-2" />
+                <Layers className="h-5 w-5 text-primary-600 mr-2" />
                 <div>
-                  <p className="text-sm font-medium text-blue-900">Hierarchies</p>
-                  <p className="text-lg font-bold text-blue-600">
+                  <p className="text-sm font-medium text-primary-900">Hierarchies</p>
+                  <p className="text-lg font-bold text-primary-600">
                     {subject.hierarchies?.length || 0}
                   </p>
                 </div>
@@ -148,7 +148,7 @@ export const SubjectCard: React.FC<SubjectCardProps> = ({
           {subject.has_hierarchy && (
             <button
               onClick={() => onManageHierarchy(subject)}
-              className="flex-1 bg-blue-50 hover:bg-blue-100 text-blue-700 font-medium py-2 px-3 rounded-lg transition-colors duration-200 inline-flex items-center justify-center"
+              className="flex-1 bg-primary-50 hover:bg-primary-100 text-primary-700 font-medium py-2 px-3 rounded-lg transition-colors duration-200 inline-flex items-center justify-center"
             >
               <Layers className="h-4 w-4 mr-2" />
               Hierarchy
@@ -163,7 +163,7 @@ export const SubjectCard: React.FC<SubjectCardProps> = ({
           </button>
           <button
             onClick={() => onEdit(subject)}
-            className="p-2 text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors duration-200"
+            className="p-2 text-gray-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors duration-200"
           >
             <Edit className="h-4 w-4" />
           </button>

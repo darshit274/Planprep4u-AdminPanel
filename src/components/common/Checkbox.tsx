@@ -30,7 +30,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
       checked={checked}
       onChange={onChange}
       disabled={disabled}
-      className={`h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
+      className={`h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
     />
   );
 };
