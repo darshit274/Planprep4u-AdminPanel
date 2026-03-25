@@ -111,6 +111,14 @@ export interface PDFDocument {
 }
 
 // Analytics types
+export interface TestSeriesAttemptData {
+  name: string;
+  total_attempts: number;
+  completed_attempts: number;
+  avg_score: number;
+  completion_rate: number;
+}
+
 export interface DashboardStats {
   total_students: number;
   total_tests: number;

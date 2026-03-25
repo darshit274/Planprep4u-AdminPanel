@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Users, BookOpen, FileText, TrendingUp, DollarSign, Activity } from 'lucide-react';
 import { StatsCard } from '../../components/dashboard/StatsCard';
-import { 
+import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   LineChart, Line, PieChart, Pie, Cell
 } from 'recharts';
@@ -10,39 +10,55 @@ import { dashboardService } from '../../services/dashboard';
 import { LoadingSpinner, CardSkeleton } from '../../components/common/LoadingSpinner';
 import { ApiError, ErrorBoundary } from '../../components/common/ErrorBoundary';
 import { UI_CONFIG } from '../../config/constants';
+import { TestSeriesAttemptData } from '../../types';
 
 export const Dashboard: React.FC = () => {
+  const [seriesPeriod, setSeriesPeriod] = useState<'week' | 'month'>('week');
+
   // API hooks for data fetching
-  const { 
-    data: stats, 
-    loading: statsLoading, 
-    error: statsError, 
-    refresh: refreshStats 
+  const {
+    data: stats,
+    loading: statsLoading,
+    error: statsError,
+    refresh: refreshStats
   } = useApi(dashboardService.getStats);
 
-  const { 
-    data: registrationData, 
-    loading: registrationLoading, 
-    error: registrationError 
+  const {
+    data: registrationData,
+    loading: registrationLoading,
+    error: registrationError
   } = useApi(() => dashboardService.getRegistrationData('month'));
 
-  const { 
-    data: testAttemptData, 
-    loading: testAttemptLoading, 
-    error: testAttemptError 
+  const {
+    data: testAttemptData,
+    loading: testAttemptLoading,
+    error: testAttemptError
   } = useApi(() => dashboardService.getTestAttemptData('week'));
 
-  const { 
-    data: categoryData, 
-    loading: categoryLoading, 
-    error: categoryError 
+  const {
+    data: categoryData,
+    loading: categoryLoading,
+    error: categoryError
   } = useApi(dashboardService.getCategoryData);
 
-  const { 
-    data: recentActivity, 
-    loading: activityLoading, 
-    error: activityError 
+  const {
+    data: recentActivity,
+    loading: activityLoading,
+    error: activityError
   } = useApi(() => dashboardService.getRecentActivity(5));
+
+  const [seriesAttemptsData, setSeriesAttemptsData] = useState<TestSeriesAttemptData[] | null>(null);
+  const [seriesAttemptsLoading, setSeriesAttemptsLoading] = useState(false);
+  const [seriesAttemptsError, setSeriesAttemptsError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setSeriesAttemptsLoading(true);
+    setSeriesAttemptsError(null);
+    dashboardService.getTestSeriesAttemptsData(seriesPeriod)
+      .then(res => setSeriesAttemptsData(res.data ?? []))
+      .catch(() => setSeriesAttemptsError('Failed to load test series data'))
+      .finally(() => setSeriesAttemptsLoading(false));
+  }, [seriesPeriod]);
 
   return (
     <ErrorBoundary>
@@ -246,6 +262,114 @@ export const Dashboard: React.FC = () => {
               </div>
             ) : null}
           </div>
+        </div>
+
+        {/* Test Attempts by Test Series */}
+        <div className="card p-6">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900">Test Attempts by Series</h3>
+              <p className="text-sm text-gray-500 mt-0.5">Which test series students attempt the most</p>
+            </div>
+            <div className="flex rounded-lg border border-gray-200 overflow-hidden">
+              <button
+                onClick={() => setSeriesPeriod('week')}
+                className={`px-3 py-1.5 text-sm font-medium transition-colors ${
+                  seriesPeriod === 'week'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-white text-gray-600 hover:bg-gray-50'
+                }`}
+              >
+                This Week
+              </button>
+              <button
+                onClick={() => setSeriesPeriod('month')}
+                className={`px-3 py-1.5 text-sm font-medium border-l border-gray-200 transition-colors ${
+                  seriesPeriod === 'month'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-white text-gray-600 hover:bg-gray-50'
+                }`}
+              >
+                This Month
+              </button>
+            </div>
+          </div>
+
+          {seriesAttemptsLoading ? (
+            <div className="h-[320px] flex items-center justify-center">
+              <LoadingSpinner text="Loading series data..." />
+            </div>
+          ) : seriesAttemptsError ? (
+            <div className="h-[320px] flex items-center justify-center text-gray-500 text-sm">
+              {seriesAttemptsError}
+            </div>
+          ) : seriesAttemptsData && seriesAttemptsData.length > 0 ? (
+            <div className="flex gap-6">
+              {/* Horizontal bar chart */}
+              <div className="flex-1">
+                <ResponsiveContainer width="100%" height={320}>
+                  <BarChart
+                    data={seriesAttemptsData}
+                    layout="vertical"
+                    margin={{ top: 0, right: 60, left: 8, bottom: 0 }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" horizontal={false} />
+                    <XAxis type="number" tick={{ fontSize: 12 }} />
+                    <YAxis
+                      type="category"
+                      dataKey="name"
+                      width={160}
+                      tick={{ fontSize: 12 }}
+                      tickFormatter={(v: string) => v.length > 22 ? `${v.slice(0, 22)}…` : v}
+                    />
+                    <Tooltip
+                      content={({ active, payload }) => {
+                        if (!active || !payload?.length) return null;
+                        const d = payload[0].payload as TestSeriesAttemptData;
+                        return (
+                          <div className="bg-white border border-gray-200 rounded-lg shadow-lg p-3 text-sm">
+                            <p className="font-semibold text-gray-900 mb-2">{d.name}</p>
+                            <p className="text-gray-600">Total attempts: <span className="font-medium text-blue-600">{d.total_attempts}</span></p>
+                            <p className="text-gray-600">Completed: <span className="font-medium text-green-600">{d.completed_attempts}</span></p>
+                            <p className="text-gray-600">Completion rate: <span className="font-medium text-yellow-600">{d.completion_rate}%</span></p>
+                            {d.avg_score > 0 && (
+                              <p className="text-gray-600">Avg score: <span className="font-medium text-purple-600">{d.avg_score}%</span></p>
+                            )}
+                          </div>
+                        );
+                      }}
+                    />
+                    <Bar dataKey="total_attempts" fill={UI_CONFIG.CHART.COLORS.PRIMARY} radius={[0, 4, 4, 0]} label={{ position: 'right', fontSize: 12 }} />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+
+              {/* Summary table */}
+              <div className="w-56 shrink-0">
+                <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-3">Top Series</p>
+                <div className="space-y-3">
+                  {seriesAttemptsData.slice(0, 5).map((s, i) => (
+                    <div key={s.name} className="flex items-start gap-2">
+                      <span className={`mt-0.5 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold text-white shrink-0 ${
+                        i === 0 ? 'bg-yellow-500' : i === 1 ? 'bg-gray-400' : i === 2 ? 'bg-amber-600' : 'bg-blue-400'
+                      }`}>
+                        {i + 1}
+                      </span>
+                      <div className="min-w-0">
+                        <p className="text-sm font-medium text-gray-900 truncate">{s.name}</p>
+                        <p className="text-xs text-gray-500">{s.total_attempts} attempts · {s.completion_rate}% done</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="h-[320px] flex flex-col items-center justify-center text-gray-400">
+              <BookOpen className="w-10 h-10 mb-2 opacity-40" />
+              <p className="text-sm">No test attempts recorded {seriesPeriod === 'week' ? 'this week' : 'this month'}</p>
+            </div>
+          )}
         </div>
       </div>
     </ErrorBoundary>

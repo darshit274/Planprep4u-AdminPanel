@@ -34,6 +34,7 @@ export const API_ENDPOINTS = {
     TEST_ATTEMPTS: '/admin/analytics/test-attempts',
     CATEGORIES: '/admin/analytics/categories',
     RECENT_ACTIVITY: '/admin/analytics/recent-activity',
+    TEST_SERIES_ATTEMPTS: '/admin/analytics/test-series-attempts',
   },
 } as const;
 
