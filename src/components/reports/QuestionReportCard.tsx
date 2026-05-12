@@ -10,6 +10,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { QuestionWithReports } from '../../types/reports';
 import { ConfirmModal } from '../modals/ConfirmModal';
+import HTMLContent from '../common/HTMLContent';
 
 interface QuestionReportCardProps {
   question: QuestionWithReports;
@@ -107,10 +108,9 @@ export const QuestionReportCard: React.FC<QuestionReportCardProps> = ({
         <h3 className="font-semibold text-gray-900 mb-2">
           Question #{question.questionId}
         </h3>
-        <div
+        <HTMLContent
           className="text-gray-700 line-clamp-2"
-          title={question.questionText ? question.questionText.replace(/<[^>]*>/g, '') : 'No question text available'}
-          dangerouslySetInnerHTML={{ __html: question.questionText || '<p class="text-gray-400 italic">No question text available</p>' }}
+          content={question.questionText || '<p class="text-gray-400 italic">No question text available</p>'}
         />
         <p className="text-sm text-green-600 mt-1 font-medium">
           ✓ Correct Answer: {question.correctAnswer || 'N/A'}

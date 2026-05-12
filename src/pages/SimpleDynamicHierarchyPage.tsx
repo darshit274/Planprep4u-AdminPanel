@@ -13,6 +13,7 @@ import { toast } from 'react-hot-toast';
 import { ConfirmModal } from '../components/modals/ConfirmModal';
 import QuestionImportModal from '../components/modals/QuestionImportModal';
 import RichTextEditor from '../components/common/RichTextEditor';
+import HTMLContent from '../components/common/HTMLContent';
 
 // Types
 interface TestSeries {
@@ -1041,9 +1042,9 @@ const SimpleDynamicHierarchyPage: React.FC = () => {
                         >
                           <FolderIcon className="w-5 h-5 text-primary-500 mr-3" />
                           <div>
-                            <h3 className="font-medium text-gray-900" dangerouslySetInnerHTML={{ __html: category.name }}></h3>
+                            <HTMLContent as="h3" className="font-medium text-gray-900" content={category.name} />
                             {category.description && (
-                              <p className="text-sm text-gray-500" dangerouslySetInnerHTML={{ __html: category.description }}></p>
+                              <HTMLContent as="p" className="text-sm text-gray-500" content={category.description} />
                             )}
                             <div className="flex items-center space-x-4 text-xs text-gray-400 mt-1">
                               <span>Level {category.hierarchy_level}</span>
@@ -1111,9 +1112,11 @@ const SimpleDynamicHierarchyPage: React.FC = () => {
                           />
                           <div className="flex-1">
                             <div className="flex items-center space-x-2 mb-2">
-                              <h3 className="font-medium text-gray-900" dangerouslySetInnerHTML={{ __html: `Q${index + 1}. ${question.question_text || question.question_text_gujarati || 'No question text'}` }}>
-                              {/* Q{index + 1}. {question.question_text || question.question_text_gujarati || 'No question text'} */}
-                            </h3>
+                              <HTMLContent
+                                as="h3"
+                                className="font-medium text-gray-900"
+                                content={`Q${index + 1}. ${question.question_text || question.question_text_gujarati || 'No question text'}`}
+                              />
                             {/* Language indicator */}
                             <span className={`px-2 py-1 text-xs font-medium rounded-full ${question.question_text && question.question_text_gujarati ? 'bg-primary-100 text-primary-800' :
                               question.question_text ? 'bg-primary-100 text-primary-800' :
@@ -1436,8 +1439,8 @@ const SimpleDynamicHierarchyPage: React.FC = () => {
               />
             </div>
 
-            {/* Gujarati Fields */}
-            <div className="pt-4 border-t border-gray-200">
+            {/* Gujarati Fields — hidden; Gujarati input discontinued. State kept so submit payload is unchanged. */}
+            <div className="pt-4 border-t border-gray-200" style={{ display: 'none' }}>
               <h4 className="text-sm font-medium text-gray-800 mb-3">🌐 Gujarati Translation</h4>
 
               <div className="space-y-3">
@@ -1803,8 +1806,8 @@ const SimpleDynamicHierarchyPage: React.FC = () => {
               />
             </div>
 
-            {/* Gujarati Fields */}
-            <div className="pt-6 border-t border-gray-200">
+            {/* Gujarati Fields — hidden; Gujarati input discontinued. State kept so submit payload is unchanged. */}
+            <div className="pt-6 border-t border-gray-200" style={{ display: 'none' }}>
               <h4 className="text-lg font-medium text-gray-800 mb-4">🌐 Gujarati Translation</h4>
 
               <div className="space-y-4">
@@ -1950,8 +1953,8 @@ const SimpleDynamicHierarchyPage: React.FC = () => {
               />
             </div>
 
-            {/* Gujarati Fields */}
-            <div className="pt-4 border-t border-gray-200">
+            {/* Gujarati Fields — hidden; Gujarati input discontinued. State kept so submit payload is unchanged. */}
+            <div className="pt-4 border-t border-gray-200" style={{ display: 'none' }}>
               <h4 className="text-sm font-medium text-gray-800 mb-3">🌐 Gujarati Translation</h4>
 
               <div className="space-y-3">
@@ -2335,8 +2338,8 @@ const SimpleDynamicHierarchyPage: React.FC = () => {
               />
             </div>
 
-            {/* Gujarati Fields */}
-            <div className="pt-6 border-t border-gray-200">
+            {/* Gujarati Fields — hidden; Gujarati input discontinued. State kept so submit payload is unchanged. */}
+            <div className="pt-6 border-t border-gray-200" style={{ display: 'none' }}>
               <h4 className="text-lg font-medium text-gray-800 mb-4">🌐 Gujarati Translation</h4>
 
               <div className="space-y-4">

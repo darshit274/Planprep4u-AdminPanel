@@ -13,6 +13,7 @@ import { toast } from 'react-hot-toast';
 import { reportsService } from '../../services/reports';
 import { ReportCard } from '../../components/reports/ReportCard';
 import { LoadingSpinner } from '../../components/common/LoadingSpinner';
+import HTMLContent from '../../components/common/HTMLContent';
 import { QuestionReportsDetailResponse } from '../../types/reports';
 import { ConfirmModal } from '../../components/modals/ConfirmModal';
 import { QuestionModal } from '../../components/modals/QuestionModal';
@@ -258,9 +259,9 @@ export const QuestionReportDetails: React.FC = () => {
         </h3>
 
         <div className="mb-4">
-          <div
+          <HTMLContent
             className="text-gray-900 font-medium mb-3"
-            dangerouslySetInnerHTML={{ __html: question.questionText }}
+            content={question.questionText}
           />
 
           <div className="space-y-2">
@@ -290,9 +291,9 @@ export const QuestionReportDetails: React.FC = () => {
             <h4 className="font-medium text-gray-700 mb-2 text-sm">
               📖 Solution:
             </h4>
-            <div
+            <HTMLContent
               className="text-gray-700 text-sm"
-              dangerouslySetInnerHTML={{ __html: question.explanation }}
+              content={question.explanation}
             />
           </div>
         )}

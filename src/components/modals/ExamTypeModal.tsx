@@ -204,51 +204,7 @@ export const ExamTypeModal: React.FC<ExamTypeModalProps> = ({
             />
           </div>
 
-          {/* Gujarati Fields */}
-          <div className="border-t pt-6">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Gujarati Translation</h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Exam Name (Gujarati)
-                </label>
-                <input
-                  type="text"
-                  name="name_gujarati"
-                  value={formData.name_gujarati}
-                  onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  placeholder="ગુજરાતીમાં પરીક્ષાનું નામ"
-                  disabled={loading}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  &nbsp;
-                </label>
-                <div className="text-sm text-gray-500 bg-gray-50 px-3 py-2 rounded-lg">
-                  Code remains the same for all languages
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Description (Gujarati)
-              </label>
-              <textarea
-                name="description_gujarati"
-                value={formData.description_gujarati}
-                onChange={handleChange}
-                rows={4}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                placeholder="ગુજરાતીમાં પરીક્ષાનું વર્ણન (વૈકલ્પિક)"
-                disabled={loading}
-              />
-            </div>
-          </div>
+          {/* Gujarati translation block removed — Gujarati input was discontinued. */}
 
           <div className="flex items-center">
             <input

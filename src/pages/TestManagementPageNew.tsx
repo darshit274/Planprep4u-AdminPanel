@@ -5,8 +5,9 @@ import { PlusIcon, EyeIcon, PencilIcon, TrashIcon, ChartBarIcon } from '@heroico
 import { toast } from 'react-hot-toast';
 import { formatDate } from '../lib/utils';
 
-// API Base URL - Note: VITE_API_URL already includes /api, we just need to add /admin
-const apiBaseUrl = (import.meta.env.VITE_API_URL || 'http://localhost:5004/api') + '/admin';
+// API Base URL — VITE_API_URL already includes /api, we add /admin here.
+// Default falls back to the backend's documented dev port (3000), matching ENV.API_URL.
+const apiBaseUrl = (import.meta.env.VITE_API_URL || 'http://localhost:3000/api') + '/admin';
 
 // Simple API service that works
 const testSeriesApi = {

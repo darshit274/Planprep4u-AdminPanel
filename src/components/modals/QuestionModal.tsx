@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, HelpCircle, BookOpen, Target, FileText, Globe } from 'lucide-react';
+import { X, HelpCircle, BookOpen, Target, FileText } from 'lucide-react';
 import toast from 'react-hot-toast';
 import api from '../../services/api';
 import RichTextEditor from '../common/RichTextEditor';
@@ -23,18 +23,12 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
 }) => {
   const [formData, setFormData] = useState({
     question_text: '',
-    question_text_gujarati: '',
     option_a: '',
-    option_a_gujarati: '',
     option_b: '',
-    option_b_gujarati: '',
     option_c: '',
-    option_c_gujarati: '',
     option_d: '',
-    option_d_gujarati: '',
     correct_answer: 'A',
     explanation: '',
-    explanation_gujarati: '',
     difficulty: 'medium',
     subject: '',
     topic: '',
@@ -43,24 +37,17 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
   });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [activeLanguageTab, setActiveLanguageTab] = useState<'english' | 'gujarati'>('english');
 
   useEffect(() => {
     if (mode === 'edit' && question) {
       setFormData({
         question_text: question.question_text || '',
-        question_text_gujarati: question.question_text_gujarati || '',
         option_a: question.option_a || '',
-        option_a_gujarati: question.option_a_gujarati || '',
         option_b: question.option_b || '',
-        option_b_gujarati: question.option_b_gujarati || '',
         option_c: question.option_c || '',
-        option_c_gujarati: question.option_c_gujarati || '',
         option_d: question.option_d || '',
-        option_d_gujarati: question.option_d_gujarati || '',
         correct_answer: question.correct_answer || 'A',
         explanation: question.explanation || '',
-        explanation_gujarati: question.explanation_gujarati || '',
         difficulty: question.difficulty || 'medium',
         subject: question.subject || '',
         topic: question.topic || '',
@@ -70,18 +57,12 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
     } else {
       setFormData({
         question_text: '',
-        question_text_gujarati: '',
         option_a: '',
-        option_a_gujarati: '',
         option_b: '',
-        option_b_gujarati: '',
         option_c: '',
-        option_c_gujarati: '',
         option_d: '',
-        option_d_gujarati: '',
         correct_answer: 'A',
         explanation: '',
-        explanation_gujarati: '',
         difficulty: 'medium',
         subject: '',
         topic: '',
@@ -95,24 +76,15 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
 
-    // Smart validation: Check if we have content in at least one language
-    const hasEnglishQuestion = formData.question_text && formData.question_text?.trim() !== '';
-    const hasGujaratiQuestion = formData.question_text_gujarati && formData.question_text_gujarati?.trim() !== '';
-
-    if (!hasEnglishQuestion && !hasGujaratiQuestion) {
-      newErrors.question_text = 'Question text is required (in English or Gujarati or both)';
+    if (!formData.question_text || formData.question_text.trim() === '') {
+      newErrors.question_text = 'Question text is required';
     }
 
-    // Validate options - at least one language required for each option
-    ['a', 'b', 'c', 'd'].forEach(option => {
-      const englishKey = `option_${option}` as keyof typeof formData;
-      const gujaratiKey = `option_${option}_gujarati` as keyof typeof formData;
-
-      const hasEnglish = formData[englishKey] && (formData[englishKey] as string)?.trim() !== '';
-      const hasGujarati = formData[gujaratiKey] && (formData[gujaratiKey] as string)?.trim() !== '';
-
-      if (!hasEnglish && !hasGujarati) {
-        newErrors[englishKey] = `Option ${option.toUpperCase()} is required (in English or Gujarati or both)`;
+    (['a', 'b', 'c', 'd'] as const).forEach(option => {
+      const key = `option_${option}` as keyof typeof formData;
+      const value = formData[key] as string;
+      if (!value || value.trim() === '') {
+        newErrors[key] = `Option ${option.toUpperCase()} is required`;
       }
     });
 
@@ -197,46 +169,7 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
           {/* Language Tabs */}
           <div className="border-b border-gray-200">
-            <nav className="flex space-x-8" aria-label="Tabs">
-              <button
-                type="button"
-                onClick={() => setActiveLanguageTab('english')}
-                className={`py-2 px-1 border-b-2 font-medium text-sm ${
-                  activeLanguageTab === 'english'
-                    ? 'border-primary-500 text-primary-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                }`}
-              >
-                <div className="flex items-center space-x-2">
-                  <Globe className="h-4 w-4" />
-                  <span>English</span>
-                  {(formData.question_text || formData.option_a || formData.option_b || formData.option_c || formData.option_d || formData.explanation) && (
-                    <span className="bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full">
-                      ✓
-                    </span>
-                  )}
-                </div>
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveLanguageTab('gujarati')}
-                className={`py-2 px-1 border-b-2 font-medium text-sm ${
-                  activeLanguageTab === 'gujarati'
-                    ? 'border-primary-500 text-primary-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                }`}
-              >
-                <div className="flex items-center space-x-2">
-                  <Globe className="h-4 w-4" />
-                  <span>ગુજરાતી</span>
-                  {(formData.question_text_gujarati || formData.option_a_gujarati || formData.option_b_gujarati || formData.option_c_gujarati || formData.option_d_gujarati || formData.explanation_gujarati) && (
-                    <span className="bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full">
-                      ✓
-                    </span>
-                  )}
-                </div>
-              </button>
-            </nav>
+            {/* Language tabs removed — Gujarati input was discontinued (English only). */}
           </div>
 
           {/* Question Text */}
@@ -244,23 +177,18 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
             <label className="block text-sm font-medium text-gray-700 mb-2">
               <div className="flex items-center space-x-2">
                 <HelpCircle className="h-4 w-4" />
-                <span>Question Text * ({activeLanguageTab === 'english' ? 'English' : 'ગુજરાતી'})</span>
+                <span>Question Text *</span>
               </div>
             </label>
             <RichTextEditor
-              value={activeLanguageTab === 'english' ? formData.question_text : formData.question_text_gujarati}
+              value={formData.question_text}
               onChange={(content) => {
-                const fieldName = activeLanguageTab === 'english' ? 'question_text' : 'question_text_gujarati';
-                setFormData(prev => ({
-                  ...prev,
-                  [fieldName]: content
-                }));
-                // Clear error when user starts typing
+                setFormData(prev => ({ ...prev, question_text: content }));
                 if (errors.question_text) {
                   setErrors(prev => ({ ...prev, question_text: '' }));
                 }
               }}
-              placeholder={activeLanguageTab === 'english' ? 'Enter the question text...' : 'પ્રશ્ન લખો...'}
+              placeholder="Enter the question text..."
               height={250}
               error={errors.question_text}
             />
@@ -268,24 +196,22 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
 
           {/* Options */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {['A', 'B', 'C', 'D'].map((option) => {
-              const optionKey = `option_${option.toLowerCase()}`;
-              const gujaratiKey = `option_${option.toLowerCase()}_gujarati`;
-              const fieldName = activeLanguageTab === 'english' ? optionKey : gujaratiKey;
-              const fieldValue = activeLanguageTab === 'english' ? formData[optionKey as keyof typeof formData] : formData[gujaratiKey as keyof typeof formData];
+            {(['A', 'B', 'C', 'D'] as const).map((option) => {
+              const optionKey = `option_${option.toLowerCase()}` as keyof typeof formData;
+              const fieldValue = formData[optionKey] as string;
 
               return (
                 <div key={option}>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Option {option} * ({activeLanguageTab === 'english' ? 'English' : 'ગુજરાતી'})
+                    Option {option} *
                   </label>
                   <input
                     type="text"
-                    name={fieldName}
-                    value={fieldValue as string}
+                    name={optionKey}
+                    value={fieldValue}
                     onChange={handleChange}
                     className={`input-field ${errors[optionKey] ? 'border-red-500' : ''}`}
-                    placeholder={activeLanguageTab === 'english' ? `Enter option ${option}` : `વિકલ્પ ${option} લખો`}
+                    placeholder={`Enter option ${option}`}
                   />
                   {errors[optionKey] && (
                     <p className="text-red-500 text-sm mt-1">{errors[optionKey]}</p>
@@ -428,19 +354,15 @@ export const QuestionModal: React.FC<QuestionModalProps> = ({
             <label className="block text-sm font-medium text-gray-700 mb-2">
               <div className="flex items-center space-x-2">
                 <FileText className="h-4 w-4" />
-                <span>Explanation ({activeLanguageTab === 'english' ? 'English' : 'ગુજરાતી'})</span>
+                <span>Explanation</span>
               </div>
             </label>
             <RichTextEditor
-              value={activeLanguageTab === 'english' ? formData.explanation : formData.explanation_gujarati}
+              value={formData.explanation}
               onChange={(content) => {
-                const fieldName = activeLanguageTab === 'english' ? 'explanation' : 'explanation_gujarati';
-                setFormData(prev => ({
-                  ...prev,
-                  [fieldName]: content
-                }));
+                setFormData(prev => ({ ...prev, explanation: content }));
               }}
-              placeholder={activeLanguageTab === 'english' ? 'Enter explanation for the correct answer (optional)...' : 'સાચા જવાબનું સ્પષ્ટીકરણ લખો (વૈકલ્પિક)...'}
+              placeholder="Enter explanation for the correct answer (optional)..."
               height={200}
             />
           </div>

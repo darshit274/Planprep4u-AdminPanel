@@ -89,9 +89,7 @@ const DynamicHierarchyPage: React.FC = () => {
       setError(null);
       
       const token = getAuthToken();
-      console.log('Token:', token ? 'Found' : 'Not found');
-      console.log('Fetching hierarchy for:', testSeriesId);
-      
+
       const response = await fetch(`${API_BASE_URL}/hierarchy/${testSeriesId}`, {
         headers: {
           'Authorization': `Bearer ${token}`,

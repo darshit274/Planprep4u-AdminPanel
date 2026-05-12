@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeftIcon, ChartBarIcon } from '@heroicons/react/24/outline';
 import { testManagementService } from '../services/test-management.service';
+import HTMLContent from '../components/common/HTMLContent';
 
 const TestSeriesDetailPageNew: React.FC = () => {
   const { testSeriesUuid } = useParams<{ testSeriesUuid: string }>();
@@ -62,9 +63,8 @@ const TestSeriesDetailPageNew: React.FC = () => {
             <ArrowLeftIcon className="h-5 w-5" />
           </button>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900" dangerouslySetInnerHTML={{ __html: testSeries?.name }}>
-            </h1>
-            <p className="text-gray-600 mt-1" dangerouslySetInnerHTML={{ __html: testSeries?.description }}></p>
+            <HTMLContent as="h1" className="text-2xl font-bold text-gray-900" content={testSeries?.name} />
+            <HTMLContent as="p" className="text-gray-600 mt-1" content={testSeries?.description} />
           </div>
         </div>
         <button
@@ -83,7 +83,7 @@ const TestSeriesDetailPageNew: React.FC = () => {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <span className="text-sm text-gray-500">Name:</span>
-              <p className="font-medium" dangerouslySetInnerHTML={{ __html: testSeries?.name }}></p>
+              <HTMLContent as="p" className="font-medium" content={testSeries?.name} />
             </div>
             <div>
               <span className="text-sm text-gray-500">Status:</span>
@@ -105,7 +105,7 @@ const TestSeriesDetailPageNew: React.FC = () => {
             {testSeries?.description && (
               <div className="col-span-2">
                 <span className="text-sm text-gray-500">Description:</span>
-                <p className="font-medium" dangerouslySetInnerHTML={{ __html: testSeries?.description }}></p>
+                <HTMLContent as="p" className="font-medium" content={testSeries?.description} />
               </div>
             )}
           </div>
