@@ -18,6 +18,9 @@ interface PDFUploadDropzoneProps {
     id: number;
     name: string;
   }>;
+  /** When set, the PDF is uploaded into this PDF category (folder) and the course selector is hidden */
+  categoryId?: number | null;
+  categoryName?: string;
 }
 
 export const PDFUploadDropzone: React.FC<PDFUploadDropzoneProps> = ({
@@ -25,7 +28,9 @@ export const PDFUploadDropzone: React.FC<PDFUploadDropzoneProps> = ({
   onUploadError,
   courses,
   testSeries = [],
-  examTypes = []
+  examTypes = [],
+  categoryId = null,
+  categoryName
 }) => {
   const [isDragOver, setIsDragOver] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
@@ -112,7 +117,7 @@ export const PDFUploadDropzone: React.FC<PDFUploadDropzoneProps> = ({
   };
 
   const handleUpload = async () => {
-    if (!selectedFile || !formData.title || !formData.course_id) {
+    if (!selectedFile || !formData.title || (!categoryId && !formData.course_id)) {
       toast.error('Please fill in all required fields');
       return;
     }
@@ -125,7 +130,11 @@ export const PDFUploadDropzone: React.FC<PDFUploadDropzoneProps> = ({
       uploadData.append('pdf', selectedFile);
       uploadData.append('title', formData.title);
       uploadData.append('description', formData.description);
-      uploadData.append('course_id', formData.course_id);
+      if (categoryId) {
+        uploadData.append('category_id', String(categoryId));
+      } else {
+        uploadData.append('course_id', formData.course_id);
+      }
       uploadData.append('access_level', formData.access_level);
       
       if (formData.test_series_id) {
@@ -216,7 +225,7 @@ export const PDFUploadDropzone: React.FC<PDFUploadDropzoneProps> = ({
       <div
         className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
           isDragOver 
-            ? 'border-blue-500 bg-blue-50' 
+            ? 'border-primary-500 bg-primary-50' 
             : selectedFile 
               ? 'border-green-500 bg-green-50' 
               : 'border-gray-300 bg-gray-50 hover:border-gray-400'
@@ -247,7 +256,7 @@ export const PDFUploadDropzone: React.FC<PDFUploadDropzoneProps> = ({
         ) : (
           <div className="space-y-4">
             <div className="flex items-center justify-center">
-              <Upload className={`h-12 w-12 ${isDragOver ? 'text-blue-500' : 'text-gray-400'}`} />
+              <Upload className={`h-12 w-12 ${isDragOver ? 'text-primary-500' : 'text-gray-400'}`} />
             </div>
             <div>
               <p className="text-lg font-medium text-gray-900">
@@ -294,32 +303,43 @@ export const PDFUploadDropzone: React.FC<PDFUploadDropzoneProps> = ({
                 type="text"
                 value={formData.title}
                 onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                 placeholder="Enter PDF title"
                 required
               />
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Course *
-              </label>
-              <select
-                value={formData.course_id}
-                onChange={(e) => setFormData(prev => ({ ...prev, course_id: e.target.value }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              >
-                <option value="">Select a course</option>
-                {Array.isArray(courses) && courses.length > 0 ? courses.map(course => (
-                  <option key={course.id} value={course.id}>
-                    {course.title}
-                  </option>
-                )) : (
-                  <option value="" disabled>Loading courses...</option>
-                )}
-              </select>
-            </div>
+            {categoryId ? (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Folder
+                </label>
+                <div className="w-full px-3 py-2 border border-gray-200 rounded-md bg-gray-50 text-gray-700">
+                  {categoryName || 'Selected folder'}
+                </div>
+              </div>
+            ) : (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Course *
+                </label>
+                <select
+                  value={formData.course_id}
+                  onChange={(e) => setFormData(prev => ({ ...prev, course_id: e.target.value }))}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  required
+                >
+                  <option value="">Select a course</option>
+                  {Array.isArray(courses) && courses.length > 0 ? courses.map(course => (
+                    <option key={course.id} value={course.id}>
+                      {course.title}
+                    </option>
+                  )) : (
+                    <option value="" disabled>Loading courses...</option>
+                  )}
+                </select>
+              </div>
+            )}
           </div>
 
           <div>
@@ -330,7 +350,7 @@ export const PDFUploadDropzone: React.FC<PDFUploadDropzoneProps> = ({
               value={formData.description}
               onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
               rows={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
               placeholder="Enter PDF description (optional)"
             />
           </div>
@@ -343,7 +363,7 @@ export const PDFUploadDropzone: React.FC<PDFUploadDropzoneProps> = ({
               <select
                 value={formData.access_level}
                 onChange={(e) => setFormData(prev => ({ ...prev, access_level: e.target.value }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
               >
                 <option value="free">Free</option>
                 <option value="premium">Premium</option>
@@ -359,7 +379,7 @@ export const PDFUploadDropzone: React.FC<PDFUploadDropzoneProps> = ({
                 <select
                   value={formData.test_series_id}
                   onChange={(e) => setFormData(prev => ({ ...prev, test_series_id: e.target.value }))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                 >
                   <option value="">None</option>
                   {Array.isArray(testSeries) && testSeries.length > 0 ? testSeries.map(ts => (
@@ -381,7 +401,7 @@ export const PDFUploadDropzone: React.FC<PDFUploadDropzoneProps> = ({
                 <select
                   value={formData.exam_type_id}
                   onChange={(e) => setFormData(prev => ({ ...prev, exam_type_id: e.target.value }))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                 >
                   <option value="">None</option>
                   {Array.isArray(examTypes) && examTypes.length > 0 ? examTypes.map(et => (
@@ -404,7 +424,7 @@ export const PDFUploadDropzone: React.FC<PDFUploadDropzoneProps> = ({
               type="text"
               value={formData.tags}
               onChange={(e) => setFormData(prev => ({ ...prev, tags: e.target.value }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
               placeholder="Enter tags separated by commas (e.g., study, notes, important)"
             />
             <p className="text-xs text-gray-500 mt-1">Separate multiple tags with commas</p>
@@ -428,7 +448,7 @@ export const PDFUploadDropzone: React.FC<PDFUploadDropzoneProps> = ({
                       min="0"
                       value={formData.price}
                       onChange={(e) => setFormData(prev => ({ ...prev, price: e.target.value }))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                       placeholder="0.00"
                     />
                   </div>
@@ -439,7 +459,7 @@ export const PDFUploadDropzone: React.FC<PDFUploadDropzoneProps> = ({
                     <select
                       value={formData.currency}
                       onChange={(e) => setFormData(prev => ({ ...prev, currency: e.target.value }))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                     >
                       <option value="INR">INR (₹)</option>
                       <option value="USD">USD ($)</option>
@@ -462,7 +482,7 @@ export const PDFUploadDropzone: React.FC<PDFUploadDropzoneProps> = ({
                     step="0.01"
                     value={formData.discount_percentage}
                     onChange={(e) => setFormData(prev => ({ ...prev, discount_percentage: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                     placeholder="0.00"
                   />
                   <p className="text-xs text-gray-500 mt-1">Optional discount percentage (0-100)</p>
@@ -477,7 +497,7 @@ export const PDFUploadDropzone: React.FC<PDFUploadDropzoneProps> = ({
                     id="subscription_required"
                     checked={formData.subscription_required}
                     onChange={(e) => setFormData(prev => ({ ...prev, subscription_required: e.target.checked }))}
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
                   />
                   <label htmlFor="subscription_required" className="ml-2 block text-sm text-gray-700">
                     Requires subscription
@@ -494,7 +514,7 @@ export const PDFUploadDropzone: React.FC<PDFUploadDropzoneProps> = ({
                     min="0"
                     value={formData.preview_pages}
                     onChange={(e) => setFormData(prev => ({ ...prev, preview_pages: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                     placeholder="0"
                   />
                   <p className="text-xs text-gray-500 mt-1">Number of free preview pages</p>
@@ -512,7 +532,7 @@ export const PDFUploadDropzone: React.FC<PDFUploadDropzoneProps> = ({
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2">
                 <div 
-                  className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                  className="bg-primary-600 h-2 rounded-full transition-all duration-300"
                   style={{ width: `${uploadProgress}%` }}
                 />
               </div>
@@ -523,8 +543,8 @@ export const PDFUploadDropzone: React.FC<PDFUploadDropzoneProps> = ({
           <div className="flex justify-end">
             <button
               onClick={handleUpload}
-              disabled={isUploading || !formData.title || !formData.course_id}
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={isUploading || !formData.title || (!categoryId && !formData.course_id)}
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Upload className="h-4 w-4 mr-2" />
               {isUploading ? 'Uploading...' : 'Upload PDF'}
