@@ -834,43 +834,6 @@ const TestManagementPageNew: React.FC = () => {
                 />
               </div>
 
-              {/* Gujarati Fields */}
-              <div className="border-t pt-4">
-                <h3 className="text-md font-medium text-gray-800 mb-3">Gujarati Translation</h3>
-
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Title (Gujarati)
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.title_gujarati}
-                    onChange={(e) => setFormData({ ...formData, title_gujarati: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    placeholder="ગુજરાતીમાં શીર્ષક"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Description (Gujarati)
-                  </label>
-                  {/* <textarea
-                    value={formData.description_gujarati}
-                    onChange={(e) => setFormData({ ...formData, description_gujarati: e.target.value })}
-                    rows={3}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    placeholder="ગુજરાતીમાં વર્ણન"
-                  /> */}
-                  <RichTextEditor
-                    value={formData?.description_gujarati}
-                    onChange={(content) => setFormData({ ...formData, description_gujarati: content })}
-                    placeholder="Enter explanation (optional)"
-                    height={200}
-                  />
-                </div>
-              </div>
-
               {/* Pricing Configuration */}
               <div className="border-t pt-4">
                 <h3 className="text-md font-medium text-gray-800 mb-3">💰 Pricing & Subscription Settings</h3>

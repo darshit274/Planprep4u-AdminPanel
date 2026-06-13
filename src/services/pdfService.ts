@@ -70,6 +70,8 @@ export interface PDFCategory {
   sort_order: number;
   is_active: boolean;
   pdf_count?: number;
+  parent_category_id?: number | null;
+  children_count?: number;
 }
 
 export interface PDFStats {
@@ -170,15 +172,40 @@ class PDFService {
     return response.data;
   }
 
-  // Create PDF category
+  // Get PDF category hierarchy (flat list with parent_category_id + counts)
+  async getCategoryTree(): Promise<{ success: boolean; data: PDFCategory[] }> {
+    const response = await api.get('/admin/pdf/categories');
+    return response.data;
+  }
+
+  // Create PDF category (pass parent_category_id to nest it)
   async createCategory(data: {
     name: string;
     description?: string;
     icon?: string;
     color?: string;
     sort_order?: number;
+    parent_category_id?: number | null;
   }): Promise<{ success: boolean; data: PDFCategory; message: string }> {
     const response = await api.post('/admin/pdf/categories', data);
+    return response.data;
+  }
+
+  // Update PDF category
+  async updateCategory(id: number, data: {
+    name?: string;
+    description?: string;
+    icon?: string;
+    color?: string;
+    sort_order?: number;
+  }): Promise<{ success: boolean; data: PDFCategory; message: string }> {
+    const response = await api.put(`/admin/pdf/categories/${id}`, data);
+    return response.data;
+  }
+
+  // Delete PDF category (fails while it still has sub-categories or PDFs)
+  async deleteCategory(id: number): Promise<{ success: boolean; message: string }> {
+    const response = await api.delete(`/admin/pdf/categories/${id}`);
     return response.data;
   }
 }
