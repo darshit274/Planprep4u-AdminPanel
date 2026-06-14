@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Save, Loader } from 'lucide-react';
+import { X, Save, Loader, Folder } from 'lucide-react';
 import api from '../../services/api';
 import toast from 'react-hot-toast';
 
@@ -7,33 +7,21 @@ interface PDFEditModalProps {
   isOpen: boolean;
   onClose: () => void;
   pdf: any;
-  courses: any[];
-  testSeries: any[];
-  examTypes: any[];
+  categories: any[];  // PDF folders (pdf_categories)
+  courses: any[];     // Test series / courses
   onUpdate: () => void;
 }
 
 export const PDFEditModal: React.FC<PDFEditModalProps> = ({
-  isOpen,
-  onClose,
-  pdf,
-  courses,
-  testSeries,
-  examTypes,
-  onUpdate
+  isOpen, onClose, pdf, categories, courses, onUpdate
 }) => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    course_id: '',
+    category_id: '',    // folder id (integer as string)
+    course_id: '',      // test_series uuid string
     access_level: 'free',
     tags: '',
-    // Pricing fields
-    price: 0,
-    currency: 'INR',
-    discount_percentage: 0,
-    subscription_required: false,
-    preview_pages: 0
   });
   const [loading, setLoading] = useState(false);
 
@@ -42,18 +30,18 @@ export const PDFEditModal: React.FC<PDFEditModalProps> = ({
       setFormData({
         title: pdf.title || '',
         description: pdf.description || '',
-        course_id: pdf.course_id?.toString() || '',
+        category_id: pdf.category_id != null ? String(pdf.category_id) : '',
+        // PDF table stores test_series_id, not course_id
+        course_id: pdf.test_series_id || '',
         access_level: pdf.access_level || 'free',
-        tags: pdf.tags ? (Array.isArray(pdf.tags) ? pdf.tags.join(', ') : pdf.tags) : '',
-        // Pricing fields
-        price: pdf.price || 0,
-        currency: pdf.currency || 'INR',
-        discount_percentage: pdf.discount_percentage || 0,
-        subscription_required: pdf.subscription_required || false,
-        preview_pages: pdf.preview_pages || 0
+        tags: pdf.tags
+          ? Array.isArray(pdf.tags) ? pdf.tags.join(', ') : pdf.tags
+          : '',
       });
     }
   }, [pdf, isOpen]);
+
+  const selectedFolder = categories.find(c => String(c.id) === formData.category_id);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,13 +49,26 @@ export const PDFEditModal: React.FC<PDFEditModalProps> = ({
 
     setLoading(true);
     try {
-      const updateData = {
-        ...formData,
-        course_id: formData.course_id ? parseInt(formData.course_id) : null,
-        tags: formData.tags ? formData.tags.split(',').map(tag => tag.trim()).filter(Boolean) : null
+      const body: Record<string, any> = {
+        title: formData.title,
+        description: formData.description,
+        access_level: formData.access_level,
+        tags: formData.tags
+          ? formData.tags.split(',').map(t => t.trim()).filter(Boolean)
+          : null,
       };
 
-      await api.put(`/admin/pdf/${pdf.id}`, updateData);
+      if (formData.category_id) {
+        // Moving into / keeping in a folder
+        body.category_id = parseInt(formData.category_id);
+        body.course_id = null;
+      } else if (formData.course_id) {
+        // Course-linked PDF (no folder) — send UUID string, never parseInt
+        body.course_id = formData.course_id;
+        body.category_id = null;
+      }
+
+      await api.put(`/admin/pdf/${pdf.id}`, body);
       toast.success('PDF updated successfully');
       onUpdate();
       onClose();
@@ -79,241 +80,169 @@ export const PDFEditModal: React.FC<PDFEditModalProps> = ({
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target;
-    const checked = (e.target as HTMLInputElement).checked;
-
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : type === 'number' ? parseFloat(value) || 0 : value
-    }));
-  };
-
   if (!isOpen || !pdf) return null;
 
+  const folderAccessLevel = selectedFolder?.access_level;
+  const effectiveAccessLevel = selectedFolder ? folderAccessLevel : formData.access_level;
+
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
+        {/* Header */}
         <div className="flex items-center justify-between p-6 border-b">
-          <h2 className="text-xl font-semibold text-gray-900">Edit PDF</h2>
-          <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-gray-600"
-            disabled={loading}
-          >
+          <div>
+            <h2 className="text-xl font-semibold text-gray-900">Edit PDF</h2>
+            <p className="text-sm text-gray-500 mt-0.5">{pdf.original_filename}</p>
+          </div>
+          <button onClick={onClose} disabled={loading} className="text-gray-400 hover:text-gray-600">
             <X className="h-6 w-6" />
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
+        <form onSubmit={handleSubmit} className="p-6 space-y-5">
+          {/* Title */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Title *
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Title *</label>
             <input
               type="text"
-              name="title"
               value={formData.title}
-              onChange={handleChange}
+              onChange={e => setFormData(p => ({ ...p, title: e.target.value }))}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
               placeholder="Enter PDF title"
             />
           </div>
 
+          {/* Description */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Description
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
             <textarea
-              name="description"
               value={formData.description}
-              onChange={handleChange}
-              rows={4}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-              placeholder="Enter PDF description"
+              onChange={e => setFormData(p => ({ ...p, description: e.target.value }))}
+              rows={3}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+              placeholder="Enter PDF description (optional)"
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Course
-              </label>
-              <select
-                name="course_id"
-                value={formData.course_id}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-              >
-                <option value="">Select course</option>
-                {Array.isArray(courses) && courses.length > 0 ? courses.map((course) => (
-                  <option key={course.id} value={course.id}>
-                    {course.title}
-                  </option>
-                )) : (
-                  <option value="" disabled>Loading courses...</option>
-                )}
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Access Level
-              </label>
-              <select
-                name="access_level"
-                value={formData.access_level}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-              >
-                <option value="free">Free</option>
-                <option value="premium">Premium</option>
-                <option value="restricted">Restricted</option>
-              </select>
-            </div>
+          {/* Folder */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              <Folder className="inline h-4 w-4 mr-1 text-gray-500" />
+              Folder
+            </label>
+            <select
+              value={formData.category_id}
+              onChange={e => setFormData(p => ({ ...p, category_id: e.target.value, course_id: '' }))}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+            >
+              <option value="">No folder (link to course instead)</option>
+              {categories.map(cat => (
+                <option key={cat.id} value={String(cat.id)}>
+                  {cat.parent_category_id
+                    ? `  └ ${cat.name}`
+                    : cat.name
+                  }{cat.access_level && cat.access_level !== 'free' ? ` [${cat.access_level}]` : ''}
+                </option>
+              ))}
+            </select>
+            {selectedFolder && (
+              <p className="text-xs text-gray-500 mt-1">
+                This folder is <span className={`font-semibold ${selectedFolder.access_level === 'premium' ? 'text-yellow-600' : 'text-green-600'}`}>
+                  {selectedFolder.access_level}
+                </span> — the PDF will inherit this access level.
+              </p>
+            )}
           </div>
 
+          {/* Course (only when no folder selected) */}
+          {!formData.category_id && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Course (optional)</label>
+              <select
+                value={formData.course_id}
+                onChange={e => setFormData(p => ({ ...p, course_id: e.target.value }))}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+              >
+                <option value="">No course</option>
+                {courses.map(c => (
+                  <option key={c.id} value={c.id}>{c.title}</option>
+                ))}
+              </select>
+            </div>
+          )}
+
+          {/* Access Level — only editable when NOT in a folder */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Tags
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Access Level</label>
+            {selectedFolder ? (
+              <div className={`px-4 py-3 rounded-lg border-2 text-sm font-medium text-center ${
+                effectiveAccessLevel === 'premium'
+                  ? 'border-yellow-400 bg-yellow-50 text-yellow-700'
+                  : 'border-green-400 bg-green-50 text-green-700'
+              }`}>
+                Inherited from folder: <span className="capitalize">{effectiveAccessLevel}</span>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 gap-3">
+                {(['free', 'premium'] as const).map(level => (
+                  <label
+                    key={level}
+                    className={`flex items-center justify-center p-3 rounded-lg border-2 cursor-pointer transition-colors ${
+                      formData.access_level === level
+                        ? level === 'free'
+                          ? 'border-green-500 bg-green-50 text-green-700'
+                          : 'border-yellow-500 bg-yellow-50 text-yellow-700'
+                        : 'border-gray-200 text-gray-600 hover:border-gray-300'
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      name="access_level"
+                      value={level}
+                      checked={formData.access_level === level}
+                      onChange={e => setFormData(p => ({ ...p, access_level: e.target.value }))}
+                      className="hidden"
+                    />
+                    <span className="text-sm font-medium capitalize">{level}</span>
+                  </label>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Tags */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Tags</label>
             <input
               type="text"
-              name="tags"
               value={formData.tags}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-              placeholder="Enter tags separated by commas"
+              onChange={e => setFormData(p => ({ ...p, tags: e.target.value }))}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+              placeholder="e.g. syllabus, 2024, physics"
             />
-            <p className="text-sm text-gray-500 mt-1">
-              Separate multiple tags with commas (e.g., physics, chemistry, biology)
-            </p>
+            <p className="text-xs text-gray-500 mt-1">Separate tags with commas</p>
           </div>
 
-          {/* Pricing Section */}
-          <div className="border-t pt-6">
-            <h4 className="text-lg font-medium text-gray-900 mb-4">Pricing Settings</h4>
-
-            <div className="space-y-4">
-              {/* Price and Currency (show only if Premium) */}
-              {formData.access_level === 'premium' && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Price
-                    </label>
-                    <input
-                      type="number"
-                      name="price"
-                      value={formData.price}
-                      onChange={handleChange}
-                      step="0.01"
-                      min="0"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                      placeholder="0.00"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Currency
-                    </label>
-                    <select
-                      name="currency"
-                      value={formData.currency}
-                      onChange={handleChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                    >
-                      <option value="INR">INR (₹)</option>
-                      <option value="USD">USD ($)</option>
-                      <option value="EUR">EUR (€)</option>
-                    </select>
-                  </div>
-                </div>
-              )}
-
-              {/* Discount Percentage (show only if Premium) */}
-              {formData.access_level === 'premium' && (
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Discount Percentage
-                  </label>
-                  <input
-                    type="number"
-                    name="discount_percentage"
-                    value={formData.discount_percentage}
-                    onChange={handleChange}
-                    min="0"
-                    max="100"
-                    step="0.01"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                    placeholder="0.00"
-                  />
-                  <p className="text-sm text-gray-500 mt-1">Optional discount percentage (0-100)</p>
-                </div>
-              )}
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Subscription Required */}
-                <div className="flex items-center">
-                  <input
-                    type="checkbox"
-                    name="subscription_required"
-                    id="subscription_required"
-                    checked={formData.subscription_required}
-                    onChange={handleChange}
-                    className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
-                  />
-                  <label htmlFor="subscription_required" className="ml-2 block text-sm text-gray-700">
-                    Requires subscription
-                  </label>
-                </div>
-
-                {/* Preview Pages */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Preview Pages
-                  </label>
-                  <input
-                    type="number"
-                    name="preview_pages"
-                    value={formData.preview_pages}
-                    onChange={handleChange}
-                    min="0"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                    placeholder="0"
-                  />
-                  <p className="text-sm text-gray-500 mt-1">Number of free preview pages</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex justify-end space-x-3 pt-4">
+          {/* Actions */}
+          <div className="flex justify-end space-x-3 pt-2 border-t">
             <button
               type="button"
               onClick={onClose}
               disabled={loading}
-              className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="px-4 py-2 text-sm font-medium text-white bg-primary-600 border border-transparent rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center"
+              className="px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700 disabled:opacity-50 inline-flex items-center"
             >
-              {loading ? (
-                <>
-                  <Loader className="animate-spin h-4 w-4 mr-2" />
-                  Updating...
-                </>
-              ) : (
-                <>
-                  <Save className="h-4 w-4 mr-2" />
-                  Update PDF
-                </>
-              )}
+              {loading
+                ? <><Loader className="animate-spin h-4 w-4 mr-2" />Saving...</>
+                : <><Save className="h-4 w-4 mr-2" />Save Changes</>
+              }
             </button>
           </div>
         </form>

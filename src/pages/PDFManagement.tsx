@@ -63,7 +63,7 @@ export const PDFManagement: React.FC = () => {
     category: null,
     parentId: null
   });
-  const [categoryForm, setCategoryForm] = useState({ name: '', description: '', color: FOLDER_COLORS[0] });
+  const [categoryForm, setCategoryForm] = useState({ name: '', description: '', color: FOLDER_COLORS[0], access_level: 'free' });
   const [categorySaving, setCategorySaving] = useState(false);
   const [deleteCategoryModal, setDeleteCategoryModal] = useState({
     isOpen: false,
@@ -213,7 +213,7 @@ export const PDFManagement: React.FC = () => {
   // ---- Folder handlers ----
 
   const openCreateFolder = () => {
-    setCategoryForm({ name: '', description: '', color: FOLDER_COLORS[0] });
+    setCategoryForm({ name: '', description: '', color: FOLDER_COLORS[0], access_level: 'free' });
     setCategoryModal({ isOpen: true, mode: 'create', category: null, parentId: currentFolderId });
   };
 
@@ -222,7 +222,8 @@ export const PDFManagement: React.FC = () => {
     setCategoryForm({
       name: category.name,
       description: category.description || '',
-      color: category.color || FOLDER_COLORS[0]
+      color: category.color || FOLDER_COLORS[0],
+      access_level: (category as any).access_level || 'free'
     });
     setCategoryModal({ isOpen: true, mode: 'edit', category, parentId: null });
   };
@@ -239,14 +240,16 @@ export const PDFManagement: React.FC = () => {
           name: categoryForm.name.trim(),
           description: categoryForm.description.trim() || undefined,
           color: categoryForm.color,
-          parent_category_id: categoryModal.parentId
+          parent_category_id: categoryModal.parentId,
+          access_level: categoryForm.access_level as any
         });
         toast.success('Folder created');
       } else if (categoryModal.category) {
         await pdfService.updateCategory(categoryModal.category.id, {
           name: categoryForm.name.trim(),
           description: categoryForm.description.trim(),
-          color: categoryForm.color
+          color: categoryForm.color,
+          access_level: categoryForm.access_level as any
         });
         toast.success('Folder updated');
       }
@@ -719,6 +722,36 @@ export const PDFManagement: React.FC = () => {
                     ))}
                   </div>
                 </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Access Level</label>
+                  <p className="text-xs text-gray-500 mb-2">
+                    All PDFs uploaded into this folder will automatically inherit this level.
+                  </p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {(['free', 'premium'] as const).map(level => (
+                      <label
+                        key={level}
+                        className={`flex items-center justify-center p-2.5 rounded-lg border-2 cursor-pointer transition-colors ${
+                          categoryForm.access_level === level
+                            ? level === 'free'
+                              ? 'border-green-500 bg-green-50 text-green-700'
+                              : 'border-yellow-500 bg-yellow-50 text-yellow-700'
+                            : 'border-gray-200 text-gray-600 hover:border-gray-300'
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="folder_access_level"
+                          value={level}
+                          checked={categoryForm.access_level === level}
+                          onChange={() => setCategoryForm(prev => ({ ...prev, access_level: level }))}
+                          className="hidden"
+                        />
+                        <span className="text-sm font-medium capitalize">{level}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
               </div>
 
               <div className="flex justify-end space-x-3 mt-6">
@@ -745,9 +778,8 @@ export const PDFManagement: React.FC = () => {
           isOpen={editModal.isOpen}
           onClose={() => setEditModal({ isOpen: false, pdf: null })}
           pdf={editModal.pdf}
+          categories={categories}
           courses={courses}
-          testSeries={testSeries}
-          examTypes={examTypes}
           onUpdate={() => {
             loadPDFs();
             loadStats();

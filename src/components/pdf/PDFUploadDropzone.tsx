@@ -41,15 +41,7 @@ export const PDFUploadDropzone: React.FC<PDFUploadDropzoneProps> = ({
     description: '',
     course_id: '',
     access_level: 'free',
-    test_series_id: '',
-    exam_type_id: '',
     tags: '',
-    // Pricing fields
-    price: '',
-    currency: 'INR',
-    discount_percentage: '',
-    subscription_required: false,
-    preview_pages: ''
   });
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
@@ -132,30 +124,15 @@ export const PDFUploadDropzone: React.FC<PDFUploadDropzoneProps> = ({
       uploadData.append('description', formData.description);
       if (categoryId) {
         uploadData.append('category_id', String(categoryId));
+        // access_level is inherited from folder on the server side
       } else {
         uploadData.append('course_id', formData.course_id);
+        uploadData.append('access_level', formData.access_level);
       }
-      uploadData.append('access_level', formData.access_level);
-      
-      if (formData.test_series_id) {
-        uploadData.append('test_series_id', formData.test_series_id);
-      }
-      
-      if (formData.exam_type_id) {
-        uploadData.append('exam_type_id', formData.exam_type_id);
-      }
-      
       if (formData.tags) {
         const tagsArray = formData.tags.split(',').map(tag => tag.trim()).filter(tag => tag);
         uploadData.append('tags', JSON.stringify(tagsArray));
       }
-
-      // Add pricing fields
-      uploadData.append('price', formData.price || '0');
-      uploadData.append('currency', formData.currency);
-      uploadData.append('discount_percentage', formData.discount_percentage || '0');
-      uploadData.append('subscription_required', formData.subscription_required.toString());
-      uploadData.append('preview_pages', formData.preview_pages || '0');
 
       const response = await api.post('/admin/pdf/upload', uploadData, {
         headers: {
@@ -173,21 +150,7 @@ export const PDFUploadDropzone: React.FC<PDFUploadDropzoneProps> = ({
       
       // Reset form
       setSelectedFile(null);
-      setFormData({
-        title: '',
-        description: '',
-        course_id: '',
-        access_level: 'free',
-        test_series_id: '',
-        exam_type_id: '',
-        tags: '',
-        // Pricing fields
-        price: '',
-        currency: 'INR',
-        discount_percentage: '',
-        subscription_required: false,
-        preview_pages: ''
-      });
+      setFormData({ title: '', description: '', course_id: '', access_level: 'free', tags: '' });
       setUploadProgress(0);
 
       if (onUploadSuccess) {
@@ -355,66 +318,35 @@ export const PDFUploadDropzone: React.FC<PDFUploadDropzoneProps> = ({
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* Access level — only shown for course-linked PDFs (folder uploads inherit folder's level) */}
+          {!categoryId && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Access Level
-              </label>
-              <select
-                value={formData.access_level}
-                onChange={(e) => setFormData(prev => ({ ...prev, access_level: e.target.value }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
-              >
-                <option value="free">Free</option>
-                <option value="premium">Premium</option>
-                <option value="restricted">Restricted</option>
-              </select>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Access Level</label>
+              <div className="grid grid-cols-2 gap-3">
+                {(['free', 'premium'] as const).map(level => (
+                  <label
+                    key={level}
+                    className={`flex items-center justify-center p-2.5 rounded-lg border-2 cursor-pointer transition-colors ${
+                      formData.access_level === level
+                        ? level === 'free'
+                          ? 'border-green-500 bg-green-50 text-green-700'
+                          : 'border-yellow-500 bg-yellow-50 text-yellow-700'
+                        : 'border-gray-200 text-gray-600 hover:border-gray-300'
+                    }`}
+                  >
+                    <input
+                      type="radio"
+                      value={level}
+                      checked={formData.access_level === level}
+                      onChange={() => setFormData(prev => ({ ...prev, access_level: level }))}
+                      className="hidden"
+                    />
+                    <span className="text-sm font-medium capitalize">{level}</span>
+                  </label>
+                ))}
+              </div>
             </div>
-
-            {testSeries.length > 0 && (
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Test Series (Optional)
-                </label>
-                <select
-                  value={formData.test_series_id}
-                  onChange={(e) => setFormData(prev => ({ ...prev, test_series_id: e.target.value }))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
-                >
-                  <option value="">None</option>
-                  {Array.isArray(testSeries) && testSeries.length > 0 ? testSeries.map(ts => (
-                    <option key={ts.id} value={ts.id}>
-                      {ts.title}
-                    </option>
-                  )) : (
-                    <option value="" disabled>Loading test series...</option>
-                  )}
-                </select>
-              </div>
-            )}
-
-            {examTypes.length > 0 && (
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Exam Type (Optional)
-                </label>
-                <select
-                  value={formData.exam_type_id}
-                  onChange={(e) => setFormData(prev => ({ ...prev, exam_type_id: e.target.value }))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
-                >
-                  <option value="">None</option>
-                  {Array.isArray(examTypes) && examTypes.length > 0 ? examTypes.map(et => (
-                    <option key={et.id} value={et.id}>
-                      {et.name}
-                    </option>
-                  )) : (
-                    <option value="" disabled>Loading exam types...</option>
-                  )}
-                </select>
-              </div>
-            )}
-          </div>
+          )}
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -428,99 +360,6 @@ export const PDFUploadDropzone: React.FC<PDFUploadDropzoneProps> = ({
               placeholder="Enter tags separated by commas (e.g., study, notes, important)"
             />
             <p className="text-xs text-gray-500 mt-1">Separate multiple tags with commas</p>
-          </div>
-
-          {/* Pricing Section */}
-          <div className="border-t pt-4">
-            <h4 className="text-md font-medium text-gray-900 mb-4">Pricing Settings</h4>
-
-            <div className="space-y-4">
-              {/* Price and Currency (show only if Premium) */}
-              {formData.access_level === 'premium' && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Price
-                    </label>
-                    <input
-                      type="number"
-                      step="0.01"
-                      min="0"
-                      value={formData.price}
-                      onChange={(e) => setFormData(prev => ({ ...prev, price: e.target.value }))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
-                      placeholder="0.00"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Currency
-                    </label>
-                    <select
-                      value={formData.currency}
-                      onChange={(e) => setFormData(prev => ({ ...prev, currency: e.target.value }))}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    >
-                      <option value="INR">INR (₹)</option>
-                      <option value="USD">USD ($)</option>
-                      <option value="EUR">EUR (€)</option>
-                    </select>
-                  </div>
-                </div>
-              )}
-
-              {/* Discount Percentage (show only if Premium) */}
-              {formData.access_level === 'premium' && (
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Discount Percentage
-                  </label>
-                  <input
-                    type="number"
-                    min="0"
-                    max="100"
-                    step="0.01"
-                    value={formData.discount_percentage}
-                    onChange={(e) => setFormData(prev => ({ ...prev, discount_percentage: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    placeholder="0.00"
-                  />
-                  <p className="text-xs text-gray-500 mt-1">Optional discount percentage (0-100)</p>
-                </div>
-              )}
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Subscription Required */}
-                <div className="flex items-center">
-                  <input
-                    type="checkbox"
-                    id="subscription_required"
-                    checked={formData.subscription_required}
-                    onChange={(e) => setFormData(prev => ({ ...prev, subscription_required: e.target.checked }))}
-                    className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
-                  />
-                  <label htmlFor="subscription_required" className="ml-2 block text-sm text-gray-700">
-                    Requires subscription
-                  </label>
-                </div>
-
-                {/* Preview Pages */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Preview Pages
-                  </label>
-                  <input
-                    type="number"
-                    min="0"
-                    value={formData.preview_pages}
-                    onChange={(e) => setFormData(prev => ({ ...prev, preview_pages: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
-                    placeholder="0"
-                  />
-                  <p className="text-xs text-gray-500 mt-1">Number of free preview pages</p>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Upload Progress */}
