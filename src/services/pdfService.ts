@@ -72,6 +72,12 @@ export interface PDFCategory {
   pdf_count?: number;
   parent_category_id?: number | null;
   children_count?: number;
+  // Root folders
+  access_level?: 'free' | 'premium' | 'restricted';
+  price?: number;
+  currency?: string;
+  // Sub-folders
+  is_free_override?: boolean;
 }
 
 export interface PDFStats {
@@ -187,6 +193,12 @@ class PDFService {
     color?: string;
     sort_order?: number;
     parent_category_id?: number | null;
+    // Root folders
+    access_level?: 'free' | 'premium';
+    price?: number;
+    currency?: string;
+    // Sub-folders
+    is_free_override?: boolean;
   }): Promise<{ success: boolean; data: PDFCategory; message: string }> {
     const response = await api.post('/admin/pdf/categories', data);
     return response.data;
@@ -199,6 +211,12 @@ class PDFService {
     icon?: string;
     color?: string;
     sort_order?: number;
+    // Root folders
+    access_level?: 'free' | 'premium';
+    price?: number;
+    currency?: string;
+    // Sub-folders
+    is_free_override?: boolean;
   }): Promise<{ success: boolean; data: PDFCategory; message: string }> {
     const response = await api.put(`/admin/pdf/categories/${id}`, data);
     return response.data;

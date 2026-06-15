@@ -63,7 +63,13 @@ export const PDFManagement: React.FC = () => {
     category: null,
     parentId: null
   });
-  const [categoryForm, setCategoryForm] = useState({ name: '', description: '', color: FOLDER_COLORS[0], access_level: 'free' });
+  const [categoryForm, setCategoryForm] = useState({
+    name: '', description: '', color: FOLDER_COLORS[0],
+    // Root folder fields
+    access_level: 'free', price: '', currency: 'INR',
+    // Sub-folder field
+    is_free_override: false
+  });
   const [categorySaving, setCategorySaving] = useState(false);
   const [deleteCategoryModal, setDeleteCategoryModal] = useState({
     isOpen: false,
@@ -213,7 +219,7 @@ export const PDFManagement: React.FC = () => {
   // ---- Folder handlers ----
 
   const openCreateFolder = () => {
-    setCategoryForm({ name: '', description: '', color: FOLDER_COLORS[0], access_level: 'free' });
+    setCategoryForm({ name: '', description: '', color: FOLDER_COLORS[0], access_level: 'free', price: '', currency: 'INR', is_free_override: false });
     setCategoryModal({ isOpen: true, mode: 'create', category: null, parentId: currentFolderId });
   };
 
@@ -223,7 +229,10 @@ export const PDFManagement: React.FC = () => {
       name: category.name,
       description: category.description || '',
       color: category.color || FOLDER_COLORS[0],
-      access_level: (category as any).access_level || 'free'
+      access_level: category.access_level || 'free',
+      price: category.price != null ? String(category.price) : '',
+      currency: category.currency || 'INR',
+      is_free_override: category.is_free_override || false
     });
     setCategoryModal({ isOpen: true, mode: 'edit', category, parentId: null });
   };
@@ -235,13 +244,23 @@ export const PDFManagement: React.FC = () => {
     }
     setCategorySaving(true);
     try {
+      const isRootFolder = categoryModal.mode === 'create'
+        ? categoryModal.parentId === null
+        : !categoryModal.category?.parent_category_id;
+
       if (categoryModal.mode === 'create') {
         await pdfService.createCategory({
           name: categoryForm.name.trim(),
           description: categoryForm.description.trim() || undefined,
           color: categoryForm.color,
           parent_category_id: categoryModal.parentId,
-          access_level: categoryForm.access_level as any
+          ...(isRootFolder ? {
+            access_level: categoryForm.access_level as 'free' | 'premium',
+            price: parseFloat(categoryForm.price) || 0,
+            currency: categoryForm.currency
+          } : {
+            is_free_override: categoryForm.is_free_override
+          })
         });
         toast.success('Folder created');
       } else if (categoryModal.category) {
@@ -249,7 +268,13 @@ export const PDFManagement: React.FC = () => {
           name: categoryForm.name.trim(),
           description: categoryForm.description.trim(),
           color: categoryForm.color,
-          access_level: categoryForm.access_level as any
+          ...(isRootFolder ? {
+            access_level: categoryForm.access_level as 'free' | 'premium',
+            price: parseFloat(categoryForm.price) || 0,
+            currency: categoryForm.currency
+          } : {
+            is_free_override: categoryForm.is_free_override
+          })
         });
         toast.success('Folder updated');
       }
@@ -403,7 +428,7 @@ export const PDFManagement: React.FC = () => {
           </button>
         </div>
       </div>
-      <div className="flex items-center mt-4 space-x-4 text-xs text-gray-500">
+      <div className="flex items-center mt-4 space-x-3 text-xs text-gray-500">
         <span className="inline-flex items-center">
           <Folder className="h-3.5 w-3.5 mr-1" />
           {folder.children_count || 0} sub-folders
@@ -412,6 +437,20 @@ export const PDFManagement: React.FC = () => {
           <FileText className="h-3.5 w-3.5 mr-1" />
           {folder.pdf_count || 0} PDFs
         </span>
+        {/* Show access badge on root folders; show free-override on sub-folders */}
+        {!folder.parent_category_id ? (
+          <span className={`ml-auto px-2 py-0.5 rounded-full font-medium ${
+            folder.access_level === 'premium'
+              ? 'bg-yellow-100 text-yellow-700'
+              : 'bg-green-100 text-green-700'
+          }`}>
+            {folder.access_level === 'premium'
+              ? `Premium${folder.price ? ` · ₹${folder.price}` : ''}`
+              : 'Free'}
+          </span>
+        ) : folder.is_free_override ? (
+          <span className="ml-auto px-2 py-0.5 rounded-full font-medium bg-green-100 text-green-700">Free</span>
+        ) : null}
       </div>
     </div>
   );
@@ -480,13 +519,26 @@ export const PDFManagement: React.FC = () => {
                   <FolderPlus className="h-4 w-4 mr-2" />
                   {currentFolderId ? 'New Sub-Folder' : 'New Folder'}
                 </button>
-                <button
-                  onClick={() => setShowUploadForm(true)}
-                  className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
-                >
-                  <Upload className="h-4 w-4 mr-2" />
-                  Upload PDF
-                </button>
+                {(() => {
+                  // Disable upload in a root folder that has sub-folders — must upload into a sub-folder
+                  const isRootWithSubfolders = currentFolderId !== null
+                    && !currentFolder?.parent_category_id
+                    && childFolders.length > 0;
+                  return isRootWithSubfolders ? (
+                    <div className="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-400 rounded-lg cursor-not-allowed text-sm" title="Navigate into a sub-folder to upload PDFs">
+                      <Upload className="h-4 w-4 mr-2" />
+                      Upload PDF
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => setShowUploadForm(true)}
+                      className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
+                    >
+                      <Upload className="h-4 w-4 mr-2" />
+                      Upload PDF
+                    </button>
+                  );
+                })()}
               </div>
             </div>
 
@@ -570,6 +622,16 @@ export const PDFManagement: React.FC = () => {
               <FolderPlus className="h-4 w-4 mr-2" />
               {currentFolderId ? 'Add Sub-Folder' : 'Add Folder'}
             </button>
+          </div>
+        )}
+
+        {/* Root-folder-with-subfolders notice */}
+        {currentFolderId !== null && !currentFolder?.parent_category_id && childFolders.length > 0 && (
+          <div className="flex items-center gap-2 bg-amber-50 border border-amber-200 rounded-lg px-4 py-3 mb-4 text-sm text-amber-700">
+            <svg className="h-4 w-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            This folder has sub-folders. Open a sub-folder to upload PDFs.
           </div>
         )}
 
@@ -722,36 +784,79 @@ export const PDFManagement: React.FC = () => {
                     ))}
                   </div>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Access Level</label>
-                  <p className="text-xs text-gray-500 mb-2">
-                    All PDFs uploaded into this folder will automatically inherit this level.
-                  </p>
-                  <div className="grid grid-cols-2 gap-2">
-                    {(['free', 'premium'] as const).map(level => (
-                      <label
-                        key={level}
-                        className={`flex items-center justify-center p-2.5 rounded-lg border-2 cursor-pointer transition-colors ${
-                          categoryForm.access_level === level
-                            ? level === 'free'
-                              ? 'border-green-500 bg-green-50 text-green-700'
-                              : 'border-yellow-500 bg-yellow-50 text-yellow-700'
-                            : 'border-gray-200 text-gray-600 hover:border-gray-300'
-                        }`}
-                      >
-                        <input
-                          type="radio"
-                          name="folder_access_level"
-                          value={level}
-                          checked={categoryForm.access_level === level}
-                          onChange={() => setCategoryForm(prev => ({ ...prev, access_level: level }))}
-                          className="hidden"
-                        />
-                        <span className="text-sm font-medium capitalize">{level}</span>
-                      </label>
-                    ))}
+                {/* Root folder: access_level + price | Sub-folder: is_free_override */}
+                {(categoryModal.mode === 'create' ? categoryModal.parentId === null : !categoryModal.category?.parent_category_id) ? (
+                  // ROOT FOLDER — set Free/Premium + price
+                  <div className="space-y-3">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Access Level</label>
+                      <p className="text-xs text-gray-500 mb-2">All PDFs in this folder inherit this.</p>
+                      <div className="grid grid-cols-2 gap-2">
+                        {(['free', 'premium'] as const).map(level => (
+                          <label
+                            key={level}
+                            className={`flex items-center justify-center p-2.5 rounded-lg border-2 cursor-pointer transition-colors ${
+                              categoryForm.access_level === level
+                                ? level === 'free' ? 'border-green-500 bg-green-50 text-green-700' : 'border-yellow-500 bg-yellow-50 text-yellow-700'
+                                : 'border-gray-200 text-gray-600 hover:border-gray-300'
+                            }`}
+                          >
+                            <input type="radio" value={level} checked={categoryForm.access_level === level}
+                              onChange={() => setCategoryForm(prev => ({ ...prev, access_level: level }))}
+                              className="hidden" />
+                            <span className="text-sm font-medium capitalize">{level}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+                    {categoryForm.access_level === 'premium' && (
+                      <div className="grid grid-cols-2 gap-2">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Price</label>
+                          <input
+                            type="number" min="0" step="0.01"
+                            value={categoryForm.price}
+                            onChange={e => setCategoryForm(prev => ({ ...prev, price: e.target.value }))}
+                            placeholder="0.00"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">Currency</label>
+                          <select
+                            value={categoryForm.currency}
+                            onChange={e => setCategoryForm(prev => ({ ...prev, currency: e.target.value }))}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm"
+                          >
+                            <option value="INR">INR (₹)</option>
+                            <option value="USD">USD ($)</option>
+                          </select>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                </div>
+                ) : (
+                  // SUB-FOLDER — simple free-override toggle
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Sub-folder Access</label>
+                    <label className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-colors ${
+                      categoryForm.is_free_override
+                        ? 'border-green-500 bg-green-50'
+                        : 'border-gray-200 hover:border-gray-300'
+                    }`}>
+                      <input
+                        type="checkbox"
+                        checked={categoryForm.is_free_override}
+                        onChange={e => setCategoryForm(prev => ({ ...prev, is_free_override: e.target.checked }))}
+                        className="h-4 w-4 text-green-600 rounded"
+                      />
+                      <span className="text-sm text-gray-700">
+                        <span className="font-medium">Mark as free</span>
+                        <span className="text-gray-500 ml-1">(PDFs here are free even if the root folder is premium)</span>
+                      </span>
+                    </label>
+                  </div>
+                )}
               </div>
 
               <div className="flex justify-end space-x-3 mt-6">
