@@ -16,6 +16,15 @@ interface TestSeries {
   validity_days: number;
 }
 
+interface PdfFolder {
+  id: number;
+  name: string;
+  price: number;
+  currency: string;
+  access_level: string;
+  parent_category_id: number | null;
+}
+
 interface GrantSubscriptionModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -29,11 +38,14 @@ export const GrantSubscriptionModal: React.FC<GrantSubscriptionModalProps> = ({
 }) => {
   const [users, setUsers] = useState<User[]>([]);
   const [testSeries, setTestSeries] = useState<TestSeries[]>([]);
+  const [pdfFolders, setPdfFolders] = useState<PdfFolder[]>([]);
   const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [subscriptionType, setSubscriptionType] = useState<'test_series' | 'pdf_folder'>('test_series');
   const [formData, setFormData] = useState({
     user_id: '',
     test_series_id: '',
+    pdf_folder_id: '',
     payment_method: 'admin_grant',
     amount_paid: 0,
     currency: 'INR',
@@ -44,6 +56,7 @@ export const GrantSubscriptionModal: React.FC<GrantSubscriptionModalProps> = ({
     if (isOpen) {
       fetchUsers();
       fetchTestSeries();
+      fetchPdfFolders();
     }
   }, [isOpen]);
 
@@ -65,20 +78,32 @@ export const GrantSubscriptionModal: React.FC<GrantSubscriptionModalProps> = ({
         params: { limit: 100 }
       });
 
-      // Safely extract the testSeries array with fallback
       const testSeriesData = response.data?.data || [];
 
-      // Ensure it's an array before setting state
       if (Array.isArray(testSeriesData)) {
         setTestSeries(testSeriesData);
       } else {
-        console.warn('Expected testSeries to be an array, got:', typeof testSeriesData);
         setTestSeries([]);
       }
     } catch (error) {
       console.error('Error fetching test series:', error);
       toast.error('Failed to fetch test series');
-      setTestSeries([]); // Ensure state remains as empty array on error
+      setTestSeries([]);
+    }
+  };
+
+  const fetchPdfFolders = async () => {
+    try {
+      const response = await api.get('/admin/pdf/categories');
+      const categories: PdfFolder[] = response.data?.data || [];
+      // Only root folders (parent_category_id === null) with premium access can be granted
+      const rootPremiumFolders = categories.filter(
+        (c) => c.parent_category_id === null && c.access_level === 'premium'
+      );
+      setPdfFolders(rootPremiumFolders);
+    } catch (error) {
+      console.error('Error fetching PDF folders:', error);
+      setPdfFolders([]);
     }
   };
 
@@ -87,33 +112,38 @@ export const GrantSubscriptionModal: React.FC<GrantSubscriptionModalProps> = ({
     setLoading(true);
 
     try {
-      // Generate unique transaction ID for admin grants
       const transactionId = `ADMIN_GRANT_${Date.now()}_${formData.user_id.slice(0, 8)}`;
 
-      // Calculate expiry date
       const expiryDate = new Date();
-      expiryDate.setDate(expiryDate.getDate() + formData.expiry_days);
+      expiryDate.setDate(expiryDate.getDate() + (formData.expiry_days || 365));
 
-
-      await api.post('/admin/subscriptions/manual', {
+      const payload: Record<string, unknown> = {
         user_id: formData.user_id,
-        test_series_id: formData.test_series_id,
+        subscription_type: subscriptionType,
         transaction_id: transactionId,
         payment_method: formData.payment_method,
         amount_paid: formData.amount_paid,
         currency: formData.currency,
         status: 'completed',
         expiry_date: expiryDate.toISOString()
-      });
+      };
+
+      if (subscriptionType === 'test_series') {
+        payload.test_series_id = formData.test_series_id;
+      } else {
+        payload.pdf_folder_id = formData.pdf_folder_id;
+      }
+
+      await api.post('/admin/subscriptions/manual', payload);
 
       toast.success('Subscription granted successfully!');
       onSuccess();
       onClose();
 
-      // Reset form
       setFormData({
         user_id: '',
         test_series_id: '',
+        pdf_folder_id: '',
         payment_method: 'admin_grant',
         amount_paid: 0,
         currency: 'INR',
@@ -128,12 +158,23 @@ export const GrantSubscriptionModal: React.FC<GrantSubscriptionModalProps> = ({
   };
 
   const handleTestSeriesChange = (testSeriesId: string) => {
-    const selectedTestSeries = testSeries.find(ts => ts.id.toString() === testSeriesId);
+    const selectedTs = testSeries.find(ts => ts.id.toString() === testSeriesId);
     setFormData({
       ...formData,
       test_series_id: testSeriesId,
-      amount_paid: selectedTestSeries?.price || 0,
-      expiry_days: selectedTestSeries?.validity_days || 0 // Assuming 30 days for paid, 0 for free
+      amount_paid: selectedTs?.price || 0,
+      expiry_days: selectedTs?.validity_days || 365
+    });
+  };
+
+  const handlePdfFolderChange = (folderId: string) => {
+    const selectedFolder = pdfFolders.find(f => f.id.toString() === folderId);
+    setFormData({
+      ...formData,
+      pdf_folder_id: folderId,
+      amount_paid: selectedFolder?.price || 0,
+      currency: selectedFolder?.currency || 'INR',
+      expiry_days: 365
     });
   };
 
@@ -141,6 +182,16 @@ export const GrantSubscriptionModal: React.FC<GrantSubscriptionModalProps> = ({
     user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
     user.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const isSubmitDisabled =
+    loading ||
+    !formData.user_id ||
+    (subscriptionType === 'test_series' && !formData.test_series_id) ||
+    (subscriptionType === 'pdf_folder' && !formData.pdf_folder_id);
+
+  const selectedTestSeries = testSeries.find(ts => ts.id.toString() === formData.test_series_id);
+  const selectedPdfFolder = pdfFolders.find(f => f.id.toString() === formData.pdf_folder_id);
+  const selectedUser = users.find(u => u.uuid === formData.user_id);
 
   if (!isOpen) return null;
 
@@ -162,6 +213,38 @@ export const GrantSubscriptionModal: React.FC<GrantSubscriptionModalProps> = ({
 
         <div className="p-6 overflow-y-auto" style={{ maxHeight: 'calc(90vh - 180px)' }}>
           <form onSubmit={handleSubmit} className="space-y-6">
+
+            {/* Subscription Type Toggle */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Subscription Type
+              </label>
+              <div className="flex rounded-lg border border-gray-300 overflow-hidden">
+                <button
+                  type="button"
+                  onClick={() => setSubscriptionType('test_series')}
+                  className={`flex-1 py-2 text-sm font-medium transition-colors ${
+                    subscriptionType === 'test_series'
+                      ? 'bg-primary-600 text-white'
+                      : 'bg-white text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  Test Series
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSubscriptionType('pdf_folder')}
+                  className={`flex-1 py-2 text-sm font-medium transition-colors ${
+                    subscriptionType === 'pdf_folder'
+                      ? 'bg-primary-600 text-white'
+                      : 'bg-white text-gray-700 hover:bg-gray-50'
+                  }`}
+                >
+                  PDF Folder
+                </button>
+              </div>
+            </div>
+
             {/* User Selection */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -195,24 +278,54 @@ export const GrantSubscriptionModal: React.FC<GrantSubscriptionModalProps> = ({
             </div>
 
             {/* Test Series Selection */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Test Series
-              </label>
-              <select
-                value={formData.test_series_id}
-                onChange={(e) => handleTestSeriesChange(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
-                required
-              >
-                <option value="">Select test series</option>
-                {Array.isArray(testSeries) && testSeries.map(ts => (
-                  <option key={ts.id} value={ts.id}>
-                    {ts.title} (₹{ts.price})
-                  </option>
-                ))}
-              </select>
-            </div>
+            {subscriptionType === 'test_series' && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Test Series
+                </label>
+                <select
+                  value={formData.test_series_id}
+                  onChange={(e) => handleTestSeriesChange(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  required
+                >
+                  <option value="">Select test series</option>
+                  {Array.isArray(testSeries) && testSeries.map(ts => (
+                    <option key={ts.id} value={ts.id}>
+                      {ts.title} (₹{ts.price})
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+
+            {/* PDF Folder Selection */}
+            {subscriptionType === 'pdf_folder' && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  PDF Folder (Premium Root Folders)
+                </label>
+                {pdfFolders.length === 0 ? (
+                  <p className="text-sm text-gray-500 py-2">
+                    No premium PDF folders found. Set a root folder as Premium in PDF Management first.
+                  </p>
+                ) : (
+                  <select
+                    value={formData.pdf_folder_id}
+                    onChange={(e) => handlePdfFolderChange(e.target.value)}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    required
+                  >
+                    <option value="">Select PDF folder</option>
+                    {pdfFolders.map(folder => (
+                      <option key={folder.id} value={folder.id}>
+                        {folder.name} (₹{folder.price} {folder.currency})
+                      </option>
+                    ))}
+                  </select>
+                )}
+              </div>
+            )}
 
             {/* Subscription Details */}
             <div className="grid grid-cols-2 gap-4">
@@ -228,18 +341,17 @@ export const GrantSubscriptionModal: React.FC<GrantSubscriptionModalProps> = ({
                   min="0"
                   step="0.01"
                 />
-                <p className="text-xs text-gray-500 mt-1">Set to 0 for free subscription</p>
+                <p className="text-xs text-gray-500 mt-1">Set to 0 for free grant</p>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Duration (Months)
+                  Duration
                 </label>
                 <input
-                  value={`${formData.expiry_days} Days`}
+                  value={formData.expiry_days === 0 ? 'Lifetime' : `${formData.expiry_days} Days`}
                   disabled
-                  // onChange={(e) => setFormData({ ...formData, expiry_days: parseInt(e.target.value) })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-500"
                 />
               </div>
             </div>
@@ -261,15 +373,19 @@ export const GrantSubscriptionModal: React.FC<GrantSubscriptionModalProps> = ({
             </div>
 
             {/* Summary */}
-            {formData.user_id && formData.test_series_id && (
+            {formData.user_id && (subscriptionType === 'test_series' ? formData.test_series_id : formData.pdf_folder_id) && (
               <div className="bg-primary-50 p-4 rounded-lg">
                 <h3 className="font-medium text-primary-900 mb-2">Subscription Summary</h3>
                 <div className="text-sm text-primary-800 space-y-1">
-                  <p><span className="font-medium">User:</span> {users.find(u => u.uuid === formData.user_id)?.username}</p>
-                  <p><span className="font-medium">Test Series:</span> {testSeries.find(ts => ts.id.toString() === formData.test_series_id)?.title}</p>
-                  <p><span className="font-medium">Amount:</span> ₹{formData.amount_paid} {formData.amount_paid === 0 ? '(Free)' : ''}</p>
+                  <p><span className="font-medium">User:</span> {selectedUser?.username}</p>
+                  {subscriptionType === 'test_series' ? (
+                    <p><span className="font-medium">Test Series:</span> {selectedTestSeries?.title}</p>
+                  ) : (
+                    <p><span className="font-medium">PDF Folder:</span> {selectedPdfFolder?.name}</p>
+                  )}
+                  <p><span className="font-medium">Amount:</span> ₹{formData.amount_paid} {formData.amount_paid === 0 ? '(Free Grant)' : ''}</p>
                   <p><span className="font-medium">Duration:</span> {formData.expiry_days === 0 ? 'Lifetime' : `${formData.expiry_days} Days`}</p>
-                  <p><span className="font-medium">Type:</span> {formData.payment_method.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}</p>
+                  <p><span className="font-medium">Type:</span> {formData.payment_method.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</p>
                 </div>
               </div>
             )}
@@ -289,7 +405,7 @@ export const GrantSubscriptionModal: React.FC<GrantSubscriptionModalProps> = ({
             <button
               onClick={handleSubmit}
               className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 disabled:opacity-50"
-              disabled={loading || !formData.user_id || !formData.test_series_id}
+              disabled={isSubmitDisabled}
             >
               {loading ? 'Granting...' : 'Grant Subscription'}
             </button>
