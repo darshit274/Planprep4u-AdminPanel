@@ -27,7 +27,7 @@ interface TestSeries {
 interface Subscription {
   id: string;
   user_id: string;
-  test_series_id: string;
+  test_series_id: string | null;
   transaction_id: string;
   payment_method: string;
   amount_paid: number;
@@ -35,10 +35,21 @@ interface Subscription {
   status: 'pending' | 'completed' | 'failed' | 'refunded';
   purchase_date: string;
   expiry_date: string | null;
+  metadata?: string;
   user: User;
-  testSeries: TestSeries;
+  testSeries: TestSeries | null;
   is_active?: boolean;
   days_remaining?: number | null;
+}
+
+function getSubscriptionLabel(sub: Subscription): string {
+  if (sub.testSeries) return sub.testSeries.title || (sub.testSeries as any).name || 'Test Series';
+  try {
+    const meta = JSON.parse(sub.metadata || '{}');
+    if (meta.subscription_type === 'pdf_folder') return `📁 ${meta.pdf_folder_name || 'PDF Folder'}`;
+    if (meta.pdf_id) return '📄 PDF Purchase';
+  } catch { /* ignore */ }
+  return '—';
 }
 
 interface SubscriptionStats {
@@ -99,7 +110,7 @@ const EditSubscriptionModal: React.FC<EditSubscriptionModalProps> = ({
         
         <div className="mb-4 p-3 bg-gray-50 rounded">
           <p className="text-sm text-gray-600">User: <span className="font-medium">{subscription.user.email}</span></p>
-          <p className="text-sm text-gray-600">Test Series: <span className="font-medium">{subscription.testSeries.name}</span></p>
+          <p className="text-sm text-gray-600">Item: <span className="font-medium">{getSubscriptionLabel(subscription)}</span></p>
           <p className="text-sm text-gray-600">Transaction ID: <span className="font-medium">{subscription.transaction_id}</span></p>
         </div>
 
@@ -494,8 +505,10 @@ export default function SubscriptionsPage() {
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">{subscription?.testSeries?.title}</div>
-                        <div className="text-sm text-gray-500">ID: {subscription?.test_series_id}</div>
+                        <div className="text-sm text-gray-900">{getSubscriptionLabel(subscription)}</div>
+                        <div className="text-sm text-gray-500">
+                          {subscription.test_series_id ? `ID: ${subscription.test_series_id}` : 'PDF Access'}
+                        </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-900">{subscription.transaction_id}</div>
